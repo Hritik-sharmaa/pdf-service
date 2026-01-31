@@ -14,8 +14,8 @@ export async function sendEmail(options) {
     // Create transporter
     const transporter = nodemailer.createTransport({
       host: "smtp.gmail.com",
-      port: 465,
-      secure: true, // use SSL
+      port: 587,
+      secure: false, // use STARTTLS
       auth: {
         user: gmailUser,
         pass: gmailPassword,
@@ -23,6 +23,9 @@ export async function sendEmail(options) {
       connectionTimeout: 30000, // 30 seconds
       greetingTimeout: 30000,
       socketTimeout: 60000, // 60 seconds for large attachments
+      tls: {
+        rejectUnauthorized: true,
+      },
     });
 
     // Prepare email options
@@ -41,6 +44,16 @@ export async function sendEmail(options) {
     console.log(`[Email] Sending to: ${mailOptions.to}`);
     console.log(`[Email] Subject: ${options.subject}`);
     console.log(`[Email] Attachments: ${options.attachments?.length || 0}`);
+
+    // Verify connection first
+    console.log("[Email] Verifying SMTP connection...");
+    try {
+      await transporter.verify();
+      console.log("[Email] ✓ SMTP connection verified");
+    } catch (verifyError) {
+      console.error("[Email] ✗ SMTP verification failed:", verifyError.message);
+      throw new Error(`SMTP connection failed: ${verifyError.message}`);
+    }
 
     // Send email
     const info = await transporter.sendMail(mailOptions);
