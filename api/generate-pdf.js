@@ -1,11 +1,11 @@
-import { VercelRequest, VercelResponse } from "@vercel/node";
-import { PDFResponse } from "../types/index.js";
 import { generatePDF } from "../utils/puppeteer.js";
 import { sendEmail } from "../utils/email.js";
 import { renderTemplate } from "../utils/template-render.js";
 import { validatePDFRequest } from "../utils/validator.js";
+import { readFileSync } from "fs";
+import { join } from "path";
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+export default async function handler(req, res) {
   console.log("[API] Request received:", req.method);
 
   // CORS headers
@@ -58,6 +58,51 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     const grandTotal = data.totalAmount + gstAmount + tcsAmount;
 
+    // Calculate additional fields
+    const totalPax =
+      (data.paxAdults || 0) + (data.paxChildren || 0) + (data.paxInfants || 0);
+    const perPersonPrice =
+      totalPax > 0 ? Math.round(grandTotal / totalPax) : grandTotal;
+
+    // Calculate country and city counts from nightAllocations if available
+    let countryCount = 1; // Default to 1
+    let cityCount = 1; // Default to 1
+
+    if (data.nightAllocations && Array.isArray(data.nightAllocations)) {
+      const countries = new Set(
+        data.nightAllocations.map((n) => n.country).filter(Boolean),
+      );
+      const cities = new Set(
+        data.nightAllocations.map((n) => n.city).filter(Boolean),
+      );
+      countryCount = countries.size || 1;
+      cityCount = cities.size || 1;
+    } else if (data.country) {
+      // If country is provided as a string, try to count comma-separated values
+      countryCount = data.country.split(",").filter((c) => c.trim()).length;
+    }
+
+    // Read logo base64 directly from file
+    let COX_KINGS_LOGO_BASE64 = "";
+    try {
+      const logoPath = join(process.cwd(), "utils", "logo-base64.ts");
+      const logoContent = readFileSync(logoPath, "utf-8");
+      const match = logoContent.match(
+        /export const COX_KINGS_LOGO_BASE64 = "(.+)";/,
+      );
+      if (match) {
+        COX_KINGS_LOGO_BASE64 = match[1];
+        console.log(
+          "[API] Logo base64 loaded, length:",
+          COX_KINGS_LOGO_BASE64.length,
+        );
+      } else {
+        console.log("[API] Could not extract logo base64 from file");
+      }
+    } catch (error) {
+      console.error("[API] Error reading logo base64:", error);
+    }
+
     // Prepare template data
     const templateData = {
       ...data,
@@ -65,6 +110,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       tcsAmount,
       tcsRate,
       grandTotal,
+      totalPax,
+      perPersonPrice,
+      countryCount,
+      cityCount,
+      COX_KINGS_LOGO_BASE64,
       currentYear: new Date().getFullYear(),
     };
 
@@ -87,12 +137,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const emailHtml = renderTemplate(`${type}-email`, templateData);
 
     // Send emails
-    const emailResults: PDFResponse["emailsSent"] = {
+    const emailResults = {
       customer: false,
       agent: false,
     };
 
-    let messageId: string | undefined;
+    let messageId;
 
     if (recipients.customer) {
       try {
@@ -127,7 +177,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       }
     }
 
-    const response: PDFResponse = {
+    const response = {
       success: true,
       emailsSent: emailResults,
       pdfGenerated: true,
@@ -138,7 +188,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   } catch (error) {
     console.error("[API] Error:", error);
 
-    const response: PDFResponse = {
+    const response = {
       success: false,
       emailsSent: { customer: false, agent: false },
       pdfGenerated: false,

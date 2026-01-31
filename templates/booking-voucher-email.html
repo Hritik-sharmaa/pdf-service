@@ -1,251 +1,529 @@
 <!doctype html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="UTF-8" />
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Booking Confirmation</title>
-    <style>
-      body {
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        line-height: 1.6;
-        color: #333;
-        margin: 0;
-        padding: 0;
-        background-color: #f5f5f5;
-      }
-      .email-container {
-        max-width: 600px;
-        margin: 20px auto;
-        background: white;
-        border-radius: 8px;
-        overflow: hidden;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      }
-      .header {
-        background: #0f2942;
-        color: white;
-        padding: 30px 20px;
-        text-align: center;
-      }
-      .header h1 {
-        margin: 0;
-        font-size: 28px;
-      }
-      .header p {
-        margin: 10px 0 0 0;
-        opacity: 0.9;
-      }
-      .content {
-        padding: 30px 20px;
-      }
-      .voucher-box {
-        background: #c65a11;
-        color: white;
-        padding: 20px;
-        text-align: center;
-        border-radius: 5px;
-        margin-bottom: 25px;
-      }
-      .voucher-box h2 {
-        margin: 0;
-        font-size: 24px;
-      }
-      .info-section {
-        margin-bottom: 25px;
-        padding-bottom: 20px;
-        border-bottom: 1px solid #e0e0e0;
-      }
-      .info-section:last-child {
-        border-bottom: none;
-      }
-      .info-section h3 {
-        color: #0f2942;
-        margin: 0 0 15px 0;
-        font-size: 18px;
-      }
-      .info-row {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 10px;
-      }
-      .info-label {
-        font-weight: 600;
-        color: #666;
-      }
-      .info-value {
-        color: #333;
-        text-align: right;
-      }
-      .highlight-box {
-        background: #f5f5f5;
-        padding: 15px;
-        border-radius: 5px;
-        border-left: 4px solid #c65a11;
-        margin: 15px 0;
-      }
-      .price-total {
-        background: #0f2942;
-        color: white;
-        padding: 15px;
-        border-radius: 5px;
-        text-align: center;
-        font-size: 20px;
-        font-weight: bold;
-        margin: 20px 0;
-      }
-      .cta-button {
-        display: inline-block;
-        background: #c65a11;
-        color: white;
-        padding: 12px 30px;
-        text-decoration: none;
-        border-radius: 5px;
-        font-weight: 600;
-        margin: 20px 0;
-      }
-      .footer {
-        background: #f5f5f5;
-        padding: 20px;
-        text-align: center;
-        color: #666;
-        font-size: 12px;
-      }
-      .contact-info {
-        background: #f9f9f9;
-        padding: 15px;
-        border-radius: 5px;
-        margin-top: 15px;
-      }
-      @media only screen and (max-width: 600px) {
-        .email-container {
-          margin: 0;
-          border-radius: 0;
-        }
-        .info-row {
-          flex-direction: column;
-        }
-        .info-value {
-          text-align: left;
-          margin-top: 5px;
-        }
-      }
-    </style>
   </head>
-  <body>
-    <div class="email-container">
-      <!-- Header -->
-      <div class="header">
-        <h1>Cox & Kings</h1>
-        <p>Partner Network</p>
-      </div>
+  <body
+    style="
+      margin: 0;
+      padding: 0;
+      font-family: &quot;Segoe UI&quot;, Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f5f5f5;
+    ">
+    <table
+      width="100%"
+      cellpadding="0"
+      cellspacing="0"
+      style="background-color: #f5f5f5; padding: 40px 20px">
+      <tr>
+        <td align="center">
+          <table
+            width="600"
+            cellpadding="0"
+            cellspacing="0"
+            style="
+              background-color: #ffffff;
+              border-radius: 16px;
+              overflow: hidden;
+              box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            ">
+            <!-- Header -->
+            <tr>
+              <td
+                style="
+                  background-color: #0f2942;
+                  padding: 32px;
+                  text-align: center;
+                ">
+                <h1
+                  style="
+                    color: #ffffff;
+                    margin: 0;
+                    font-size: 28px;
+                    font-weight: 600;
+                  ">
+                  Cox & Kings
+                </h1>
+                <p
+                  style="
+                    color: rgba(255, 255, 255, 0.6);
+                    margin: 8px 0 0 0;
+                    font-size: 12px;
+                  ">
+                  Partner Network • Est. 1758
+                </p>
+              </td>
+            </tr>
 
-      <!-- Content -->
-      <div class="content">
-        <h2 style="color: #0f2942; margin-top: 0">Booking Confirmed! 🎉</h2>
-        <p>Dear {{customerName}},</p>
-        <p>
-          Thank you for booking with Cox & Kings Partner Network. Your booking
-          has been confirmed and your voucher is attached to this email.
-        </p>
+            <!-- Success Banner -->
+            <tr>
+              <td
+                style="
+                  background-color: #10b981;
+                  padding: 20px;
+                  text-align: center;
+                ">
+                <p
+                  style="
+                    color: #ffffff;
+                    margin: 0;
+                    font-size: 18px;
+                    font-weight: 600;
+                  ">
+                  ✓ Booking Confirmed!
+                </p>
+              </td>
+            </tr>
 
-        <!-- Voucher Number -->
-        <div class="voucher-box">
-          <h2>Voucher #{{voucherNumber}}</h2>
-        </div>
+            <!-- Content -->
+            <tr>
+              <td style="padding: 32px">
+                <p style="color: #374151; font-size: 16px; margin: 0 0 24px 0">
+                  Dear <strong>{{customerName}}</strong>,
+                </p>
+                <p
+                  style="
+                    color: #6b7280;
+                    font-size: 14px;
+                    line-height: 1.6;
+                    margin: 0 0 24px 0;
+                  ">
+                  Thank you for choosing Cox & Kings! Your booking has been
+                  confirmed successfully. Below are your booking details:
+                </p>
 
-        <!-- Tour Details -->
-        <div class="info-section">
-          <h3>Tour Details</h3>
-          <div class="info-row">
-            <span class="info-label">Package:</span>
-            <span class="info-value">{{tourTitle}}</span>
-          </div>
-          {{#if destination}}
-          <div class="info-row">
-            <span class="info-label">Destination:</span>
-            <span class="info-value">{{destination}}</span>
-          </div>
-          {{/if}}
-          <div class="info-row">
-            <span class="info-label">Departure:</span>
-            <span class="info-value">{{departureDate}}</span>
-          </div>
-          <div class="info-row">
-            <span class="info-label">Return:</span>
-            <span class="info-value">{{endDate}}</span>
-          </div>
-          <div class="info-row">
-            <span class="info-label">Passengers:</span>
-            <span class="info-value">
-              {{paxAdults}} Adult(s){{#if (gt paxChildren 0)}}, {{paxChildren}}
-              Child(ren){{/if}}{{#if (gt paxInfants 0)}}, {{paxInfants}}
-              Infant(s){{/if}}
-            </span>
-          </div>
-        </div>
+                <!-- Voucher Number -->
+                <table
+                  width="100%"
+                  cellpadding="0"
+                  cellspacing="0"
+                  style="
+                    background-color: #fef3c7;
+                    border-radius: 12px;
+                    margin-bottom: 24px;
+                  ">
+                  <tr>
+                    <td style="padding: 20px; text-align: center">
+                      <p
+                        style="
+                          color: #92400e;
+                          margin: 0 0 4px 0;
+                          font-size: 12px;
+                          text-transform: uppercase;
+                          letter-spacing: 1px;
+                        ">
+                        Voucher Number
+                      </p>
+                      <p
+                        style="
+                          color: #0f2942;
+                          margin: 0;
+                          font-size: 24px;
+                          font-weight: 700;
+                          font-family: monospace;
+                        ">
+                        #{{voucherNumber}}
+                      </p>
+                    </td>
+                  </tr>
+                </table>
 
-        <!-- Price Summary -->
-        <div class="info-section">
-          <h3>Price Summary</h3>
-          <div class="info-row">
-            <span class="info-label">Package Amount:</span>
-            <span class="info-value">{{formatINR totalAmount}}</span>
-          </div>
-          <div class="info-row">
-            <span class="info-label">GST (5%):</span>
-            <span class="info-value">{{formatINR gstAmount}}</span>
-          </div>
-          {{#if includeTcs}}
-          <div class="info-row">
-            <span class="info-label">TCS ({{tcsRate}}):</span>
-            <span class="info-value">{{formatINR tcsAmount}}</span>
-          </div>
-          {{/if}}
-        </div>
+                <!-- Tour Details -->
+                <table
+                  width="100%"
+                  cellpadding="0"
+                  cellspacing="0"
+                  style="
+                    background-color: #f9fafb;
+                    border-radius: 12px;
+                    margin-bottom: 24px;
+                  ">
+                  <tr>
+                    <td style="padding: 24px">
+                      <h3
+                        style="
+                          color: #c65a11;
+                          margin: 0 0 16px 0;
+                          font-size: 12px;
+                          text-transform: uppercase;
+                          letter-spacing: 1px;
+                        ">
+                        Tour Details
+                      </h3>
+                      <p
+                        style="
+                          color: #0f2942;
+                          margin: 0 0 8px 0;
+                          font-size: 18px;
+                          font-weight: 600;
+                        ">
+                        {{tourTitle}}
+                      </p>
+                      <p
+                        style="
+                          color: #6b7280;
+                          margin: 0 0 16px 0;
+                          font-size: 14px;
+                        ">
+                        Dates: {{departureDate}} - {{endDate}}
+                      </p>
+                      <table width="100%" cellpadding="0" cellspacing="0">
+                        <tr>
+                          <td style="padding: 8px 0">
+                            <span style="color: #6b7280; font-size: 14px"
+                              >Travelers:</span
+                            >
+                            <span
+                              style="
+                                color: #0f2942;
+                                font-size: 14px;
+                                font-weight: 600;
+                                float: right;
+                              "
+                              >{{paxAdults}} Adult{{#if (gt paxAdults
+                              1)}}s{{/if}}{{#if (gt paxChildren 0)}},
+                              {{paxChildren}} Child{{#if (gt paxChildren
+                              1)}}ren{{/if}}{{/if}}{{#if (gt paxInfants 0)}},
+                              {{paxInfants}} Infant{{#if (gt paxInfants
+                              1)}}s{{/if}}{{/if}}</span
+                            >
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="
+                              padding: 8px 0;
+                              border-top: 1px solid #e5e7eb;
+                            ">
+                            <span style="color: #6b7280; font-size: 14px"
+                              >Package Amount:</span
+                            >
+                            <span
+                              style="
+                                color: #0f2942;
+                                font-size: 14px;
+                                font-weight: 600;
+                                float: right;
+                              "
+                              >{{formatINR totalAmount}}</span
+                            >
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="padding: 8px 0">
+                            <span style="color: #6b7280; font-size: 13px"
+                              >+ GST (5%):</span
+                            >
+                            <span
+                              style="
+                                color: #6b7280;
+                                font-size: 13px;
+                                float: right;
+                              "
+                              >{{formatINR gstAmount}}</span
+                            >
+                          </td>
+                        </tr>
+                        {{#if includeTcs}}
+                        <tr>
+                          <td style="padding: 8px 0">
+                            <span style="color: #6b7280; font-size: 13px"
+                              >+ TCS ({{tcsRate}}):</span
+                            >
+                            <span
+                              style="
+                                color: #6b7280;
+                                font-size: 13px;
+                                float: right;
+                              "
+                              >{{formatINR tcsAmount}}</span
+                            >
+                          </td>
+                        </tr>
+                        {{/if}}
+                        <tr>
+                          <td
+                            style="
+                              padding: 12px 0 0 0;
+                              border-top: 2px solid #e5e7eb;
+                            ">
+                            <span
+                              style="
+                                color: #0f2942;
+                                font-size: 15px;
+                                font-weight: 700;
+                              "
+                              >Grand Total:</span
+                            >
+                            <span
+                              style="
+                                color: #10b981;
+                                font-size: 18px;
+                                font-weight: 700;
+                                float: right;
+                              "
+                              >{{formatINR grandTotal}}</span
+                            >
+                          </td>
+                        </tr>
+                      </table>
+                      {{#if includeTcs}}
+                      <p
+                        style="
+                          color: #9ca3af;
+                          font-size: 11px;
+                          line-height: 1.4;
+                          margin: 12px 0 0 0;
+                        ">
+                        GST (5%) is a non-refundable tax. TCS is an advance tax
+                        adjustable against your income tax liability.
+                      </p>
+                      {{else}}
+                      <p
+                        style="
+                          color: #9ca3af;
+                          font-size: 11px;
+                          line-height: 1.4;
+                          margin: 12px 0 0 0;
+                        ">
+                        GST (5%) is a non-refundable tax. TCS is not included in
+                        this booking.
+                      </p>
+                      {{/if}}
+                    </td>
+                  </tr>
+                </table>
 
-        <div class="price-total">Total Amount: {{formatINR grandTotal}}</div>
+                <!-- Contact Info -->
+                <table
+                  width="100%"
+                  cellpadding="0"
+                  cellspacing="0"
+                  style="
+                    border: 1px solid #e5e7eb;
+                    border-radius: 12px;
+                    margin-bottom: 24px;
+                  ">
+                  <tr>
+                    <td style="padding: 24px">
+                      <h3
+                        style="
+                          color: #c65a11;
+                          margin: 0 0 16px 0;
+                          font-size: 12px;
+                          text-transform: uppercase;
+                          letter-spacing: 1px;
+                        ">
+                        Your Travel Agent
+                      </h3>
+                      <p
+                        style="
+                          color: #0f2942;
+                          margin: 0 0 8px 0;
+                          font-size: 16px;
+                          font-weight: 600;
+                        ">
+                        {{agencyName}}
+                      </p>
+                      <p style="color: #6b7280; margin: 0; font-size: 14px">
+                        Phone: {{agencyPhone}}
+                      </p>
+                    </td>
+                  </tr>
+                </table>
 
-        <!-- Important Information -->
-        <div class="highlight-box">
-          <strong>📎 Important:</strong>
-          <ul style="margin: 10px 0 0 20px; padding: 0">
-            <li>Please carry a printed copy of your voucher during travel</li>
-            <li>Ensure all traveler documents are valid and up to date</li>
-            {{#if flightIncluded}}
-            <li>Check-in opens 3 hours before departure</li>
-            {{/if}}
-            <li>Contact your agent for any queries or changes</li>
-          </ul>
-        </div>
+                {{#if paymentInfo}}
+                <!-- Payment Information -->
+                <table
+                  width="100%"
+                  cellpadding="0"
+                  cellspacing="0"
+                  style="
+                    background-color: #eff6ff;
+                    border-radius: 12px;
+                    margin-bottom: 24px;
+                  ">
+                  <tr>
+                    <td style="padding: 24px">
+                      <h3
+                        style="
+                          color: #1e40af;
+                          margin: 0 0 16px 0;
+                          font-size: 12px;
+                          text-transform: uppercase;
+                          letter-spacing: 1px;
+                        ">
+                        Payment Information
+                      </h3>
+                      <p
+                        style="
+                          color: #0f2942;
+                          margin: 0 0 12px 0;
+                          font-size: 14px;
+                          font-weight: 600;
+                        ">
+                        {{#if (eq paymentInfo.paymentType "one_time")}}✓ Full
+                        Payment Received{{else}}Installment Payment Plan{{/if}}
+                      </p>
+                      {{#if (eq paymentInfo.paymentType "installment")}} {{#if
+                      paymentInfo.installments}}
+                      <table
+                        width="100%"
+                        cellpadding="0"
+                        cellspacing="0"
+                        style="margin-top: 12px">
+                        {{#each paymentInfo.installments}}
+                        <tr>
+                          <td
+                            style="
+                              padding: 8px 0;
+                              border-top: 1px solid #dbeafe;
+                            ">
+                            <span style="color: #6b7280; font-size: 13px"
+                              >{{label}}</span
+                            >
+                            <span
+                              style="
+                                color: #1e40af;
+                                font-size: 13px;
+                                font-weight: 600;
+                                float: right;
+                              "
+                              >{{formatINR amount}}</span
+                            >
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="padding: 0 0 8px 0">
+                            <span style="color: #9ca3af; font-size: 11px"
+                              >Due: {{dueDate}}</span
+                            >
+                          </td>
+                        </tr>
+                        {{/each}}
+                      </table>
+                      {{/if}} {{/if}}
+                    </td>
+                  </tr>
+                </table>
+                {{/if}} {{#if travelers}} {{#if (gt travelers.length 0)}}
+                <!-- Traveler Information -->
+                <table
+                  width="100%"
+                  cellpadding="0"
+                  cellspacing="0"
+                  style="
+                    border: 1px solid #e5e7eb;
+                    border-radius: 12px;
+                    margin-bottom: 24px;
+                  ">
+                  <tr>
+                    <td style="padding: 24px">
+                      <h3
+                        style="
+                          color: #c65a11;
+                          margin: 0 0 16px 0;
+                          font-size: 12px;
+                          text-transform: uppercase;
+                          letter-spacing: 1px;
+                        ">
+                        Traveler Information
+                      </h3>
+                      {{#each travelers}}
+                      <div
+                        style="
+                          margin-bottom: {{#if @last}}0{{else}}16px{{/if}};
+                          padding-bottom: {{#if @last}}0{{else}}16px{{/if}};
+                          border-bottom: {{#if @last}}none{{else}}1px solid
+                          #e5e7eb{{/if}};
+                        ">
+                        <p
+                          style="
+                            color: #0f2942;
+                            margin: 0 0 8px 0;
+                            font-size: 14px;
+                            font-weight: 600;
+                          ">
+                          {{firstName}} {{lastName}}
+                          <span
+                            style="
+                              color: #9ca3af;
+                              font-size: 12px;
+                              font-weight: 400;
+                            "
+                            >({{type}})</span
+                          >
+                        </p>
+                        {{#if passportNumber}}
+                        <p style="color: #6b7280; margin: 0; font-size: 13px">
+                          Passport: {{passportNumber}}
+                        </p>
+                        {{/if}} {{#if passportExpiry}}
+                        <p style="color: #6b7280; margin: 0; font-size: 13px">
+                          Expiry: {{passportExpiry}}
+                        </p>
+                        {{/if}} {{#if nationality}}
+                        <p style="color: #6b7280; margin: 0; font-size: 13px">
+                          Nationality: {{nationality}}
+                        </p>
+                        {{/if}}
+                      </div>
+                      {{/each}}
+                    </td>
+                  </tr>
+                </table>
+                {{/if}} {{/if}}
+              </td>
+            </tr>
 
-        <!-- Agency Contact -->
-        <div class="info-section">
-          <h3>Your Travel Agent</h3>
-          <div class="contact-info">
-            <div style="font-weight: 600; font-size: 16px; margin-bottom: 8px">
-              {{agencyName}}
-            </div>
-            {{#if agentName}}
-            <div>Agent: {{agentName}}</div>
-            {{/if}}
-            <div>Phone: {{agencyPhone}}</div>
-            {{#if agencyEmail}}
-            <div>Email: {{agencyEmail}}</div>
-            {{/if}}
-          </div>
-        </div>
-
-        <p style="margin-top: 25px">We wish you a wonderful journey!</p>
-        <p style="margin-bottom: 0">
-          Best regards,<br /><strong>Cox & Kings Partner Network</strong>
-        </p>
-      </div>
-
-      <!-- Footer -->
-      <div class="footer">
-        <p>This is an automated email. Please do not reply to this message.</p>
-        <p>&copy; {{currentYear}} Cox & Kings. All rights reserved.</p>
-      </div>
-    </div>
+            <!-- Footer -->
+            <tr>
+              <td
+                style="
+                  background-color: #f9fafb;
+                  padding: 24px;
+                  text-align: center;
+                  border-top: 1px solid #e5e7eb;
+                ">
+                <p style="color: #9ca3af; font-size: 12px; margin: 0 0 8px 0">
+                  This is a computer generated email. Please contact your travel
+                  agent for any queries.
+                </p>
+                <p style="color: #9ca3af; font-size: 12px; margin: 0 0 12px 0">
+                  © {{currentYear}} Cox & Kings Partner Network. All rights
+                  reserved.
+                </p>
+                <p
+                  style="
+                    color: #9ca3af;
+                    font-size: 11px;
+                    margin: 0;
+                    line-height: 1.8;
+                  ">
+                  <a
+                    href="https://coxandkings.com/info/terms-condition"
+                    style="color: #c65a11; text-decoration: none"
+                    >Terms & Conditions</a
+                  >
+                  |
+                  <a
+                    href="https://coxandkings.com/info/privacy-policy"
+                    style="color: #c65a11; text-decoration: none"
+                    >Privacy Policy</a
+                  >
+                  |
+                  <a
+                    href="https://coxandkings.com/info/cookie-policy"
+                    style="color: #c65a11; text-decoration: none"
+                    >Cookie Policy</a
+                  >
+                </p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
   </body>
 </html>

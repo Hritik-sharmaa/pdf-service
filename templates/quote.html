@@ -3,569 +3,2257 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Quote - {{quoteNumber}}</title>
+    <title>Quote {{quoteNumber}}</title>
     <style>
-      /* Cox & Kings Brand Colors */
-      :root {
-        --navy: #0f2942;
-        --accent: #c65a11;
-        --light-gray: #f5f5f5;
-        --border-gray: #e0e0e0;
-        --text-dark: #333333;
-        --text-light: #666666;
-      }
-
       * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
       }
 
+      @page {
+        size: A4;
+        margin: 0;
+      }
+
       body {
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        color: var(--text-dark);
+        font-family: "Georgia", "Times New Roman", serif;
+        font-size: 10pt;
         line-height: 1.6;
-        font-size: 14px;
-        print-color-adjust: exact;
-        -webkit-print-color-adjust: exact;
-      }
-
-      .container {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 20px;
-      }
-
-      .header {
-        background: var(--navy);
-        color: white;
-        padding: 30px 20px;
-        text-align: center;
-        margin-bottom: 30px;
-      }
-
-      .header h1 {
-        font-size: 28px;
-        margin-bottom: 10px;
-      }
-
-      .header .tagline {
-        font-size: 14px;
-        opacity: 0.9;
-      }
-
-      .quote-number {
-        background: var(--accent);
-        color: white;
-        padding: 15px 20px;
-        text-align: center;
-        font-size: 20px;
-        font-weight: bold;
-        margin-bottom: 20px;
-        border-radius: 5px;
-      }
-
-      .quote-meta {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 30px;
-        padding: 15px;
-        background: var(--light-gray);
-        border-radius: 5px;
-      }
-
-      .quote-meta div {
-        flex: 1;
-      }
-
-      .quote-meta .label {
-        font-size: 12px;
-        color: var(--text-light);
-        text-transform: uppercase;
-        margin-bottom: 5px;
-      }
-
-      .quote-meta .value {
-        font-size: 14px;
-        font-weight: 600;
-        color: var(--navy);
-      }
-
-      .section {
-        margin-bottom: 30px;
-        padding: 20px;
+        color: #333333;
         background: white;
-        border: 1px solid var(--border-gray);
-        border-radius: 5px;
       }
 
-      .section-title {
-        font-size: 18px;
-        color: var(--navy);
-        margin-bottom: 15px;
-        padding-bottom: 10px;
-        border-bottom: 2px solid var(--accent);
-        font-weight: 600;
+      .page {
+        width: 210mm;
+        min-height: 297mm;
+        padding: 0;
+        background: white;
+        position: relative;
+        page-break-after: always;
       }
 
-      .info-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-      }
-
-      .info-item {
-        margin-bottom: 10px;
-      }
-
-      .info-label {
-        font-weight: 600;
-        color: var(--text-light);
-        font-size: 12px;
-        text-transform: uppercase;
-        margin-bottom: 5px;
-      }
-
-      .info-value {
-        color: var(--text-dark);
-        font-size: 14px;
-      }
-
-      .itinerary-day {
-        margin-bottom: 20px;
-        padding: 15px;
-        background: var(--light-gray);
-        border-left: 4px solid var(--accent);
-        page-break-inside: avoid;
-      }
-
-      .itinerary-day h4 {
-        color: var(--navy);
-        margin-bottom: 10px;
-        font-size: 16px;
-      }
-
-      .itinerary-day p {
-        margin-bottom: 8px;
-        line-height: 1.5;
-      }
-
-      .itinerary-day .day-details {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-        margin-top: 10px;
-        font-size: 13px;
-      }
-
-      .itinerary-day .detail-item {
+      /* ============================================ */
+      /* PAGE 1: COVER PAGE STYLES */
+      /* ============================================ */
+      .page-cover {
+        position: relative;
         display: flex;
-        align-items: center;
-      }
-
-      .itinerary-day .detail-label {
-        font-weight: 600;
-        margin-right: 5px;
-        color: var(--text-light);
-      }
-
-      .inclusions-list,
-      .exclusions-list {
-        list-style: none;
+        flex-direction: column;
+        justify-content: space-between;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
         padding: 0;
       }
 
-      .inclusions-list li,
-      .exclusions-list li {
-        padding: 8px 0;
-        padding-left: 25px;
+      .cover-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+      }
+
+      .cover-logo-badge {
         position: relative;
+        z-index: 2;
+        display: flex;
+        justify-content: center;
+        padding: 20px 0 10px 0;
       }
 
-      .inclusions-list li:before {
-        content: "✓";
-        position: absolute;
-        left: 0;
-        color: var(--accent);
-        font-weight: bold;
+      .logo-image {
+        height: 80px;
+        width: auto;
+        filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.5));
       }
 
-      .exclusions-list li:before {
-        content: "✗";
-        position: absolute;
-        left: 0;
-        color: #999;
-        font-weight: bold;
-      }
-
-      .price-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 15px;
-      }
-
-      .price-table td {
-        padding: 10px;
-        border-bottom: 1px solid var(--border-gray);
-      }
-
-      .price-table td:first-child {
-        font-weight: 500;
-        color: var(--text-light);
-      }
-
-      .price-table td:last-child {
-        text-align: right;
-        font-weight: 600;
-      }
-
-      .price-table tr.subtotal {
-        background: var(--light-gray);
-      }
-
-      .price-table tr.total {
-        background: var(--navy);
-        color: white;
-        font-size: 16px;
-      }
-
-      .price-table tr.total td {
-        padding: 15px 10px;
-        border-bottom: none;
-      }
-
-      .terms-box {
-        background: var(--light-gray);
-        padding: 15px;
-        border-radius: 5px;
-        font-size: 12px;
-        line-height: 1.6;
-      }
-
-      .terms-box h4 {
-        color: var(--navy);
-        margin-bottom: 10px;
-        font-size: 14px;
-      }
-
-      .terms-box ul {
-        margin-left: 20px;
-      }
-
-      .terms-box li {
-        margin-bottom: 5px;
-      }
-
-      .special-notes {
-        background: #fff9e6;
-        border-left: 4px solid var(--accent);
-        padding: 15px;
-        margin: 20px 0;
-        border-radius: 5px;
-      }
-
-      .special-notes h4 {
-        color: var(--accent);
-        margin-bottom: 10px;
-      }
-
-      .contact-info {
-        margin-top: 15px;
-        padding: 15px;
-        background: var(--light-gray);
-        border-radius: 5px;
-      }
-
-      .footer {
-        margin-top: 40px;
-        padding-top: 20px;
-        border-top: 2px solid var(--border-gray);
+      .cover-main-content {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        flex: 1;
+        padding: 20px 60px;
         text-align: center;
-        color: var(--text-light);
-        font-size: 12px;
       }
 
-      .validity-badge {
-        display: inline-block;
-        background: #e8f5e9;
-        color: #2e7d32;
-        padding: 8px 15px;
-        border-radius: 20px;
-        font-size: 13px;
+      .cover-duniya-tag {
+        font-family: "Arial", sans-serif;
+        font-size: 12pt;
+        font-weight: 700;
+        color: #ffd700;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
+        margin-bottom: 10px;
+      }
+
+      .cover-hero-title {
+        font-family: "Georgia", serif;
+        font-size: 44pt;
+        font-weight: 700;
+        color: #ffffff;
+        letter-spacing: 2px;
+        line-height: 1.1;
+        text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.9);
+        margin-bottom: 8px;
+        max-width: 900px;
+      }
+
+      .cover-destinations {
+        font-family: "Arial", sans-serif;
+        font-size: 11pt;
         font-weight: 600;
+        color: #ffffff;
+        letter-spacing: 1px;
+        text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
+        margin-bottom: 20px;
+        line-height: 1.6;
+        max-width: 800px;
+      }
+
+      .cover-price-section {
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(10px);
+        padding: 15px 35px;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        display: inline-block;
+      }
+
+      .cover-price-label {
+        font-family: "Arial", sans-serif;
+        font-size: 10pt;
+        color: #ffffff;
+        margin-bottom: 3px;
+      }
+
+      .cover-price-amount {
+        font-family: "Georgia", serif;
+        font-size: 42pt;
+        font-weight: 700;
+        color: #ffffff;
+        letter-spacing: 1px;
+        line-height: 1;
+        margin: 3px 0;
+      }
+
+      .cover-price-per {
+        font-family: "Arial", sans-serif;
+        font-size: 10pt;
+        color: #ffffff;
+        margin-top: 3px;
+      }
+
+      .cover-duration {
+        font-family: "Arial", sans-serif;
+        font-size: 11pt;
+        font-weight: 600;
+        color: #ffffff;
+        background: rgba(0, 0, 0, 0.5);
+        padding: 8px 20px;
+        border-radius: 25px;
+        display: inline-block;
+        margin-bottom: 12px;
+        text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+      }
+
+      .cover-availability {
+        font-family: "Arial", sans-serif;
+        font-size: 9pt;
+        font-weight: 600;
+        color: #ffffff;
+        background: rgba(255, 69, 0, 0.8);
+        padding: 6px 18px;
+        border-radius: 20px;
+        display: inline-block;
+        margin-bottom: 15px;
+        text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+      }
+
+      .cover-rating {
+        background: rgba(0, 0, 0, 0.5);
+        padding: 8px 20px;
+        border-radius: 25px;
+        display: inline-block;
+      }
+
+      .rating-stars {
+        font-size: 11pt;
+        color: #ffd700;
+        display: inline;
+      }
+
+      .rating-text {
+        font-family: "Arial", sans-serif;
+        font-size: 10pt;
+        font-weight: 600;
+        color: #ffffff;
+        margin-left: 8px;
+        display: inline;
+      }
+
+      .cover-footer-text {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        padding: 15px 50px;
+        background: rgba(0, 0, 0, 0.8);
+        font-family: "Arial", sans-serif;
+        font-size: 10pt;
+        font-weight: 600;
+        color: #ffffff;
+        letter-spacing: 1px;
+      }
+
+      /* ============================================ */
+      /* PAGE 2: INTRODUCTION PAGE STYLES */
+      /* ============================================ */
+      .page-intro {
+        background: linear-gradient(135deg, #004080 0%, #003366 100%);
+        padding: 30px 40px 25px 40px;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .intro-header {
+        margin-bottom: 20px;
+        padding-bottom: 12px;
+      }
+
+      .intro-from {
+        font-family: "Georgia", serif;
+        font-size: 22pt;
+        font-weight: 400;
+        color: #ffffff;
+        margin-bottom: 3px;
+        line-height: 1;
+      }
+
+      .intro-brand {
+        font-family: "Georgia", serif;
+        font-size: 38pt;
+        font-weight: 700;
+        color: #ffffff;
+        margin-bottom: 3px;
+        line-height: 1;
+      }
+
+      .intro-to-you {
+        font-family: "Georgia", serif;
+        font-size: 22pt;
+        font-weight: 400;
+        color: #ffffff;
+        margin-bottom: 10px;
+        line-height: 1;
+      }
+
+      .intro-divider {
+        width: 100%;
+        height: 2px;
+        background: #ffffff;
+        margin-top: 8px;
+      }
+
+      .intro-letter {
+        flex: 1;
         margin-bottom: 20px;
       }
 
+      .intro-question {
+        font-family: "Arial", sans-serif;
+        font-size: 9pt;
+        line-height: 1.5;
+        color: #ffffff;
+        margin-bottom: 12px;
+        font-weight: 600;
+      }
+
+      .intro-letter p {
+        font-family: "Arial", sans-serif;
+        font-size: 8.5pt;
+        line-height: 1.5;
+        color: #ffffff;
+        text-align: justify;
+        margin-bottom: 10px;
+      }
+
+      .intro-signature {
+        margin-top: 20px;
+      }
+
+      .signature-handwritten {
+        font-family: "Brush Script MT", cursive;
+        font-size: 20pt;
+        color: #ffffff;
+        margin-bottom: 6px;
+      }
+
+      .signature-closing {
+        font-family: "Arial", sans-serif;
+        font-size: 8pt;
+        color: #ffffff;
+        margin-bottom: 2px;
+      }
+
+      .signature-name {
+        font-family: "Arial", sans-serif;
+        font-size: 8pt;
+        font-weight: 700;
+        color: #ffffff;
+        margin-bottom: 2px;
+      }
+
+      .signature-title {
+        font-family: "Arial", sans-serif;
+        font-size: 7.5pt;
+        color: #ffffff;
+        font-style: italic;
+      }
+
+      .intro-bottom {
+        display: grid;
+        grid-template-columns: 1fr 1.5fr;
+        gap: 30px;
+        margin-top: 15px;
+      }
+
+      .intro-left-column {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .intro-logo {
+        background: white;
+        padding: 10px;
+        border-radius: 6px;
+        display: inline-block;
+        width: fit-content;
+      }
+
+      .intro-logo-img {
+        height: 40px;
+        width: auto;
+      }
+
+      .intro-contact {
+        font-family: "Arial", sans-serif;
+        font-size: 7.5pt;
+        line-height: 1.6;
+        color: #ffffff;
+      }
+
+      .contact-company {
+        font-weight: 700;
+        margin-bottom: 3px;
+      }
+
+      .contact-address {
+        margin-bottom: 6px;
+      }
+
+      .contact-phone,
+      .contact-email,
+      .contact-website {
+        margin-bottom: 3px;
+      }
+
+      .intro-right-column {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        position: relative;
+      }
+
+      .intro-offerings h4,
+      .intro-trust h4 {
+        font-family: "Georgia", serif;
+        font-size: 10pt;
+        font-weight: 700;
+        color: #ffffff;
+        margin-bottom: 8px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        padding-bottom: 6px;
+      }
+
+      .intro-offerings ul,
+      .intro-trust ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .intro-offerings ul li,
+      .intro-trust ul li {
+        font-family: "Arial", sans-serif;
+        font-size: 7.5pt;
+        color: #ffffff;
+        padding: 3px 0;
+        padding-left: 15px;
+        position: relative;
+        line-height: 1.4;
+      }
+
+      .intro-offerings ul li::before,
+      .intro-trust ul li::before {
+        content: "•";
+        position: absolute;
+        left: 0;
+        color: #ffffff;
+        font-weight: 700;
+        font-size: 10pt;
+      }
+
+      .intro-icon {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        opacity: 0.8;
+      }
+
+      /* ============================================ */
+      /* PAGE 3: ITINERARY PAGE STYLES */
+      /* ============================================ */
+      .page-itinerary {
+        padding: 20px 30px 15px 30px;
+        background: white;
+      }
+
+      .itinerary-label {
+        font-family: "Arial", sans-serif;
+        font-size: 6.5pt;
+        font-weight: 700;
+        color: #999999;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 6px;
+      }
+
+      .itinerary-main-title {
+        font-family: "Georgia", serif;
+        font-size: 24pt;
+        font-weight: 400;
+        color: #999999;
+        margin-bottom: 8px;
+        line-height: 1;
+      }
+
+      .itinerary-title-divider {
+        width: 100%;
+        height: 1px;
+        background: #cccccc;
+        margin-bottom: 8px;
+      }
+
+      .itinerary-info-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+        font-family: "Arial", sans-serif;
+        font-size: 7pt;
+        color: #666666;
+      }
+
+      .info-left {
+        font-weight: 400;
+      }
+
+      .info-right {
+        font-weight: 700;
+      }
+
+      .itinerary-two-column {
+        display: grid;
+        grid-template-columns: 0.85fr 1.15fr;
+        gap: 15px;
+        margin-bottom: 10px;
+      }
+
+      .itinerary-left-col {
+        padding-right: 5px;
+      }
+
+      .route-box {
+        border: 1px solid #999999;
+        padding: 8px 10px;
+        margin-bottom: 10px;
+        font-family: "Arial", sans-serif;
+        font-size: 7pt;
+        font-weight: 700;
+        color: #004080;
+        line-height: 1.4;
+      }
+
+      .section-heading {
+        font-family: "Arial", sans-serif;
+        font-size: 8pt;
+        font-weight: 700;
+        color: #333333;
+        margin-bottom: 6px;
+        margin-top: 10px;
+      }
+
+      .tour-overview-text {
+        font-family: "Arial", sans-serif;
+        font-size: 6.5pt;
+        line-height: 1.3;
+        color: #333333;
+        text-align: justify;
+        margin-bottom: 10px;
+      }
+
+      .highlights-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .highlights-list li {
+        font-family: "Arial", sans-serif;
+        font-size: 6pt;
+        color: #333333;
+        padding: 1.5px 0;
+        padding-left: 10px;
+        position: relative;
+        line-height: 1.2;
+      }
+
+      .highlights-list li::before {
+        content: "•";
+        position: absolute;
+        left: 0;
+        color: #333333;
+        font-weight: 700;
+        font-size: 7pt;
+      }
+
+      .itinerary-right-col {
+        padding-left: 5px;
+      }
+
+      .itinerary-hero-img {
+        width: 100%;
+        height: 120px;
+        overflow: hidden;
+        margin-bottom: 10px;
+        border-radius: 2px;
+      }
+
+      .itinerary-hero-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .day-by-day {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 6px 10px;
+      }
+
+      .day-item {
+        page-break-inside: avoid;
+      }
+
+      .day-title {
+        font-family: "Arial", sans-serif;
+        font-size: 6.5pt;
+        font-weight: 700;
+        color: #333333;
+        margin-bottom: 2px;
+        line-height: 1.1;
+      }
+
+      .day-desc {
+        font-family: "Arial", sans-serif;
+        font-size: 6pt;
+        color: #666666;
+        line-height: 1.2;
+        text-align: justify;
+      }
+
+      .itinerary-footer {
+        text-align: center;
+        font-family: "Arial", sans-serif;
+        font-size: 6.5pt;
+        color: #aaaaaa;
+        padding-top: 10px;
+        border-top: 1px solid #e0e0e0;
+        margin-top: 10px;
+      }
+
+      /* ============================================ */
+      /* PAGE 4: LOGISTICS PAGE STYLES */
+      /* ============================================ */
+      .page-logistics {
+        padding: 0;
+        background: white;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .logistics-hero-full {
+        width: 100%;
+        height: 450px;
+        overflow: hidden;
+      }
+
+      .logistics-hero-full img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .hero-placeholder {
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #ff8c42 0%, #ff6b35 100%);
+      }
+
+      .logistics-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 25px;
+        padding: 25px 30px 20px 30px;
+      }
+
+      .logistics-left {
+        padding-right: 10px;
+      }
+
+      .logistics-main-heading {
+        font-family: "Georgia", serif;
+        font-size: 14pt;
+        font-weight: 700;
+        color: #004080;
+        margin-bottom: 15px;
+      }
+
+      .logistics-section {
+        margin-bottom: 15px;
+      }
+
+      .logistics-subheading {
+        font-family: "Arial", sans-serif;
+        font-size: 9pt;
+        font-weight: 700;
+        color: #333333;
+        margin-bottom: 8px;
+      }
+
+      .logistics-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .logistics-list li {
+        font-family: "Arial", sans-serif;
+        font-size: 7.5pt;
+        color: #333333;
+        padding: 3px 0;
+        padding-left: 12px;
+        position: relative;
+        line-height: 1.4;
+      }
+
+      .logistics-list li::before {
+        content: "•";
+        position: absolute;
+        left: 0;
+        color: #333333;
+        font-weight: 700;
+      }
+
+      .logistics-right {
+        padding-left: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .price-box {
+        background: #004080;
+        color: white;
+        padding: 12px 15px;
+        text-align: center;
+        font-family: "Georgia", serif;
+        font-size: 14pt;
+        font-weight: 700;
+        border-radius: 4px;
+      }
+
+      .includes-box {
+        background: #e8f0f8;
+        padding: 12px 15px;
+        border-radius: 4px;
+      }
+
+      .includes-header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 8px;
+      }
+
+      .includes-title {
+        font-family: "Arial", sans-serif;
+        font-size: 9pt;
+        font-weight: 700;
+        color: #004080;
+      }
+
+      .includes-list {
+        font-family: "Arial", sans-serif;
+        font-size: 7pt;
+        color: #333333;
+        line-height: 1.5;
+      }
+
+      .dates-section,
+      .payment-section {
+        background: #f9f9f9;
+        padding: 12px 15px;
+        border-radius: 4px;
+      }
+
+      .section-title {
+        font-family: "Arial", sans-serif;
+        font-size: 9pt;
+        font-weight: 700;
+        color: #004080;
+        margin-bottom: 8px;
+      }
+
+      .dates-text {
+        font-family: "Arial", sans-serif;
+        font-size: 7pt;
+        color: #333333;
+        line-height: 1.5;
+      }
+
+      .payment-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .payment-list li {
+        font-family: "Arial", sans-serif;
+        font-size: 7pt;
+        color: #333333;
+        padding: 4px 0;
+        padding-left: 12px;
+        position: relative;
+        line-height: 1.4;
+      }
+
+      .payment-list li::before {
+        content: "•";
+        position: absolute;
+        left: 0;
+        color: #004080;
+        font-weight: 700;
+      }
+
+      .logistics-bottom-img {
+        width: 100%;
+        height: 120px;
+        overflow: hidden;
+        border-radius: 4px;
+      }
+
+      .logistics-bottom-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .img-placeholder {
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+      }
+
+      .logistics-page-footer {
+        text-align: center;
+        font-family: "Arial", sans-serif;
+        font-size: 7pt;
+        color: #999999;
+        padding: 12px 30px;
+        border-top: 1px solid #e0e0e0;
+        position: relative;
+      }
+
+      .page-number {
+        position: absolute;
+        right: 30px;
+        font-weight: 700;
+      }
+
+      /* ============================================ */
+      /* PAGE 5: QUOTE DETAILS & PRICING */
+      /* ============================================ */
+      .page-quote-details {
+        padding: 25px 30px;
+        background: white;
+      }
+
+      .quote-details-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding-bottom: 15px;
+        border-bottom: 3px solid #004080;
+        margin-bottom: 20px;
+      }
+
+      .quote-details-title {
+        font-family: "Georgia", serif;
+        font-size: 20pt;
+        font-weight: 700;
+        color: #004080;
+        margin-bottom: 5px;
+      }
+
+      .quote-reference {
+        font-family: "Arial", sans-serif;
+        font-size: 9pt;
+        color: #666666;
+      }
+
+      .quote-date,
+      .quote-valid {
+        font-family: "Arial", sans-serif;
+        font-size: 8pt;
+        color: #666666;
+        text-align: right;
+      }
+
+      .quote-details-content {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+        gap: 25px;
+      }
+
+      .details-section {
+        margin-bottom: 18px;
+        padding: 15px;
+        background: #f9f9f9;
+        border-left: 3px solid #004080;
+      }
+
+      .section-heading-blue {
+        font-family: "Arial", sans-serif;
+        font-size: 11pt;
+        font-weight: 700;
+        color: #004080;
+        margin-bottom: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .info-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .info-row {
+        display: grid;
+        grid-template-columns: 140px 1fr;
+        gap: 10px;
+        font-family: "Arial", sans-serif;
+        font-size: 8pt;
+        line-height: 1.4;
+      }
+
+      .info-label {
+        font-weight: 700;
+        color: #333333;
+      }
+
+      .info-value {
+        color: #666666;
+      }
+
+      .travelers-summary {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 12px;
+      }
+
+      .traveler-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 8px;
+        background: white;
+        border-radius: 4px;
+        font-family: "Arial", sans-serif;
+        font-size: 8pt;
+      }
+
+      .traveler-count {
+        font-weight: 700;
+        font-size: 14pt;
+        color: #004080;
+        min-width: 30px;
+      }
+
+      .traveler-type {
+        flex: 1;
+        font-weight: 600;
+        color: #333333;
+      }
+
+      .traveler-price {
+        color: #666666;
+        font-size: 7pt;
+      }
+
+      .total-travelers,
+      .room-info {
+        font-family: "Arial", sans-serif;
+        font-size: 8pt;
+        color: #333333;
+        padding: 8px;
+        background: white;
+        border-radius: 4px;
+        margin-top: 8px;
+      }
+
+      .special-requests-text {
+        font-family: "Arial", sans-serif;
+        font-size: 8pt;
+        color: #333333;
+        line-height: 1.5;
+        padding: 10px;
+        background: white;
+        border-radius: 4px;
+      }
+
+      .pricing-box {
+        background: linear-gradient(135deg, #004080 0%, #003366 100%);
+        padding: 18px;
+        border-radius: 6px;
+        color: white;
+        margin-bottom: 15px;
+      }
+
+      .pricing-heading {
+        font-family: "Georgia", serif;
+        font-size: 14pt;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 15px;
+        text-align: center;
+      }
+
+      .price-line-items {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .price-item {
+        display: flex;
+        justify-content: space-between;
+        font-family: "Arial", sans-serif;
+        font-size: 8pt;
+        padding: 6px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .price-item.discount {
+        color: #ffd700;
+      }
+
+      .price-item.tax {
+        font-size: 7.5pt;
+        color: rgba(255, 255, 255, 0.9);
+      }
+
+      .price-subtotal {
+        display: flex;
+        justify-content: space-between;
+        font-family: "Arial", sans-serif;
+        font-size: 9pt;
+        font-weight: 700;
+        padding: 10px 0;
+        border-top: 2px solid rgba(255, 255, 255, 0.3);
+        border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+        margin: 8px 0;
+      }
+
+      .price-total {
+        display: flex;
+        justify-content: space-between;
+        font-family: "Georgia", serif;
+        font-size: 14pt;
+        font-weight: 700;
+        padding: 12px 0;
+        border-top: 3px solid white;
+        margin-top: 8px;
+      }
+
+      .price-per-person {
+        text-align: center;
+        font-family: "Arial", sans-serif;
+        font-size: 8pt;
+        color: rgba(255, 255, 255, 0.8);
+        margin-top: 8px;
+        font-style: italic;
+      }
+
+      .payment-schedule-box {
+        background: #f0f8ff;
+        padding: 15px;
+        border-radius: 6px;
+        border: 2px solid #004080;
+        margin-bottom: 15px;
+      }
+
+      .payment-heading {
+        font-family: "Arial", sans-serif;
+        font-size: 11pt;
+        font-weight: 700;
+        color: #004080;
+        margin-bottom: 12px;
+        text-align: center;
+      }
+
+      .payment-milestones {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .payment-milestone {
+        background: white;
+        padding: 10px;
+        border-radius: 4px;
+        border-left: 4px solid #004080;
+      }
+
+      .milestone-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 5px;
+      }
+
+      .milestone-label {
+        font-family: "Arial", sans-serif;
+        font-size: 8pt;
+        font-weight: 700;
+        color: #333333;
+      }
+
+      .milestone-percent {
+        font-family: "Arial", sans-serif;
+        font-size: 10pt;
+        font-weight: 700;
+        color: #004080;
+      }
+
+      .milestone-amount {
+        font-family: "Georgia", serif;
+        font-size: 12pt;
+        font-weight: 700;
+        color: #004080;
+        margin-bottom: 3px;
+      }
+
+      .milestone-note {
+        font-family: "Arial", sans-serif;
+        font-size: 7pt;
+        color: #666666;
+        font-style: italic;
+      }
+
+      .notes-box {
+        background: #fff9e6;
+        padding: 12px;
+        border-radius: 4px;
+        border: 1px solid #ffd700;
+      }
+
+      .notes-heading {
+        font-family: "Arial", sans-serif;
+        font-size: 9pt;
+        font-weight: 700;
+        color: #333333;
+        margin-bottom: 8px;
+      }
+
+      .notes-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .notes-list li {
+        font-family: "Arial", sans-serif;
+        font-size: 7pt;
+        color: #666666;
+        padding: 3px 0;
+        padding-left: 12px;
+        position: relative;
+        line-height: 1.4;
+      }
+
+      .notes-list li::before {
+        content: "⚠";
+        position: absolute;
+        left: 0;
+        color: #ffd700;
+        font-size: 8pt;
+      }
+
+      .quote-details-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 15px;
+        border-top: 2px solid #e0e0e0;
+        margin-top: 15px;
+      }
+
+      .footer-contact {
+        font-family: "Arial", sans-serif;
+        font-size: 7.5pt;
+        color: #666666;
+      }
+
+      .footer-page {
+        font-family: "Arial", sans-serif;
+        font-size: 8pt;
+        font-weight: 700;
+        color: #004080;
+      }
+
+      /* ============================================ */
+      /* PAGE 6: BACK COVER - NEW DESIGN */
+      /* ============================================ */
+      .page-back-cover {
+        display: flex;
+        flex-direction: row;
+        padding: 0;
+        background: white;
+        height: 297mm;
+        max-height: 297mm;
+        overflow: hidden;
+      }
+
+      .back-cover-left {
+        width: 40%;
+        background: linear-gradient(135deg, #004080 0%, #003366 100%);
+        padding: 25px 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        color: white;
+      }
+
+      .back-logo {
+        background: white;
+        padding: 10px 15px;
+        border-radius: 6px;
+        margin-bottom: 20px;
+      }
+
+      .back-logo-img {
+        height: 45px;
+        width: auto;
+      }
+
+      .back-company-info {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .company-name {
+        font-family: "Georgia", serif;
+        font-size: 15pt;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 8px;
+        letter-spacing: 0.5px;
+      }
+
+      .company-address {
+        font-family: "Arial", sans-serif;
+        font-size: 7.5pt;
+        color: white;
+        line-height: 1.5;
+        margin-bottom: 5px;
+      }
+
+      .back-divider {
+        width: 80%;
+        height: 2px;
+        background: white;
+        margin: 20px 0;
+      }
+
+      .back-contact-info {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 20px;
+        width: 100%;
+      }
+
+      .contact-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-family: "Arial", sans-serif;
+        font-size: 8pt;
+        color: white;
+      }
+
+      .contact-icon {
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      .contact-icon svg {
+        width: 20px;
+        height: 20px;
+      }
+
+      .contact-text {
+        flex: 1;
+        line-height: 1.3;
+      }
+
+      .back-people-icon {
+        margin-top: auto;
+        opacity: 0.8;
+      }
+
+      .back-cover-right {
+        width: 60%;
+        background: #004080;
+        display: flex;
+        flex-direction: column;
+        height: 297mm;
+        padding: 20px;
+      }
+
+      .back-image-stack {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        gap: 15px;
+      }
+
+      .back-image-stack > div {
+        flex: 1;
+        overflow: hidden;
+        position: relative;
+        border-radius: 8px;
+      }
+
+      .back-image-stack img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 8px;
+      }
+
+      .back-img-placeholder {
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #ff8c42 0%, #ff6b35 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-family: "Georgia", serif;
+        font-size: 14pt;
+        font-weight: 700;
+        border-radius: 8px;
+      }
+
+      /* Print optimizations */
       @media print {
-        body {
-          print-color-adjust: exact;
-          -webkit-print-color-adjust: exact;
-        }
-        .section {
-          page-break-inside: avoid;
+        .page {
+          page-break-after: always;
         }
       }
     </style>
   </head>
   <body>
-    <div class="container">
-      <!-- Header -->
-      <div class="header">
-        <h1>Cox & Kings</h1>
-        <p class="tagline">Partner Network - Travel Quote</p>
+    <!-- ============================================ -->
+    <!-- PAGE 1: THE COVER -->
+    <!-- ============================================ -->
+    {{#if bannerImageUrl}}
+    <div
+      class="page page-cover"
+      style="background-image: url('{{bannerImageUrl}}'); background-size: cover; background-position: center;">
+      <div
+        class="cover-overlay"
+        style="
+          background: linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.3) 0%,
+            rgba(0, 0, 0, 0.5) 100%
+          );
+        "></div>
+    {{else}}
+    <div
+      class="page page-cover"
+      style="background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%)">
+      <div
+        class="cover-overlay"
+        style="
+          background: linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.3) 0%,
+            rgba(0, 0, 0, 0.5) 100%
+          );
+        "></div>
+    {{/if}}
+
+      <div class="cover-logo-badge">
+        <div style="background: white; padding: 15px 25px; border-radius: 8px">
+          <img
+            src="data:image/png;base64,{{COX_KINGS_LOGO_BASE64}}"
+            alt="Cox & Kings"
+            style="height: 60px; width: auto;" />
+        </div>
       </div>
 
-      <!-- Quote Number -->
-      <div class="quote-number">Quote #{{quoteNumber}}</div>
+      <div class="cover-main-content">
+        {{#if brandTag}}{{#if (eq brandTag "DUNIYA_DEKHO")}}
+        <div class="cover-duniya-tag">DUNIYA DEKHO</div>
+        {{/if}}{{/if}}
 
-      <!-- Quote Meta Information -->
-      <div class="quote-meta">
-        <div>
-          <div class="label">Quote Date</div>
-          <div class="value">{{quoteDate}}</div>
+        <h1 class="cover-hero-title">{{tourTitle}}</h1>
+
+        {{#if destination}}
+        <div class="cover-destinations">{{destination}}</div>
+        {{/if}}
+
+        <div class="cover-price-section">
+          <div class="cover-price-label">From</div>
+          <div class="cover-price-amount">{{formatINR grandTotal}}</div>
+          <div class="cover-price-per">per person</div>
         </div>
-        <div>
-          <div class="label">Valid Until</div>
-          <div class="value">{{validUntil}}</div>
+
+        {{#if duration}}
+        <div class="cover-duration">{{duration}}</div>
+        {{/if}}
+
+        <div class="cover-availability">
+          Limited Availability – Only a few spots left
         </div>
-        <div>
-          <div class="label">Duration</div>
-          <div class="value">{{duration}}</div>
+
+        <div class="cover-rating">
+          <span class="rating-stars">★★★★★</span>
+          <span class="rating-text">4.8 rating</span>
         </div>
       </div>
 
-      <div class="validity-badge">
-        ⏰ This quote is valid until {{validUntil}}
+      <div class="cover-footer-text">
+        Cox & Kings 260+ Years of Travel, 1M+ Travelers.
+      </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- PAGE 2: INTRODUCTION & BRAND PROMISE -->
+    <!-- ============================================ -->
+    <div class="page page-intro">
+      <!-- Top Header -->
+      <div class="intro-header">
+        <div class="intro-from">From</div>
+        <div class="intro-brand">Cox & Kings</div>
+        <div class="intro-to-you">to you</div>
+        <div class="intro-divider"></div>
       </div>
 
-      <!-- Customer Information -->
-      <div class="section">
-        <h2 class="section-title">Customer Information</h2>
-        <div class="info-grid">
-          <div class="info-item">
-            <div class="info-label">Name</div>
-            <div class="info-value">{{customerName}}</div>
+      <!-- Main Body: Personal Letter -->
+      <div class="intro-letter">
+        <p class="intro-question">
+          When you think of travel, what's the first thing that comes to mind?
+        </p>
+
+        <p>
+          For us, it's a mix of excitement, comfort, and a whole lot of heart.
+          It's that sigh of relief when you know everything is taken care of,
+          that spark when a new experience feels utterly familiar, and that
+          beautiful time we call "now forget."
+        </p>
+
+        <p>
+          With Duniya Dekho making its way back, we aim to do more than plan
+          holidays, to create moments that go on to become everlasting memories.
+          Maybe it's the glimmer of a skyline at dusk, the burst of flavours
+          that surprise your senses, or the simple joy of sharing a laugh with
+          your favourite people in a new city; but each detail is intentional,
+          handpicked, tested, and timed to perfection by a team of travel
+          enthusiasts who genuinely love what they do!
+        </p>
+
+        <p>
+          At Cox & Kings, we've been crafting journeys for more than 260 years.
+          And yet, the joy of watching our travellers fall in love with the
+          world never gets old. So, wherever you go from here, wherever this
+          journey leads, we hope it leaves you with stories you'll want to tell
+          for years to come.
+        </p>
+
+        <div class="intro-signature">
+          <div class="signature-handwritten">Amitabha Das</div>
+          <div class="signature-closing">Expertly Yours,</div>
+          <div class="signature-name">Amitabha Das</div>
+          <div class="signature-title">Head, Holiday Experiences</div>
+        </div>
+      </div>
+
+      <!-- Bottom Section -->
+      <div class="intro-bottom">
+        <!-- Bottom Left: Logo and Contact -->
+        <div class="intro-left-column">
+          <div class="intro-logo">
+            <img
+              src="data:image/png;base64,{{COX_KINGS_LOGO_BASE64}}"
+              alt="Cox & Kings"
+              class="intro-logo-img" />
           </div>
-          <div class="info-item">
-            <div class="info-label">Phone</div>
-            <div class="info-value">{{customerPhone}}</div>
+
+          <div class="intro-contact">
+            <div class="contact-company">Cox and Kings</div>
+            <div class="contact-address">
+              Plot no. 32-B, 1st floor, 100 ft road<br />Ghitorni, New
+              Delhi-110030
+            </div>
+            <div class="contact-phone">+91 855 600 1700</div>
+            <div class="contact-email">holidays@coxandkings.com</div>
+            <div class="contact-website">www.coxandkings.com</div>
           </div>
-          {{#if customerEmail}}
-          <div class="info-item">
-            <div class="info-label">Email</div>
-            <div class="info-value">{{customerEmail}}</div>
+        </div>
+
+        <!-- Bottom Right: What We Offer & Why Trust -->
+        <div class="intro-right-column">
+          <div class="intro-offerings">
+            <h4>What We Offer Across Europe</h4>
+            <ul>
+              <li>Private tailored travel</li>
+              <li>Guaranteed Group Departures</li>
+              <li>Multi-country itineraries</li>
+              <li>Luxury rail journeys</li>
+              <li>River cruises</li>
+              <li>Self-drive itineraries</li>
+            </ul>
+          </div>
+
+          <div class="intro-trust">
+            <h4>Why Trust Cox & Kings With Your Holiday</h4>
+            <ul>
+              <li>Our extraordinary heritage, established in 1758</li>
+              <li>Award-winning holidays crafted with care</li>
+              <li>Premium experiences at great value for money</li>
+              <li>Personalised services throughout the journey</li>
+              <li>Expert guidance from your dedicated tour consultant</li>
+              <li>
+                Exceptional guides who bring every destination to life
+              </li>
+            </ul>
+          </div>
+
+          <div class="intro-icon">
+            <svg
+              width="60"
+              height="60"
+              viewBox="0 0 60 60"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <circle cx="20" cy="15" r="8" fill="white" opacity="0.9" />
+              <circle cx="40" cy="15" r="8" fill="white" opacity="0.9" />
+              <path
+                d="M10 35 Q20 25 30 35 Q40 25 50 35 L50 55 L10 55 Z"
+                fill="white"
+                opacity="0.9" />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- PAGE 3: THE ITINERARY & HIGHLIGHTS -->
+    <!-- ============================================ -->
+    <div class="page page-itinerary">
+      <!-- Top Label -->
+      <div class="itinerary-label">EUROPE • GROUP TOUR</div>
+
+      <!-- Main Title -->
+      <h1 class="itinerary-main-title">{{tourTitle}}</h1>
+
+      <!-- Divider Line -->
+      <div class="itinerary-title-divider"></div>
+
+      <!-- Info Bar -->
+      <div class="itinerary-info-bar">
+        <div class="info-left">
+          Duration • {{duration}} • {{countryCount}} {{#if (eq countryCount
+          1)}}Country{{else}}Countries{{/if}} • {{cityCount}} {{#if (eq
+          cityCount 1)}}City{{else}}Cities{{/if}}
+        </div>
+        <div class="info-right">Starting Price {{formatINR grandTotal}}*</div>
+      </div>
+
+      <!-- Two Column Layout -->
+      <div class="itinerary-two-column">
+        <!-- Left Column -->
+        <div class="itinerary-left-col">
+          <!-- Route Box -->
+          {{#if nightAllocations}}
+          <div class="route-box">
+            {{#each nightAllocations}} {{#if @index}} > {{/if}}{{city}} {{/each}}
           </div>
           {{/if}}
-        </div>
-      </div>
 
-      <!-- Tour Details -->
-      <div class="section">
-        <h2 class="section-title">Tour Package Details</h2>
-        <div class="info-grid">
-          <div class="info-item">
-            <div class="info-label">Package</div>
-            <div class="info-value">{{tourTitle}}</div>
-          </div>
-          {{#if destination}}
-          <div class="info-item">
-            <div class="info-label">Destination</div>
-            <div class="info-value">{{destination}}</div>
+          <!-- Tour Overview -->
+          <h3 class="section-heading">Tour overview</h3>
+          <p class="tour-overview-text">
+            {{#if aboutDescription}} {{aboutDescription}} {{else}} A great
+            journey is measured by the moments that leave you standing still in
+            awe, and somehow, Europe has a way of giving you a whole lot of
+            those. Paris draws you in with its cafés, corners, and sweeping
+            views from the Eiffel Tower, leaving you wondering how so much
+            beauty can exist in one place. Switzerland lifts your gaze even
+            higher: glaciers, snow-brushed peaks, and waterfalls that feel
+            carved out of the sky. Italy brings it all back down to earth:
+            gondolas slipping through Venice, a scoop of gelato in San
+            Gimignano, and history laid out in the streets of Rome. Over this
+            carefully designed 14-day journey, every detail is taken care of so
+            you can wander, taste, watch, and feel without a worry in the world.
+            From handpicked hotels to curated meals to easy transfers,
+            everything falls into place around you, leaving you free to collect
+            the sights, sounds, and the small surprises waiting for you here.
+            {{/if}}
+          </p>
+
+          <!-- C&K Highlights -->
+          <h3 class="section-heading">C&K highlights</h3>
+          <ul class="highlights-list">
+            {{#if highlights}} {{#each highlights}}
+            <li>{{this}}</li>
+            {{/each}} {{else}}
+            <li>Amsterdam Canal Cruise</li>
+            <li>Visit to Cheese Farm Catharina-Hoeve</li>
+            <li>Visit to De Zaanse Schans Clog Workshop</li>
+            <li>Second Visit to Keukenhof Gardens in Muidendam</li>
+            <li>Guided exploration of the Palace of Versailles</li>
+            <li>
+              Guided Paris city tour with Eiffel Tower 3rd level access
+            </li>
+            <li>
+              Experience Paris by night with Seine River Cruise and dinner
+              onboard
+            </li>
+            <li>Orientation tour of Dijon, the heart of Burgundy</li>
+            <li>
+              Journey through Switzerland's alpine heart on the GoldenPass Line
+            </li>
+            <li>
+              Scenic Titlis excursion with Rotair cable car, Ice Flyer, and
+              alpine lunch
+            </li>
+            <li>Rhine Falls visit and Grand Orientation Tour</li>
+            <li>Lindt Chocolate Factory experience</li>
+            <li>Guided discovery of Venice city</li>
+            <li>
+              Gondola ride experience through the romantic canals of Venice
+            </li>
+            <li>
+              Half-day plane excursion by boat covering San Marco, Burano, and
+              Murano
+            </li>
+            <li>
+              Iconic sights of Pisa: San Gimignano, and Siena with wine tasting
+            </li>
+            <li>
+              Guided exploration of Rome's iconic landmarks: Colosseum, Trevi
+              Fountain, and Vatican City
+            </li>
+            {{/if}}
+          </ul>
+        </div>
+
+        <!-- Right Column -->
+        <div class="itinerary-right-col">
+          <!-- Hero Image -->
+          {{#if packageImages}}
+          <div class="itinerary-hero-img">
+            <img src="{{packageImages.[0]}}" alt="Tour destination" />
           </div>
           {{/if}}
-          <div class="info-item">
-            <div class="info-label">Departure Date</div>
-            <div class="info-value">{{departureDate}}</div>
-          </div>
-          <div class="info-item">
-            <div class="info-label">Return Date</div>
-            <div class="info-value">{{endDate}}</div>
-          </div>
-          <div class="info-item">
-            <div class="info-label">Passengers</div>
-            <div class="info-value">
-              {{paxAdults}} Adult(s) {{#if (gt paxChildren 0)}}, {{paxChildren}}
-              Child(ren){{/if}} {{#if (gt paxInfants 0)}}, {{paxInfants}}
-              Infant(s){{/if}}
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <!-- Itinerary -->
-      {{#if itinerary}}
-      <div class="section">
-        <h2 class="section-title">Day-by-Day Itinerary</h2>
-        {{#each itinerary}}
-        <div class="itinerary-day">
-          <h4>Day {{day}}: {{title}}</h4>
-          {{#if city_name}}
-          <p><strong>City:</strong> {{city_name}}</p>
-          {{/if}}
-          <p>{{description}}</p>
-
-          <div class="day-details">
-            {{#if meals}}
-            <div class="detail-item">
-              <span class="detail-label">Meals:</span>
-              <span
-                >{{#each meals}}{{this}}{{#unless @last}},
-                {{/unless}}{{/each}}</span
-              >
+          <!-- Day by Day Itinerary -->
+          <div class="day-by-day">
+            {{#if itinerary}} {{#each itinerary}}
+            <div class="day-item">
+              <div class="day-title">Day {{day}}: {{title}}</div>
+              {{#if description}}
+              <div class="day-desc">{{description}}</div>
+              {{/if}}
             </div>
-            {{/if}} {{#if stay}} {{#if stay.hotel_name}}
-            <div class="detail-item">
-              <span class="detail-label">Stay:</span>
-              <span
-                >{{stay.hotel_name}}{{#if stay.room_type}} -
-                {{stay.room_type}}{{/if}}</span
-              >
+            {{/each}} {{else}}
+            <div class="day-item">
+              <div class="day-title">Day 1: Welcome to Amsterdam</div>
+              <div class="day-desc">
+                Arrive in Amsterdam, settle into your hotel, and relax before
+                tomorrow's scenic evening cruise before sharing a welcome dinner
+                with your fellow travellers.
+              </div>
             </div>
-            {{/if}} {{/if}} {{#if activities}}
-            <div class="detail-item" style="grid-column: 1 / -1">
-              <span class="detail-label">Activities:</span>
-              <span
-                >{{#each activities}}{{this}}{{#unless @last}},
-                {{/unless}}{{/each}}</span
-              >
+            <div class="day-item">
+              <div class="day-title">Day 2: Tulips & Timeless Crafts</div>
+              <div class="day-desc">
+                Spend the day at Keukenhof's blooming gardens, explore the
+                heritage of Zaanse Schans, and enjoy a relaxed afternoon.
+              </div>
+            </div>
+            <div class="day-item">
+              <div class="day-title">Day 3: Capitals in Transit</div>
+              <div class="day-desc">
+                Make the journey from Paris via Brussels, strolling through
+                Brussels' Grand Place before arriving in the City of Light.
+              </div>
+            </div>
+            <div class="day-item">
+              <div class="day-title">
+                Day 4: Versailles, Paris Icons and a Seine Cruise
+              </div>
+              <div class="day-desc">
+                Step into the splendour of Versailles, discover Paris' most
+                iconic spots, ascend the Eiffel Tower, and conclude the day with
+                a Seine River dinner cruise.
+              </div>
+            </div>
+            <div class="day-item">
+              <div class="day-title">
+                Day 5: A Free Day in Paris or Disneyland
+              </div>
+              <div class="day-desc">
+                Shape the day to your interests; wander through Paris,
+                boutiques, and neighbourhoods, or have an optional magical
+                experience at Disneyland Paris.
+              </div>
+            </div>
+            <div class="day-item">
+              <div class="day-title">
+                Day 6: Burgundy Countryside and Arrival in Switzerland
+              </div>
+              <div class="day-desc">
+                Pause in Dijon and continue across scenic routes to reach the
+                natural beauty of Switzerland.
+              </div>
+            </div>
+            <div class="day-item">
+              <div class="day-title">
+                Day 7: GoldenPass Scenic Rail, Interlaken & Optional Jungfraujoch
+                Experience
+              </div>
+              <div class="day-desc">
+                Journey through Switzerland's alpine heart on the GoldenPass
+                Line, with an optional chance to choose between a relaxed
+                lakeside afternoon or a breathtaking ascent to Jungfraujoch –
+                Top of Europe!
+              </div>
+            </div>
+            <div class="day-item">
+              <div class="day-title">Day 8: Mt. Titlis and Lucerne</div>
+              <div class="day-desc">
+                Rise to the snowy heights of Mt. Titlis, enjoy an alpine lunch,
+                explore Lucerne's Chapel Bridge, Lion's treat, and unwind amid
+                the beauty of Lucerne on a cruise with appetisers.
+              </div>
+            </div>
+            <div class="day-item">
+              <div class="day-title">
+                Day 9: Rhine Falls, Zurich and Lindt Chocolate Factory
+              </div>
+              <div class="day-desc">
+                Feel the rush of the Rhine Falls on a boat ride, tour the
+                cultural centre of Zurich, and savour sweet moments inside the
+                Lindt Chocolate Factory.
+              </div>
+            </div>
+            <div class="day-item">
+              <div class="day-title">
+                Day 10: Switzerland to Italy: Lakeside Scenery & Milan Highlights
+              </div>
+              <div class="day-desc">
+                Cross into Italy, passing through the scenic Lugano lake region
+                and past Lake Como, arriving in Milan for an orientation tour of
+                this iconic landmarks, before continuing to Padova for dinner and
+                an overnight stay.
+              </div>
+            </div>
+            <div class="day-item">
+              <div class="day-title">
+                Day 11: Canals, Colours & Venetian Craft
+              </div>
+              <div class="day-desc">
+                Experience Venice by boat and gondola, then explore the shining
+                glass workshops of Murano and the pastel tones of Burano before
+                continuing through Tuscany.
+              </div>
+            </div>
+            <div class="day-item">
+              <div class="day-title">Day 12: Pisa, Tuscany & Medieval Dreams</div>
+              <div class="day-desc">
+                Capture the Leaning Tower of Pisa, stroll the medieval streets of
+                San Gimignano, savour a gelato, and arrive in Rome by evening.
+              </div>
+            </div>
+            <div class="day-item">
+              <div class="day-title">Day 13: Witness the Eternal City</div>
+              <div class="day-desc">
+                Trace the capital's ancient heart and the Vatican's treasures,
+                from the Colosseum and Sistine Chapel to the Fountain to St.
+                Peter's Basilica.
+              </div>
+            </div>
+            <div class="day-item">
+              <div class="day-title">Day 14: Farewell to Europe from Rome</div>
+              <div class="day-desc">
+                Depart the Eternal City carrying home the memories, moments, and
+                stories gathered along the way.
+              </div>
             </div>
             {{/if}}
           </div>
         </div>
-        {{/each}}
-      </div>
-      {{/if}}
-
-      <!-- Inclusions -->
-      {{#if inclusions}}
-      <div class="section">
-        <h2 class="section-title">Package Inclusions</h2>
-        <ul class="inclusions-list">
-          {{#each inclusions}}
-          <li>{{this}}</li>
-          {{/each}}
-        </ul>
-      </div>
-      {{/if}}
-
-      <!-- Exclusions -->
-      {{#if exclusions}}
-      <div class="section">
-        <h2 class="section-title">Package Exclusions</h2>
-        <ul class="exclusions-list">
-          {{#each exclusions}}
-          <li>{{this}}</li>
-          {{/each}}
-        </ul>
-      </div>
-      {{/if}}
-
-      <!-- Special Notes -->
-      {{#if specialNotes}}
-      <div class="special-notes">
-        <h4>📌 Important Notes</h4>
-        <p>{{specialNotes}}</p>
-      </div>
-      {{/if}}
-
-      <!-- Price Breakdown -->
-      <div class="section">
-        <h2 class="section-title">Price Breakdown</h2>
-        <table class="price-table">
-          <tr>
-            <td>
-              Package Amount ({{paxAdults}} Adult{{#if (gt paxAdults
-              1)}}s{{/if}} @ {{formatINR pricePerAdult}} per person)
-            </td>
-            <td>{{formatINR (add 0 (add 0 totalAmount))}}</td>
-          </tr>
-          {{#if (gt paxChildren 0)}} {{#if pricePerChild}}
-          <tr>
-            <td>
-              Children ({{paxChildren}} @ {{formatINR pricePerChild}} per child)
-            </td>
-            <td>Included above</td>
-          </tr>
-          {{/if}} {{/if}} {{#if (gt paxInfants 0)}} {{#if pricePerInfant}}
-          <tr>
-            <td>
-              Infants ({{paxInfants}} @ {{formatINR pricePerInfant}} per infant)
-            </td>
-            <td>Included above</td>
-          </tr>
-          {{/if}} {{/if}}
-          <tr class="subtotal">
-            <td><strong>Subtotal</strong></td>
-            <td><strong>{{formatINR totalAmount}}</strong></td>
-          </tr>
-          <tr>
-            <td>GST (5%)</td>
-            <td>{{formatINR gstAmount}}</td>
-          </tr>
-          {{#if includeTcs}}
-          <tr>
-            <td>TCS ({{tcsRate}})</td>
-            <td>{{formatINR tcsAmount}}</td>
-          </tr>
-          {{/if}}
-          <tr class="total">
-            <td>Grand Total</td>
-            <td>{{formatINR grandTotal}}</td>
-          </tr>
-        </table>
-      </div>
-
-      <!-- Terms & Conditions -->
-      <div class="section">
-        <h2 class="section-title">Terms & Conditions</h2>
-        <div class="terms-box">
-          {{#if termsAndConditions}}
-          <p>{{termsAndConditions}}</p>
-          {{else}}
-          <ul>
-            <li>This quote is valid for {{validUntil}} only</li>
-            <li>Prices are subject to availability at the time of booking</li>
-            <li>Full payment required to confirm booking</li>
-            <li>Cancellation charges apply as per company policy</li>
-            <li>Travel insurance is recommended but not included</li>
-            <li>
-              Passport must be valid for at least 6 months from travel date
-            </li>
-            <li>Prices may vary based on seasonal fluctuations</li>
-            <li>GST and TCS are calculated as per government regulations</li>
-          </ul>
-          {{/if}}
-        </div>
-      </div>
-
-      <!-- Agency Contact -->
-      <div class="section">
-        <h2 class="section-title">Contact Information</h2>
-        <div class="contact-info">
-          <div style="font-weight: 600; font-size: 16px; margin-bottom: 8px">
-            {{agencyName}}
-          </div>
-          {{#if agentName}}
-          <div>Agent: {{agentName}}</div>
-          {{/if}}
-          <div>Phone: {{agencyPhone}}</div>
-          {{#if agencyEmail}}
-          <div>Email: {{agencyEmail}}</div>
-          {{/if}}
-        </div>
-        <p style="margin-top: 15px; font-size: 13px; color: var(--text-light)">
-          For any queries or to confirm this booking, please contact us at the
-          above details.
-        </p>
       </div>
 
       <!-- Footer -->
-      <div class="footer">
-        <p>Thank you for considering Cox & Kings Partner Network</p>
-        <p>
-          This is a computer-generated quote and does not require a signature.
-        </p>
-        <p>&copy; {{currentYear}} Cox & Kings. All rights reserved.</p>
+      <div class="itinerary-footer">
+        Contact us on {{agencyPhone}} or holidays@coxandkings.com
+      </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- PAGE 4: LOGISTICS, INCLUSIONS & DATES -->
+    <!-- ============================================ -->
+    <div class="page page-logistics">
+      <!-- Top: Full Width Hero Image -->
+      <div class="logistics-hero-full">
+        {{#if packageImages}}
+        <img src="{{packageImages.[1]}}" alt="Destination" />
+        {{else}}
+        <div class="hero-placeholder"></div>
+        {{/if}}
+      </div>
+
+      <!-- Bottom Content Section -->
+      <div class="logistics-content">
+        <!-- Left Column -->
+        <div class="logistics-left">
+          <h2 class="logistics-main-heading">What Makes This Journey Special</h2>
+
+          <!-- All-Inclusive Convenience -->
+          <div class="logistics-section">
+            <h3 class="logistics-subheading">All-Inclusive Convenience</h3>
+            <ul class="logistics-list">
+              <li>
+                Expertly crafted and consistently loved, with an impressive
+                5-star reviews
+              </li>
+              <li>Flights Included</li>
+              <li>Hotel Stays</li>
+              <li>All Meals</li>
+              <li>Fully immersive and packed</li>
+              <li>Airport Transfers</li>
+              <li>Complimentary Travel Insurance</li>
+              <li>Expert Tour Manager</li>
+              <li>Visa Included</li>
+            </ul>
+          </div>
+
+          <!-- Our Signature Touch -->
+          <div class="logistics-section">
+            <h3 class="logistics-subheading">Our Signature Touch</h3>
+            <ul class="logistics-list">
+              <li>Handpicked hotels for comfort and convenience</li>
+              <li>
+                Specially curated, selected for authentic Indian flavours and
+                vegetarian options
+              </li>
+              <li>
+                Assistance of experienced guides throughout your journey
+              </li>
+            </ul>
+          </div>
+
+          <!-- Our Brand -->
+          <div class="logistics-section">
+            <h3 class="logistics-subheading">Our Brand</h3>
+            <ul class="logistics-list">
+              <li>Artfully curated journeys with care and expertise</li>
+              <li>A legacy of over 260 years in travel</li>
+              <li>Cox and Kings one of the most awarded travel brands</li>
+              <li>Trusted by over a million travellers worldwide</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="logistics-right">
+          <!-- Starting Price Box -->
+          <div class="price-box">Starting Price {{formatINR grandTotal}}*</div>
+
+          <!-- Group Tours Include Box -->
+          <div class="includes-box">
+            <div class="includes-header">
+              <span class="includes-title">Group tours include:</span>
+            </div>
+            <div class="includes-list">
+              International Flights • 4-Star Hotels • Meals • Expert Guided
+              Tours • Visa Fees & Assistance • Free Local SIMs • Free Travel
+              Insurance • Parking & Currency Guide • Bucket List Experiences
+            </div>
+          </div>
+
+          <!-- Departure Dates -->
+          <div class="dates-section">
+            <h3 class="section-title">Departure dates for {{currentYear}}</h3>
+            <div class="dates-text">
+              {{#if departureStartDate}}
+              Selected Departure Date: {{departureStartDate}}
+              {{else}}
+              Please contact us for available departure dates
+              {{/if}}
+            </div>
+          </div>
+
+          <!-- Payment Schedule -->
+          <div class="payment-section">
+            <h3 class="section-title">Payment Schedule</h3>
+            <ul class="payment-list">
+              <li>100% of flight cost at the time of booking to secure seats</li>
+              <li>35% of the total package amount upon booking</li>
+              <li>40% due 60 days before departure</li>
+              <li>25% due 45 days before departure</li>
+            </ul>
+          </div>
+
+          <!-- Bottom Landscape Image -->
+          <div class="logistics-bottom-img">
+            {{#if packageImages}}
+            <img src="{{packageImages.[2]}}" alt="Scenic view" />
+            {{else}}
+            <div class="img-placeholder"></div>
+            {{/if}}
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="logistics-page-footer">
+        Find out more at www.coxandkings.com or from your travel agent
+        <span class="page-number">4</span>
+      </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- PAGE 5: QUOTE DETAILS & PRICING BREAKDOWN -->
+    <!-- ============================================ -->
+    <div class="page page-quote-details">
+      <!-- Header -->
+      <div class="quote-details-header">
+        <div class="header-left">
+          <h1 class="quote-details-title">Your Quote Summary</h1>
+          <div class="quote-reference">
+            Quote Reference: <strong>#{{quoteNumber}}</strong>
+          </div>
+        </div>
+        <div class="header-right">
+          <div class="quote-date">Date: {{quoteDate}}</div>
+          {{#if validUntil}}
+          <div class="quote-valid">Valid Until: {{validUntil}}</div>
+          {{/if}}
+        </div>
+      </div>
+
+      <!-- Two Column Layout -->
+      <div class="quote-details-content">
+        <!-- Left Column -->
+        <div class="quote-details-left">
+          <!-- Customer Information -->
+          <div class="details-section">
+            <h2 class="section-heading-blue">Customer Information</h2>
+            <div class="info-grid">
+              <div class="info-row">
+                <span class="info-label">Name:</span>
+                <span class="info-value">{{customerName}}</span>
+              </div>
+              {{#if customerEmail}}
+              <div class="info-row">
+                <span class="info-label">Email:</span>
+                <span class="info-value">{{customerEmail}}</span>
+              </div>
+              {{/if}} {{#if customerPhone}}
+              <div class="info-row">
+                <span class="info-label">Phone:</span>
+                <span class="info-value">{{customerPhone}}</span>
+              </div>
+              {{/if}}
+            </div>
+          </div>
+
+          <!-- Tour Information -->
+          <div class="details-section">
+            <h2 class="section-heading-blue">Tour Information</h2>
+            <div class="info-grid">
+              <div class="info-row">
+                <span class="info-label">Package:</span>
+                <span class="info-value">{{tourTitle}}</span>
+              </div>
+              {{#if destination}}
+              <div class="info-row">
+                <span class="info-label">Destination:</span>
+                <span class="info-value">{{destination}}</span>
+              </div>
+              {{/if}} {{#if duration}}
+              <div class="info-row">
+                <span class="info-label">Duration:</span>
+                <span class="info-value">{{duration}}</span>
+              </div>
+              {{/if}} {{#if departureDate}}
+              <div class="info-row">
+                <span class="info-label">Departure Date:</span>
+                <span class="info-value">{{departureDate}}</span>
+              </div>
+              {{/if}} {{#if originCity}}
+              <div class="info-row">
+                <span class="info-label">Departure City:</span>
+                <span class="info-value">{{originCity}}</span>
+              </div>
+              {{/if}}
+            </div>
+          </div>
+
+          <!-- Traveler Details -->
+          <div class="details-section">
+            <h2 class="section-heading-blue">Traveler Details</h2>
+            <div class="travelers-summary">
+              <div class="traveler-item">
+                <span class="traveler-type"><strong>Adults:</strong></span>
+                <span class="traveler-count">{{paxAdults}}</span>
+                {{#if pricePerAdult}}
+                <span class="traveler-price">{{formatINR pricePerAdult}} each</span>
+                {{/if}}
+              </div>
+              {{#if (gt paxChildren 0)}}
+              <div class="traveler-item">
+                <span class="traveler-type"><strong>Children:</strong></span>
+                <span class="traveler-count">{{paxChildren}}</span>
+                {{#if pricePerChild}}
+                <span class="traveler-price">{{formatINR pricePerChild}} each</span>
+                {{/if}}
+              </div>
+              {{/if}} {{#if (gt paxInfants 0)}}
+              <div class="traveler-item">
+                <span class="traveler-type"><strong>Infants:</strong></span>
+                <span class="traveler-count">{{paxInfants}}</span>
+                {{#if pricePerInfant}}
+                <span class="traveler-price">{{formatINR pricePerInfant}} each</span>
+                {{/if}}
+              </div>
+              {{/if}}
+            </div>
+            <div class="total-travelers">
+              <strong>Total Travelers:</strong> {{totalPax}} person{{#if (gt
+              totalPax 1)}}s{{/if}}
+            </div>
+            {{#if roomCount}}
+            <div class="room-info">
+              <strong>Rooms Required:</strong> {{roomCount}} room{{#if (gt
+              roomCount 1)}}s{{/if}}
+            </div>
+            {{/if}}
+          </div>
+
+          {{#if specialRequests}}
+          <!-- Special Requests -->
+          <div class="details-section">
+            <h2 class="section-heading-blue">Special Requests</h2>
+            <div class="special-requests-text">{{specialRequests}}</div>
+          </div>
+          {{/if}}
+        </div>
+
+        <!-- Right Column -->
+        <div class="quote-details-right">
+          <!-- Price Breakdown -->
+          <div class="pricing-box">
+            <h2 class="pricing-heading">Price Breakdown</h2>
+
+            <div class="price-line-items">
+              {{#if pricePerAdult}} {{#if (gt paxAdults 0)}}
+              <div class="price-item">
+                <span class="price-desc"
+                  >Adults ({{paxAdults}} × {{formatINR pricePerAdult}})</span
+                >
+                <span class="price-amount"
+                  >{{formatINR (multiply paxAdults pricePerAdult)}}</span
+                >
+              </div>
+              {{/if}} {{/if}} {{#if pricePerChild}} {{#if (gt paxChildren 0)}}
+              <div class="price-item">
+                <span class="price-desc"
+                  >Children ({{paxChildren}} × {{formatINR pricePerChild}})</span
+                >
+                <span class="price-amount"
+                  >{{formatINR (multiply paxChildren pricePerChild)}}</span
+                >
+              </div>
+              {{/if}} {{/if}} {{#if pricePerInfant}} {{#if (gt paxInfants 0)}}
+              <div class="price-item">
+                <span class="price-desc"
+                  >Infants ({{paxInfants}} × {{formatINR pricePerInfant}})</span
+                >
+                <span class="price-amount"
+                  >{{formatINR (multiply paxInfants pricePerInfant)}}</span
+                >
+              </div>
+              {{/if}} {{/if}} {{#if discountAmount}} {{#if (gt discountAmount
+              0)}}
+              <div class="price-item discount">
+                <span class="price-desc"
+                  >Discount {{#if discountType}}({{discountType}}){{/if}}</span
+                >
+                <span class="price-amount">-{{formatINR discountAmount}}</span>
+              </div>
+              {{/if}} {{/if}}
+
+              <div class="price-subtotal">
+                <span class="price-desc">Package Subtotal</span>
+                <span class="price-amount">{{formatINR totalAmount}}</span>
+              </div>
+
+              <div class="price-item tax">
+                <span class="price-desc">GST (5%)</span>
+                <span class="price-amount">{{formatINR gstAmount}}</span>
+              </div>
+
+              {{#if includeTcs}} {{#if (gt tcsAmount 0)}}
+              <div class="price-item tax">
+                <span class="price-desc">TCS ({{tcsRate}})</span>
+                <span class="price-amount">{{formatINR tcsAmount}}</span>
+              </div>
+              {{/if}} {{/if}}
+
+              <div class="price-total">
+                <span class="price-desc">Grand Total</span>
+                <span class="price-amount">{{formatINR grandTotal}}</span>
+              </div>
+
+              <div class="price-per-person">
+                Per Person: {{formatINR perPersonPrice}}
+              </div>
+            </div>
+          </div>
+
+          <!-- Important Notes -->
+          <div class="notes-box">
+            <h3 class="notes-heading">Important Notes</h3>
+            <ul class="notes-list">
+              <li>All prices are in Indian Rupees (INR)</li>
+              <li>Prices are subject to availability at the time of booking</li>
+              <li>
+                This quote is valid for {{#if validUntil}}{{validUntil}}{{else}}30
+                days{{/if}}
+              </li>
+              <li>Payment schedule may vary based on departure date</li>
+              {{#if flightIncluded}}
+              <li>International flights are included in the package</li>
+              {{else}}
+              <li>International flights can be arranged separately</li>
+              {{/if}}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="quote-details-footer">
+        <div class="footer-contact">
+          <strong>Questions?</strong> Contact us at {{agencyPhone}}{{#if
+          agencyEmail}} or {{agencyEmail}}{{/if}}
+        </div>
+        <div class="footer-page">Page 5</div>
+      </div>
+    </div>
+    <!-- ============================================ -->
+    <!-- PAGE 6: BACK COVER -->
+    <!-- ============================================ -->
+    <div class="page page-back-cover">
+      <!-- Left Side: Blue Background with Contact Info -->
+      <div class="back-cover-left">
+        <!-- Logo -->
+        <div class="back-logo">
+          <img
+            src="data:image/png;base64,{{COX_KINGS_LOGO_BASE64}}"
+            alt="Cox & Kings"
+            class="back-logo-img" />
+        </div>
+
+        <!-- Company Info -->
+        <div class="back-company-info">
+          <div class="company-name">Cox and Kings</div>
+          <div class="company-address">
+            Plot no. 35-B, 1st floor<br />100 ft road, Ghitorni,<br />New
+            Delhi-110030
+          </div>
+        </div>
+
+        <!-- Divider -->
+        <div class="back-divider"></div>
+
+        <!-- Contact Info -->
+        <div class="back-contact-info">
+          <div class="contact-item">
+            <span class="contact-icon">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+                  fill="white" />
+              </svg>
+            </span>
+            <span class="contact-text">{{agencyPhone}}</span>
+          </div>
+
+          <div class="contact-item">
+            <span class="contact-icon">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                  stroke="white"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round" />
+                <polyline
+                  points="22,6 12,13 2,6"
+                  stroke="white"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </span>
+            <span class="contact-text"
+              >{{#if agencyEmail}}{{agencyEmail}}{{else}}holidays@coxandkings.com{{/if}}</span
+            >
+          </div>
+
+          <div class="contact-item">
+            <span class="contact-icon">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="white"
+                  stroke-width="2" />
+                <line
+                  x1="2"
+                  y1="12"
+                  x2="22"
+                  y2="12"
+                  stroke="white"
+                  stroke-width="2" />
+                <path
+                  d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+                  stroke="white"
+                  stroke-width="2" />
+              </svg>
+            </span>
+            <span class="contact-text">www.coxandkings.com</span>
+          </div>
+        </div>
+
+        <!-- People Icon -->
+        <div class="back-people-icon">
+          <svg
+            width="40"
+            height="40"
+            viewBox="0 0 60 60"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <circle cx="20" cy="15" r="8" fill="white" opacity="0.9" />
+            <circle cx="40" cy="15" r="8" fill="white" opacity="0.9" />
+            <path
+              d="M10 35 Q20 25 30 35 Q40 25 50 35 L50 55 L10 55 Z"
+              fill="white"
+              opacity="0.9" />
+          </svg>
+        </div>
+      </div>
+
+      <!-- Right Side: Three Stacked Images -->
+      <div class="back-cover-right">
+        <div class="back-image-stack">
+          <div>
+            {{#if packageImages}}
+            <img src="{{packageImages.[3]}}" alt="Destination 1" />
+            {{else}}
+            <div class="back-img-placeholder">Rome</div>
+            {{/if}}
+          </div>
+          <div>
+            {{#if packageImages}}
+            <img src="{{packageImages.[4]}}" alt="Destination 2" />
+            {{else}}
+            <div class="back-img-placeholder">Paris</div>
+            {{/if}}
+          </div>
+          <div>
+            {{#if packageImages}}
+            <img src="{{packageImages.[5]}}" alt="Destination 3" />
+            {{else}}
+            <div class="back-img-placeholder">Switzerland</div>
+            {{/if}}
+          </div>
+        </div>
       </div>
     </div>
   </body>

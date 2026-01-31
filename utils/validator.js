@@ -46,7 +46,9 @@ const QuoteDataSchema = z.object({
   tourTitle: z.string(),
   destination: z.string().nullable(),
   departureDate: z.string(),
-  endDate: z.string().optional(), // Make optional since main app might not send it
+  departureStartDate: z.string().nullable().optional(),
+  departureEndDate: z.string().nullable().optional(),
+  endDate: z.string().optional(),
   duration: z.string(),
   paxAdults: z.number(),
   paxChildren: z.number(),
@@ -69,7 +71,6 @@ const QuoteDataSchema = z.object({
   brandTag: z.string().nullable().optional(),
   includeTcs: z.boolean().optional(),
   flightIncluded: z.boolean().nullable().optional(),
-  // Additional fields from main app
   country: z.string().nullable().optional(),
   roomCount: z.number().optional(),
   highlights: z.array(z.string()).nullable().optional(),
@@ -80,18 +81,19 @@ const QuoteDataSchema = z.object({
   cancellationPolicy: z.string().nullable().optional(),
   departureAirport: z.string().nullable().optional(),
   flightDetails: z.any().nullable().optional(),
+  packageImages: z.array(z.string()).nullable().optional(),
 });
 
 const PDFRequestSchema = z.object({
   type: z.enum(["booking-voucher", "quote", "invoice"]),
-  data: z.any(), // Accept any data, validate based on type
+  data: z.any(),
   recipients: z.object({
     customer: EmailRecipientSchema.optional(),
     agent: EmailRecipientSchema.optional(),
   }),
 });
 
-export function validatePDFRequest(data: unknown) {
+export function validatePDFRequest(data) {
   // First validate the basic structure
   const validated = PDFRequestSchema.parse(data);
 
@@ -126,7 +128,6 @@ export function validatePDFRequest(data: unknown) {
       }
     }
   }
-  // For 'invoice' or other types, skip specific validation for now
 
   return validated;
 }
