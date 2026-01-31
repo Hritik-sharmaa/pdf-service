@@ -1,7 +1,7 @@
 # Use official Node.js image
 FROM node:20-slim
 
-# Install Chromium and all required dependencies
+# Install Chromium and all required dependencies in one layer
 RUN apt-get update && apt-get install -y \
     chromium \
     chromium-sandbox \
@@ -30,21 +30,20 @@ RUN apt-get update && apt-get install -y \
 # Set working directory
 WORKDIR /app
 
-# Copy package files
+# Copy package files first (for better caching)
 COPY package*.json ./
 
-# Install dependencies (skip Chromium download since we use system Chromium)
+# Set environment variables to skip Chromium download
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
-RUN npm ci --only=production
+ENV PUPPETEER_SKIP_DOWNLOAD=true
+ENV NODE_ENV=production
+ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
+
+# Install dependencies without running install scripts
+RUN npm ci --only=production --ignore-scripts || npm install --only=production --ignore-scripts
 
 # Copy application files
 COPY . .
-
-# Set environment variables
-ENV NODE_ENV=production
-ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
-ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
-ENV NODE_OPTIONS="--dns-result-order=ipv4first"
 
 # Expose port
 EXPOSE 3000
