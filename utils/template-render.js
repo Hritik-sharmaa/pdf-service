@@ -5,8 +5,6 @@ import { join } from "path";
 // Register Handlebars helpers
 Handlebars.registerHelper("formatINR", function (amount) {
   return new Intl.NumberFormat("en-IN", {
-    style: "currency",
-    currency: "INR",
     maximumFractionDigits: 0,
   }).format(amount);
 });
