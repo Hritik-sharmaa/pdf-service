@@ -4,9 +4,10 @@ import { join } from "path";
 
 // Register Handlebars helpers
 Handlebars.registerHelper("formatINR", function (amount) {
-  return new Intl.NumberFormat("en-IN", {
+  const formatted = new Intl.NumberFormat("en-IN", {
     maximumFractionDigits: 0,
   }).format(amount);
+  return `₹${formatted}`;
 });
 
 Handlebars.registerHelper("eq", function (a, b) {
