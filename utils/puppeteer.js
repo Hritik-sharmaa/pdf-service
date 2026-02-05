@@ -164,11 +164,6 @@ export async function generatePDF(html) {
   try {
     const page = await browser.newPage();
 
-    // Set content encoding to UTF-8
-    await page.setExtraHTTPHeaders({
-      "Content-Type": "text/html; charset=UTF-8",
-    });
-
     page.on("requestfailed", (request) => {
       if (request.resourceType() === "image") {
         console.error(
@@ -196,7 +191,6 @@ export async function generatePDF(html) {
         bottom: "0px",
         left: "0px",
       },
-      preferCSSPageSize: false,
     });
 
     console.log(`[Puppeteer] PDF generated: ${pdf.length} bytes`);

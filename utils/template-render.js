@@ -10,6 +10,12 @@ Handlebars.registerHelper("formatINR", function (amount) {
   return `₹${formatted}`;
 });
 
+Handlebars.registerHelper("formatINRPlain", function (amount) {
+  return new Intl.NumberFormat("en-IN", {
+    maximumFractionDigits: 0,
+  }).format(amount);
+});
+
 Handlebars.registerHelper("eq", function (a, b) {
   return a === b;
 });
