@@ -2155,6 +2155,12 @@
           <div class="quote-reference">
             Quote Reference: <strong>#{{quoteNumber}}</strong>
           </div>
+          {{#if quoteLink}}
+          <div class="quote-link" style="margin-top: 8px; font-size: 9pt;">
+            <span style="color: #666;">View Online: </span>
+            <a href="{{quoteLink}}" style="color: #004080; text-decoration: none; font-weight: 500;">{{quoteLink}}</a>
+          </div>
+          {{/if}}
         </div>
         <div class="header-right">
           <div class="quote-date">Date: {{quoteDate}}</div>

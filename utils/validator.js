@@ -82,6 +82,7 @@ const QuoteDataSchema = z.object({
   departureAirport: z.string().nullable().optional(),
   flightDetails: z.any().nullable().optional(),
   packageImages: z.array(z.string()).nullable().optional(),
+  quoteLink: z.string().nullable().optional()
 });
 
 const PDFRequestSchema = z
