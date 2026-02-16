@@ -31,28 +31,6 @@ async function getPuppeteerConfig() {
     }
   }
 
-  // Mode 2: Vercel/Serverless - use @sparticuz/chromium
-  if (isVercel) {
-    try {
-      const puppeteerCore = await import("puppeteer-core");
-      const chromium = await import("@sparticuz/chromium");
-
-      console.log("[Puppeteer] Using @sparticuz/chromium (serverless)");
-
-      return {
-        puppeteer: puppeteerCore.default,
-        launchOptions: {
-          args: chromium.default.args,
-          defaultViewport: chromium.default.defaultViewport,
-          executablePath: await chromium.default.executablePath(),
-          headless: chromium.default.headless,
-        },
-      };
-    } catch (e) {
-      console.error("[Puppeteer] Failed to load @sparticuz/chromium:", e);
-    }
-  }
-
   // Mode 3: Railway/Docker - use system Chromium
   const puppeteerCore = await import("puppeteer-core");
   console.log("[Puppeteer] Using system Chromium (Railway/Docker)");
