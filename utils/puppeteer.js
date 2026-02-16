@@ -5,16 +5,7 @@ import { execSync } from "child_process";
  */
 async function getPuppeteerConfig() {
   const isProduction = process.env.NODE_ENV === "production";
-  const isRailway = process.env.RAILWAY_ENVIRONMENT;
-  const isVercel = process.env.VERCEL;
-  const isLocal = !isProduction && !isRailway && !isVercel;
-
-  console.log("[Puppeteer] Environment:", {
-    isLocal,
-    isRailway,
-    isVercel,
-    isProduction,
-  });
+  const isLocal = !isProduction;
 
   // Mode 1: Local development - use bundled Chromium
   if (isLocal) {

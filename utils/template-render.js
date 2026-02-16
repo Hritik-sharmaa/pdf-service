@@ -42,6 +42,28 @@ Handlebars.registerHelper("formatBrandTag", function (brandTag) {
     .join(" ");
 });
 
+Handlebars.registerHelper("formatDate", function (dateString) {
+  if (!dateString) return "";
+
+  try {
+    const date = new Date(dateString);
+
+    // Check if date is valid
+    if (isNaN(date.getTime())) {
+      return dateString;
+    }
+
+    // Format as: February 21, 2026
+    return date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  } catch (error) {
+    return dateString;
+  }
+});
+
 Handlebars.registerHelper("stripHtml", function (text) {
   if (!text) return "";
 
