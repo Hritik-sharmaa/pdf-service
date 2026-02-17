@@ -90,6 +90,48 @@ const QuoteDataSchema = z.object({
   quoteLink: z.string().nullable().optional(),
 });
 
+const InvoiceDataSchema = z.object({
+  invoiceNumber: z.string(),
+  invoiceDate: z.string(),
+  bookingId: z.string(),
+  bookingDate: z.string(),
+  customerName: z.string(),
+  customerEmail: z.string().email().nullable().optional(),
+  customerPhone: z.string(),
+  tourTitle: z.string(),
+  destination: z.string(),
+  country: z.string(),
+  duration: z.string(),
+  departureDate: z.string(),
+  endDate: z.string(),
+  paxAdults: z.number(),
+  paxChildren: z.number(),
+  paxInfants: z.number(),
+  subtotal: z.number(),
+  gstRate: z.number(),
+  gstAmount: z.number(),
+  tcsAmount: z.number().nullable().optional(),
+  grandTotal: z.number(),
+  includeTcs: z.boolean().optional(),
+  sacCode: z.string().optional(),
+  paymentType: z.string().optional(),
+  payments: z
+    .array(
+      z.object({
+        paymentNumber: z.number(),
+        amount: z.number(),
+        transactionId: z.string(),
+        paymentMethod: z.string(),
+        paidDate: z.string(),
+      }),
+    )
+    .optional(),
+  agencyName: z.string().nullable().optional(),
+  agentName: z.string().nullable().optional(),
+  agencyPhone: z.string().nullable().optional(),
+  agencyEmail: z.string().nullable().optional(),
+});
+
 const PDFRequestSchema = z
   .object({
     type: z.enum(["booking-voucher", "quote", "invoice"]),
@@ -142,6 +184,8 @@ export function validatePDFRequest(data) {
         validated.data.endDate = validated.data.departureDate;
       }
     }
+  } else if (validated.type === "invoice") {
+    validated.data = InvoiceDataSchema.parse(validated.data);
   }
 
   return validated;
