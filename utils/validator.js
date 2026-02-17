@@ -109,6 +109,7 @@ const InvoiceDataSchema = z.object({
   paxInfants: z.number(),
   subtotal: z.number(),
   gstRate: z.number(),
+  tcsRate: z.number(),
   gstAmount: z.number(),
   tcsAmount: z.number().nullable().optional(),
   grandTotal: z.number(),

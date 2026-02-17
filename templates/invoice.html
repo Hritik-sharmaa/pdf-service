@@ -75,8 +75,6 @@
       .logo {
         max-width: 100px;
         height: auto;
-        border: 2px solid #4472c4;
-        border-radius: 50%;
         padding: 3px;
       }
 
@@ -330,17 +328,10 @@
   </head>
   <body>
     <div class="container">
-      <!-- Decorative Triangles -->
-      <div class="triangle-top"></div>
-      <div class="triangle-bottom"></div>
-      <!-- Decorative Triangles -->
-      <div class="triangle-top"></div>
-      <div class="triangle-bottom"></div>
-
       <!-- Header with Company Info -->
       <div class="header-section">
         <div class="logo-section">
-          <img src="{{COX_KINGS_LOGO_BASE64}}" alt="Cox & Kings" class="logo" />
+          <img src="data:image/png;base64,{{COX_KINGS_LOGO_BASE64}}" alt="Cox & Kings" class="logo" />
         </div>
         <div class="company-info">
           <div class="company-name">Cox & Kings Ltd.</div>
@@ -349,7 +340,7 @@
               D-2 Southern Park, Unit 10 & 108, Saket, New Delhi, 110017
             </div>
             <div>Website - www.coxandkings.com</div>
-            <div>Phone - +91 1149506070</div>
+            <div>Phone - +91 9056750579</div>
             <div>Email ID - finance@coxandkings.com</div>
           </div>
         </div>
@@ -369,14 +360,6 @@
           <div class="info-item">
             <span class="info-item-label">Customer Address</span>
             <span class="info-item-value">{{destination}}, {{country}}</span>
-          </div>
-          <div class="info-item">
-            <span class="info-item-label">Customer PAN</span>
-            <span class="info-item-value">AANPR5407BA</span>
-          </div>
-          <div class="info-item">
-            <span class="info-item-label">State Code</span>
-            <span class="info-item-value">07</span>
           </div>
         </div>
 
@@ -398,10 +381,6 @@
             <span class="info-item-label">Receipt Date</span>
             <span class="info-item-value">{{bookingDate}}</span>
           </div>
-          <div class="info-item">
-            <span class="info-item-label">GSTIN</span>
-            <span class="info-item-value">07AAGCP1078A1Z1</span>
-          </div>
         </div>
       </div>
 
@@ -416,7 +395,7 @@
             <th style="width: 10%">Rate of Tax</th>
             <th style="width: 8%">Discount</th>
             <th colspan="2" style="width: 15%">Net Amount</th>
-            <th style="width: 12%">Total</th>
+            <th rowspan="2" style="width: 12%">Amounts (in ₹)<br />Total</th>
           </tr>
           <tr>
             <th></th>
@@ -427,7 +406,6 @@
             <th></th>
             <th style="width: 8%">Taxable</th>
             <th style="width: 7%">Exempt</th>
-            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -497,7 +475,7 @@
             <td class="text-left">TCS (Tax Collected at Source)</td>
             <td class="text-center"></td>
             <td class="text-right"></td>
-            <td class="text-center">-</td>
+            <td class="text-center">{{tcsRate}}%</td>
             <td class="text-center">-</td>
             <td class="text-right"></td>
             <td class="text-right"></td>
@@ -579,7 +557,7 @@
             <strong>Bank Branch:</strong> SCO 36, Pocket 1, Sec. Manimajra,
             Chandigarh
           </p>
-          <p><strong>Account No:</strong> 000405031396</p>
+          <p><strong>Account No:</strong> 036205004638</p>
           <p><strong>Beneficiary Name:</strong> Cox & Kings Ltd.</p>
           <p><strong>IFSC Code:</strong> ICIC0000362</p>
           <br />
@@ -588,7 +566,7 @@
               >Please quote our invoice number while remitting funds.</strong
             >
           </p>
-          <p style="font-size: 9px">Our GSTIN: 07AAACW8237H1ZZ</p>
+          <p style="font-size: 9px">Our GSTIN: 07AADCW8237H1Z2</p>
           <p style="font-size: 9px">PAN No.: AAACW8237H</p>
         </div>
 
