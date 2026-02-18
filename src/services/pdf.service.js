@@ -31,6 +31,23 @@ export function prepareTemplateData(data) {
   // Transform image URLs
   templateData = transformImageUrls(templateData);
 
+  // If highlights array is missing but highlightsHtml exists, sanitize it into a string array
+  if ((!templateData.highlights || templateData.highlights.length === 0) && templateData.highlightsHtml) {
+    const stripped = templateData.highlightsHtml
+      .replace(/<\/?(li|p|div|br|h[1-6])[^>]*>/gi, '\n')  // block tags → newlines
+      .replace(/<[^>]+>/g, '')                              // strip remaining tags
+      .replace(/&nbsp;/g, ' ')
+      .replace(/&amp;/g, '&')
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>')
+      .replace(/&quot;/g, '"');
+    templateData.highlights = stripped
+      .split('\n')
+      .map(s => s.trim())
+      .filter(s => s.length > 3);
+    console.log(`[PDF] Converted highlightsHtml to highlights array: ${templateData.highlights.length} items`);
+  }
+
   // Log agency information
   console.log("[PDF] Agency Information:", {
     agencyName: templateData.agencyName || "NOT PROVIDED",
@@ -47,6 +64,13 @@ export function prepareTemplateData(data) {
       ? `Array(${templateData.exclusions.length})`
       : "NOT PROVIDED",
     tourInclusions: templateData.tourInclusions || "NOT PROVIDED",
+  });
+
+  // Log highlights data
+  console.log("[PDF] Highlights Data:", {
+    highlights: templateData.highlights
+      ? `Array(${templateData.highlights.length}): ${JSON.stringify(templateData.highlights)}`
+      : "NOT PROVIDED / NULL",
   });
 
   // Detailed tourInclusions logging

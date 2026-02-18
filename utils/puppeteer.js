@@ -150,6 +150,18 @@ export async function generatePDF(html) {
       timeout: 30000,
     });
 
+    // Wait for dynamic pagination scripts to complete
+    await page.evaluate(() => {
+      return new Promise((resolve) => {
+        // Give inline scripts time to execute and measure DOM
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            resolve();
+          });
+        });
+      });
+    });
+
     console.log("[Puppeteer] Generating PDF...");
     const pdf = await page.pdf({
       format: "A4",

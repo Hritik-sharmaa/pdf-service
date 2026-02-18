@@ -86,132 +86,20 @@ Handlebars.registerHelper("stripHtml", function (text) {
   return cleaned;
 });
 
-// Helper to split itinerary into chunks for pagination
-Handlebars.registerHelper("splitItinerary", function (itinerary, options) {
-  if (!itinerary || itinerary.length === 0) {
-    return options.fn({ days: [], hasMore: false, isFirst: true });
+Handlebars.registerHelper("isArray", function (value) {
+  return Array.isArray(value);
+});
+
+// Helper to JSON-serialize data for client-side dynamic pagination
+// Handles strings, arrays, objects, null/undefined safely
+// Also escapes </script to prevent premature script tag termination
+Handlebars.registerHelper("jsonStringify", function (value) {
+  if (value === undefined || value === null) {
+    return new Handlebars.SafeString("null");
   }
-
-  // Estimate content height based on description length
-  // Average characters per line: ~80-100 for the small font (6pt)
-  // Lines per day item: title (1 line) + description lines + spacing
-  const estimateHeight = (day) => {
-    const titleHeight = 1.2; // lines (including margin)
-    const descLength = day.description ? day.description.length : 0;
-    const descLines = Math.ceil(descLength / 110); // ~110 chars per line for small font
-    const spacing = 0.3; // gap between items
-    return titleHeight + descLines + spacing;
-  };
-
-  // First page constraints (with left column taking ~40% width)
-  // Right column has 2 sub-columns for days
-  // Available height: ~50-55 lines total in 2 columns
-  const firstPageMaxLines = 55;
-
-  // Continuation page constraints (SAME as first page - also has left column)
-  // Same layout, same capacity
-  const continuationPageMaxLines = 55;
-
-  let result = "";
-  let currentIndex = 0;
-
-  // First page chunk - dynamically calculate based on content
-  if (currentIndex < itinerary.length) {
-    let firstChunk = [];
-    let totalLines = 0;
-
-    for (let i = 0; i < itinerary.length; i++) {
-      const dayHeight = estimateHeight(itinerary[i]);
-
-      // Account for 2-column layout (divide by 2)
-      if (totalLines + dayHeight <= firstPageMaxLines) {
-        firstChunk.push(itinerary[i]);
-        totalLines += dayHeight;
-      } else {
-        break;
-      }
-    }
-
-    // Safety bounds: minimum 5 days, maximum 12 days
-    if (firstChunk.length < 5 && itinerary.length >= 5) {
-      firstChunk = itinerary.slice(0, 5);
-    }
-    if (firstChunk.length > 12) {
-      firstChunk = itinerary.slice(0, 12);
-    }
-
-    // If all remaining days can fit (13 or fewer total), include them all
-    if (itinerary.length <= 13) {
-      firstChunk = itinerary;
-    }
-
-    const hasMore = itinerary.length > firstChunk.length;
-
-    result += options.fn({
-      days: firstChunk,
-      hasMore: hasMore,
-      isFirst: true,
-      isContinuation: false,
-    });
-
-    currentIndex = firstChunk.length;
-  }
-
-  // Continuation pages - dynamically calculate based on content
-  while (currentIndex < itinerary.length) {
-    let chunk = [];
-    let totalLines = 0;
-    const remainingDays = itinerary.length - currentIndex;
-
-    // Calculate total lines for all remaining days
-    let remainingTotalLines = 0;
-    for (let i = currentIndex; i < itinerary.length; i++) {
-      remainingTotalLines += estimateHeight(itinerary[i]);
-    }
-
-    // If all remaining days can fit on one page, include them all
-    if (remainingTotalLines <= continuationPageMaxLines || remainingDays <= 7) {
-      chunk = itinerary.slice(currentIndex);
-    } else {
-      // Otherwise, fit as many as possible
-      for (let i = currentIndex; i < itinerary.length; i++) {
-        const dayHeight = estimateHeight(itinerary[i]);
-
-        if (totalLines + dayHeight <= continuationPageMaxLines) {
-          chunk.push(itinerary[i]);
-          totalLines += dayHeight;
-        } else {
-          break;
-        }
-      }
-
-      // Safety bounds: minimum 5 days, maximum 12 days
-      if (chunk.length < 5 && currentIndex + 5 <= itinerary.length) {
-        chunk = itinerary.slice(currentIndex, currentIndex + 5);
-      }
-      if (chunk.length > 12) {
-        chunk = itinerary.slice(currentIndex, currentIndex + 12);
-      }
-    }
-
-    // If no items fit, take at least one to avoid infinite loop
-    if (chunk.length === 0 && currentIndex < itinerary.length) {
-      chunk = [itinerary[currentIndex]];
-    }
-
-    const hasMore = currentIndex + chunk.length < itinerary.length;
-
-    result += options.fn({
-      days: chunk,
-      hasMore: hasMore,
-      isFirst: false,
-      isContinuation: true,
-    });
-
-    currentIndex += chunk.length;
-  }
-
-  return result;
+  // Escape </script sequences to prevent breaking the HTML script tag
+  const json = JSON.stringify(value).replace(/<\/script/gi, "<\\/script");
+  return new Handlebars.SafeString(json);
 });
 
 export function renderTemplate(templateName, data) {

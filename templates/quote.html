@@ -487,8 +487,8 @@
       .itinerary-two-column {
         display: grid;
         grid-template-columns: 0.60fr 1.35fr;
-        gap: 15px;
-        margin-bottom: 10px;
+        gap: 12px;
+        margin-bottom: 8px;
       }
 
       .itinerary-left-col {
@@ -525,7 +525,7 @@
 
       .tour-overview-text {
         font-family: "Arial", sans-serif;
-        font-size: 6.5pt;
+        font-size: 7.5pt;
         line-height: 1.3;
         color: #333333;
         text-align: justify;
@@ -540,7 +540,7 @@
 
       .highlights-list li {
         font-family: "Arial", sans-serif;
-        font-size: 6pt;
+        font-size: 7.5pt;
         color: #333333;
         padding: 1.5px 0;
         padding-left: 10px;
@@ -563,9 +563,9 @@
 
       .itinerary-hero-img {
         width: 100%;
-        height: 120px;
+        height: 110px;
         overflow: hidden;
-        margin-bottom: 10px;
+        margin-bottom: 8px;
         border-radius: 12px;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
       }
@@ -574,34 +574,95 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
+        object-position: center;
       }
 
       .day-by-day {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 6px 10px;
+        gap: 5px 8px;
       }
 
       .day-item {
         page-break-inside: avoid;
         break-inside: avoid;
+        display: flex;
+        flex-direction: column;
       }
 
       .day-title {
         font-family: "Inter", sans-serif;
-        font-size: 6.5pt;
+        font-size: 10pt;
         font-weight: 600;
         color: #0f172a;
-        margin-bottom: 3px;
-        line-height: 1.2;
+        margin-bottom: 2px;
+        line-height: 1.1;
       }
 
       .day-desc {
         font-family: "Inter", sans-serif;
-        font-size: 6pt;
+        font-size: 9pt;
         color: #64748b;
-        line-height: 1.3;
+        line-height: 1.25;
         text-align: left;
+        margin-bottom: 3px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .day-details {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        margin-top: 3px;
+      }
+
+      .day-detail-row {
+        display: flex;
+        align-items: flex-start;
+        gap: 3px;
+        font-family: "Inter", sans-serif;
+        font-size: 5.5pt;
+        line-height: 1.25;
+      }
+
+      .day-detail-icon {
+        flex-shrink: 0;
+        width: 8px;
+        height: 8px;
+        margin-top: 1px;
+      }
+
+      .day-detail-label {
+        font-weight: 600;
+        color: #475569;
+        min-width: 50px;
+      }
+
+      .day-detail-value {
+        color: #64748b;
+        flex: 1;
+      }
+
+      .day-activities-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        color: #64748b;
+      }
+
+      .day-activities-list li {
+        padding-left: 8px;
+        position: relative;
+        line-height: 1.3;
+      }
+
+      .day-activities-list li::before {
+        content: "•";
+        position: absolute;
+        left: 0;
+        color: #94a3b8;
+        font-size: 6pt;
       }
 
       .itinerary-footer {
@@ -624,6 +685,7 @@
         page-break-before: always;
         display: flex;
         flex-direction: column;
+        min-height: 297mm;
       }
 
       .continuation-header {
@@ -740,7 +802,7 @@
       }
 
       .inclusion-section-title.tour-inclusions-title {
-        color: #2563eb;
+        color: #f0f8ff;
       }
 
       .inclusions-list {
@@ -801,6 +863,7 @@
       }
 
       .tour-inclusions-list .inclusion-item {
+        color: white;
         display: inline;
       }
 
@@ -816,7 +879,8 @@
       }
 
       .inclusions-full-width {
-        background: #f8fafc;
+        color: white;
+        background: #f8fafc21;
         border-radius: 12px;
         padding: 20px;
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
@@ -853,6 +917,7 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
+        object-position: center;
       }
 
       .hero-placeholder {
@@ -1022,6 +1087,7 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
+        object-position: center;
       }
 
       .img-placeholder {
@@ -1040,12 +1106,6 @@
         margin-top: auto;
         border-radius: 4px;
         font-weight: 500;
-      }
-
-      .page-number {
-        position: absolute;
-        right: 30px;
-        font-weight: 700;
       }
 
       /* ============================================ */
@@ -1529,6 +1589,7 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
+        object-position: center;
         border-radius: 8px;
       }
 
@@ -1622,22 +1683,26 @@
           <span class="rating-text">4.8 Rating</span>
         </div>
 
-        {{#if departureStartDate}}
-        <div class="cover-departure-info" style="margin-top: 20px; padding: 15px 25px; background: rgba(255, 255, 255, 0.1); border-radius: 8px; backdrop-filter: blur(10px);">
-          <div style="font-size: 10pt; color: #ffffff; font-weight: 500; margin-bottom: 8px;">
-            📅 Travel Dates
-          </div>
-          <div style="font-size: 12pt; color: #ffffff; font-weight: 600;">
-            {{formatDate departureStartDate}}{{#if departureEndDate}} - {{formatDate departureEndDate}}{{/if}}
-          </div>
+              <!-- Full Width Tour Inclusions Section -->
+      {{#if tourInclusions}}
+      <div class="inclusions-full-width">
+        <h3 class="inclusion-section-title tour-inclusions-title">
+          <span class="inclusion-icon"><svg width="20px" height="20px" viewBox="0 -0.5 33 33" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><title>star</title> <desc>Created with Sketch.</desc> <defs> </defs> <g id="Vivid.JS" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Vivid-Icons" transform="translate(-903.000000, -411.000000)" fill="#efefef"> <g id="Icons" transform="translate(37.000000, 169.000000)"> <g id="star" transform="translate(858.000000, 234.000000)"> <g transform="translate(7.000000, 8.000000)" id="Shape"> <polygon points="27.865 31.83 17.615 26.209 7.462 32.009 9.553 20.362 0.99 12.335 12.532 10.758 17.394 0 22.436 10.672 34 12.047 25.574 20.22"> </polygon> </g> </g> </g> </g> </g> </g></svg></span>
+          {{#if tourInclusions.label}}{{tourInclusions.label}}{{else}}Special Tour Inclusions{{/if}}
+        </h3>
+        <div class="tour-inclusions-list">
+          {{#if tourInclusions.inclusions}}
+            {{#each tourInclusions.inclusions}}
+            <span class="inclusion-item">{{this.label}}</span>
+            {{/each}}
+          {{else}}
+            {{#each tourInclusions}}
+            <span class="inclusion-item">{{this}}</span>
+            {{/each}}
+          {{/if}}
         </div>
-        {{/if}}
-
-        {{#if validUntil}}
-        <div class="cover-validity-info" style="margin-top: 12px; font-size: 9pt; color: rgba(255, 255, 255, 0.85);">
-          ⏰ Quote valid until {{formatDate validUntil}}
-        </div>
-        {{/if}}
+      </div>
+      {{/if}}
       </div>
 
       <div class="cover-footer-text">
@@ -1646,235 +1711,305 @@
     </div>
 
     <!-- ============================================ -->
-    <!-- PAGE 3+: THE ITINERARY & HIGHLIGHTS -->
+    <!-- PAGE 3+: THE ITINERARY & HIGHLIGHTS (DYNAMIC PAGINATION) -->
     <!-- ============================================ -->
     {{#if itinerary}}
-    {{#splitItinerary itinerary}}
-      {{#if isFirst}}
-      <!-- First Itinerary Page (with left column) -->
-      <div class="page page-itinerary">
-        <!-- Top Label -->
-        <div class="itinerary-label">{{../country}} • GROUP TOUR</div>
+    <!-- Itinerary pages container - will be dynamically paginated -->
+    <div id="itinerary-pages-container"></div>
 
-        <!-- Main Title -->
-        <h1 class="itinerary-main-title">{{../tourTitle}}</h1>
+    <!-- Hidden data for the pagination script -->
+    <script id="itinerary-data" type="application/json">{{{jsonStringify itinerary}}}</script>
+    <script id="template-data" type="application/json">{
+      "country": {{{jsonStringify country}}},
+      "tourTitle": {{{jsonStringify tourTitle}}},
+      "duration": {{{jsonStringify duration}}},
+      "countryCount": {{#if countryCount}}{{{jsonStringify countryCount}}}{{else}}1{{/if}},
+      "cityCount": {{#if cityCount}}{{{jsonStringify cityCount}}}{{else}}1{{/if}},
+      "grandTotal": {{#if grandTotal}}{{{jsonStringify grandTotal}}}{{else}}0{{/if}},
+      "includeTcs": {{#if includeTcs}}true{{else}}false{{/if}},
+      "agencyName": {{{jsonStringify agencyName}}},
+      "agencyEmail": {{#if agencyEmail}}{{{jsonStringify agencyEmail}}}{{else}}"holidays@coxandkings.com"{{/if}},
+      "agencyPhone": {{#if agencyPhone}}{{{jsonStringify agencyPhone}}}{{else}}"+91 855 600 1700"{{/if}},
+      "packageImage": {{#if packageImages}}{{{jsonStringify packageImages.[0]}}}{{else}}""{{/if}},
+      "nightAllocations": {{{jsonStringify nightAllocations}}},
+      "aboutDescription": {{{jsonStringify aboutDescription}}},
+      "highlights": {{{jsonStringify highlights}}}
+    }</script>
 
-        <!-- Divider Line -->
-        <div class="itinerary-title-divider"></div>
+    <script>
+    (function() {
+      var PAGE_HEIGHT = 1122; // A4 height in px at 96dpi (297mm)
+      var PAGE_PADDING_TOP = 20;
+      var PAGE_PADDING_BOTTOM = 15;
+      var HEADER_HEIGHT = 120; // label + title + divider + info bar
+      var FOOTER_HEIGHT = 30;
+      var HERO_IMG_HEIGHT = 118; // hero image + margin
+      var GRID_GAP = 5;
+      var SAFETY_MARGIN = 15;
 
-        <!-- Info Bar -->
-        <div class="itinerary-info-bar">
-          <div class="info-left">
-            Duration • {{../duration}} • {{../countryCount}} {{#if (eq ../countryCount 1)}}Country{{else}}Countries{{/if}} • {{../cityCount}} {{#if (eq ../cityCount 1)}}City{{else}}Cities{{/if}}
-          </div>
-          <div class="info-right">
-            Quote Price INR {{formatINR ../grandTotal}}/-
-            <div style="font-size: 5pt; color: #666; margin-top: 2px;">
-              {{#if ../includeTcs}}incl. taxes{{else}}incl. GST{{/if}}
-            </div>
-          </div>
-        </div>
+      var itinerary, tplData;
+      try {
+        itinerary = JSON.parse(document.getElementById('itinerary-data').textContent);
+        tplData = JSON.parse(document.getElementById('template-data').textContent);
+      } catch(e) {
+        console.error('[PDF] Failed to parse template data JSON:', e.message);
+        itinerary = [];
+        tplData = {};
+      }
+      var container = document.getElementById('itinerary-pages-container');
 
-        <!-- Two Column Layout -->
-        <div class="itinerary-two-column">
-          <!-- Left Column -->
-          <div class="itinerary-left-col">
-            <!-- Route Box -->
-            <div class="left-side">
-              {{#if ../nightAllocations}}
-              <div class="route-box">
-                {{#each ../nightAllocations}} {{#if @index}} > {{/if}}{{city}}{{#if nights}} ({{nights}}N){{/if}} {{/each}}
-              </div>
-              {{/if}}
+      function formatINR(amount) {
+        return new Intl.NumberFormat('en-IN', { maximumFractionDigits: 0 }).format(amount);
+      }
 
-              <!-- Tour Overview -->
-              <h3 class="section-heading">Tour overview</h3>
-              <p class="tour-overview-text">
-                {{#if ../aboutDescription}} {{stripHtml ../aboutDescription}} {{else}} A great
-                journey is measured by the moments that leave you standing still in
-                awe, and somehow, Europe has a way of giving you a whole lot of
-                those. Paris draws you in with its cafés, corners, and sweeping
-                views from the Eiffel Tower, leaving you wondering how so much
-                beauty can exist in one place. Switzerland lifts your gaze even
-                higher: glaciers, snow-brushed peaks, and waterfalls that feel
-                carved out of the sky. Italy brings it all back down to earth:
-                gondolas slipping through Venice, a scoop of gelato in San
-                Gimignano, and history laid out in the streets of Rome. Over this
-                carefully designed 14-day journey, every detail is taken care of so
-                you can wander, taste, watch, and feel without a worry in the world.
-                From handpicked hotels to curated meals to easy transfers,
-                everything falls into place around you, leaving you free to collect
-                the sights, sounds, and the small surprises waiting for you here.
-                {{/if}}
-              </p>
+      function escapeHtml(text) {
+        if (!text) return '';
+        var div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+      }
 
-              <!-- C&K Highlights -->
-              <h3 class="section-heading">C&K highlights</h3>
-              <ul class="highlights-list">
-                {{#if ../highlights}} {{#each ../highlights}}
-                <li>{{this}}</li>
-                {{/each}} {{else}}
-                <li>Amsterdam Canal Cruise</li>
-                <li>Visit to Cheese Farm Catharina-Hoeve</li>
-                <li>Visit to De Zaanse Schans Clog Workshop</li>
-                <li>Second Visit to Keukenhof Gardens in Muidendam</li>
-                <li>Guided exploration of the Palace of Versailles</li>
-                <li>Guided Paris city tour with Eiffel Tower 3rd level access</li>
-                <li>Experience Paris by night with Seine River Cruise and dinner onboard</li>
-                <li>Orientation tour of Dijon, the heart of Burgundy</li>
-                <li>Journey through Switzerland's alpine heart on the GoldenPass Line</li>
-                <li>Scenic Titlis excursion with Rotair cable car, Ice Flyer, and alpine lunch</li>
-                <li>Rhine Falls visit and Grand Orientation Tour</li>
-                <li>Lindt Chocolate Factory experience</li>
-                <li>Guided discovery of Venice city</li>
-                <li>Gondola ride experience through the romantic canals of Venice</li>
-                <li>Half-day plane excursion by boat covering San Marco, Burano, and Murano</li>
-                <li>Iconic sights of Pisa: San Gimignano, and Siena with wine tasting</li>
-                <li>Guided exploration of Rome's iconic landmarks: Colosseum, Trevi Fountain, and Vatican City</li>
-                {{/if}}
-              </ul>
-            </div>
-          </div>
+      function stripHtml(text) {
+        if (!text) return '';
+        var tmp = document.createElement('div');
+        tmp.innerHTML = text;
+        return tmp.textContent || tmp.innerText || '';
+      }
 
-          <!-- Right Column -->
-          <div class="itinerary-right-col">
-            <!-- Hero Image -->
-            {{#if ../packageImages}}
-            <div class="itinerary-hero-img">
-              <img src="{{../packageImages.[0]}}" alt="Tour destination" />
-            </div>
-            {{/if}}
+      function buildLeftSidebar() {
+        var routeHtml = '';
+        if (tplData.nightAllocations && tplData.nightAllocations.length > 0) {
+          var parts = [];
+          tplData.nightAllocations.forEach(function(n) {
+            var s = escapeHtml(n.city);
+            if (n.nights) s += ' (' + n.nights + 'N)';
+            parts.push(s);
+          });
+          routeHtml = '<div class="route-box">' + parts.join(' > ') + '</div>';
+        }
 
-            <!-- Day by Day Itinerary -->
-            <div class="day-by-day">
-              {{#each days}}
-              <div class="day-item">
-                <div class="day-title">Day {{day}}: {{title}}</div>
-                {{#if description}}
-                <div class="day-desc">{{stripHtml description}}</div>
-                {{/if}}
-              </div>
-              {{/each}}
-            </div>
-          </div>
-        </div>
+        var overviewText = tplData.aboutDescription ? stripHtml(tplData.aboutDescription) : 'A great journey is measured by the moments that leave you standing still in awe. Every detail is taken care of so you can wander, taste, watch, and feel without a worry in the world.';
 
-        <!-- Footer -->
-        <div class="itinerary-footer">
-          {{#if ../agencyName}}{{../agencyName}} | {{/if}}{{#if ../agencyEmail}}{{../agencyEmail}}{{else}}holidays@coxandkings.com{{/if}} | {{#if ../agencyPhone}}{{../agencyPhone}}{{else}}+91 855 600 1700{{/if}}
-          <span class="page-number">2</span></div>
-      </div>
-      {{else}}
-      <!-- Continuation Itinerary Page (same layout as first page) -->
-      <div class="page page-itinerary-continuation">
-        <!-- Top Label -->
-        <div class="itinerary-label">{{../country}} • GROUP TOUR</div>
+        var highlightsHtml = '';
+        if (tplData.highlights && tplData.highlights.length > 0) {
+          tplData.highlights.forEach(function(h) {
+            highlightsHtml += '<li>' + escapeHtml(h) + '</li>';
+          });
+        } else {
+          highlightsHtml = '<li>Curated experiences by Cox & Kings</li>';
+        }
 
-        <!-- Main Title -->
-        <h1 class="itinerary-main-title">{{../tourTitle}} (continued)</h1>
+        return '<div class="itinerary-left-col"><div class="left-side">' +
+          routeHtml +
+          '<h3 class="section-heading">Tour overview</h3>' +
+          '<p class="tour-overview-text">' + escapeHtml(overviewText) + '</p>' +
+          '<h3 class="section-heading">C&K highlights</h3>' +
+          '<ul class="highlights-list">' + highlightsHtml + '</ul>' +
+          '</div></div>';
+      }
 
-        <!-- Divider Line -->
-        <div class="itinerary-title-divider"></div>
+      function buildDayItemHtml(day) {
+        var html = '<div class="day-item" data-day="' + day.day + '">';
+        html += '<div class="day-title">Day ' + day.day + ': ' + escapeHtml(day.title) + '</div>';
+        if (day.description) {
+          html += '<div class="day-desc">' + escapeHtml(stripHtml(day.description)) + '</div>';
+        }
+        html += '<div class="day-details">';
+        if (day.transfers) {
+          html += '<div class="day-detail-row">' +
+            '<svg class="day-detail-icon" viewBox="0 0 24 24" fill="#475569" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>' +
+            '<span class="day-detail-label">Transport:</span>' +
+            '<span class="day-detail-value">' + escapeHtml(day.transfers) + '</span></div>';
+        }
+        if (day.activities && day.activities.length > 0) {
+          html += '<div class="day-detail-row">' +
+            '<svg class="day-detail-icon" viewBox="0 0 24 24" fill="#475569" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>' +
+            '<span class="day-detail-label">Activities:</span>' +
+            '<div class="day-detail-value"><ul class="day-activities-list">';
+          day.activities.forEach(function(a) {
+            html += '<li>' + escapeHtml(a) + '</li>';
+          });
+          html += '</ul></div></div>';
+        }
+        if (day.meals && day.meals.length > 0) {
+          html += '<div class="day-detail-row">' +
+            '<svg class="day-detail-icon" viewBox="0 0 24 24" fill="#475569" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>' +
+            '<span class="day-detail-label">Meals:</span>' +
+            '<span class="day-detail-value">' + day.meals.map(function(m) { return escapeHtml(m); }).join(', ') + '</span></div>';
+        }
+        html += '</div></div>';
+        return html;
+      }
 
-        <!-- Info Bar -->
-        <div class="itinerary-info-bar">
-          <div class="info-left">
-            Duration • {{../duration}} • {{../countryCount}} {{#if (eq ../countryCount 1)}}Country{{else}}Countries{{/if}} • {{../cityCount}} {{#if (eq ../cityCount 1)}}City{{else}}Cities{{/if}}
-          </div>
-          <div class="info-right">Starting Price {{formatINR ../grandTotal}}*</div>
-        </div>
+      function buildPageHeader(isContinuation) {
+        var taxLabel = tplData.includeTcs ? 'incl. taxes' : 'incl. GST';
+        var countryCount = tplData.countryCount || 1;
+        var cityCount = tplData.cityCount || 1;
+        var countryLabel = countryCount === 1 ? 'Country' : 'Countries';
+        var cityLabel = cityCount === 1 ? 'City' : 'Cities';
+        var titleSuffix = isContinuation ? ' (continued)' : '';
 
-        <!-- Two Column Layout -->
-        <div class="itinerary-two-column">
-          <!-- Left Column -->
-          <div class="itinerary-left-col">
-            <!-- Route Box -->
-            <div class="left-side">
-              {{#if ../nightAllocations}}
-              <div class="route-box">
-                {{#each ../nightAllocations}} {{#if @index}} > {{/if}}{{city}}{{#if nights}} ({{nights}}N){{/if}} {{/each}}
-              </div>
-              {{/if}}
+        return '<div class="itinerary-label">' + escapeHtml(tplData.country || '') + ' &bull; GROUP TOUR</div>' +
+          '<h1 class="itinerary-main-title">' + escapeHtml(tplData.tourTitle || '') + titleSuffix + '</h1>' +
+          '<div class="itinerary-title-divider"></div>' +
+          '<div class="itinerary-info-bar">' +
+            '<div class="info-left">Duration &bull; ' + escapeHtml(tplData.duration || '') + ' &bull; ' + countryCount + ' ' + countryLabel + ' &bull; ' + cityCount + ' ' + cityLabel + '</div>' +
+            '<div class="info-right">Quote Price INR ' + formatINR(tplData.grandTotal || 0) + '/-<div style="font-size:5pt;color:#666;margin-top:2px;">' + taxLabel + '</div></div>' +
+          '</div>';
+      }
 
-              <!-- Tour Overview -->
-              <h3 class="section-heading">Tour overview</h3>
-              <p class="tour-overview-text">
-                {{#if ../aboutDescription}} {{stripHtml ../aboutDescription}} {{else}} A great
-                journey is measured by the moments that leave you standing still in
-                awe, and somehow, Europe has a way of giving you a whole lot of
-                those. Paris draws you in with its cafés, corners, and sweeping
-                views from the Eiffel Tower, leaving you wondering how so much
-                beauty can exist in one place. Switzerland lifts your gaze even
-                higher: glaciers, snow-brushed peaks, and waterfalls that feel
-                carved out of the sky. Italy brings it all back down to earth:
-                gondolas slipping through Venice, a scoop of gelato in San
-                Gimignano, and history laid out in the streets of Rome. Over this
-                carefully designed 14-day journey, every detail is taken care of so
-                you can wander, taste, watch, and feel without a worry in the world.
-                From handpicked hotels to curated meals to easy transfers,
-                everything falls into place around you, leaving you free to collect
-                the sights, sounds, and the small surprises waiting for you here.
-                {{/if}}
-              </p>
+      function buildFooter() {
+        var parts = [];
+        if (tplData.agencyName) parts.push(tplData.agencyName);
+        parts.push(tplData.agencyEmail || 'holidays@coxandkings.com');
+        parts.push(tplData.agencyPhone || '+91 855 600 1700');
+        return '<div class="itinerary-footer">' + parts.join(' | ') + '</div>';
+      }
 
-              <!-- C&K Highlights -->
-              <h3 class="section-heading">C&K highlights</h3>
-              <ul class="highlights-list">
-                {{#if ../highlights}} {{#each ../highlights}}
-                <li>{{this}}</li>
-                {{/each}} {{else}}
-                <li>Amsterdam Canal Cruise</li>
-                <li>Visit to Cheese Farm Catharina-Hoeve</li>
-                <li>Visit to De Zaanse Schans Clog Workshop</li>
-                <li>Second Visit to Keukenhof Gardens in Muidendam</li>
-                <li>Guided exploration of the Palace of Versailles</li>
-                <li>Guided Paris city tour with Eiffel Tower 3rd level access</li>
-                <li>Experience Paris by night with Seine River Cruise and dinner onboard</li>
-                <li>Orientation tour of Dijon, the heart of Burgundy</li>
-                <li>Journey through Switzerland's alpine heart on the GoldenPass Line</li>
-                <li>Scenic Titlis excursion with Rotair cable car, Ice Flyer, and alpine lunch</li>
-                <li>Rhine Falls visit and Grand Orientation Tour</li>
-                <li>Lindt Chocolate Factory experience</li>
-                <li>Guided discovery of Venice city</li>
-                <li>Gondola ride experience through the romantic canals of Venice</li>
-                <li>Half-day plane excursion by boat covering San Marco, Burano, and Murano</li>
-                <li>Iconic sights of Pisa: San Gimignano, and Siena with wine tasting</li>
-                <li>Guided exploration of Rome's iconic landmarks: Colosseum, Trevi Fountain, and Vatican City</li>
-                {{/if}}
-              </ul>
-            </div>
-          </div>
+      // Measure function: create a temporary off-screen page to measure day items
+      function measureDayItems(dayItemsHtml) {
+        var measurer = document.createElement('div');
+        measurer.style.position = 'absolute';
+        measurer.style.left = '-9999px';
+        measurer.style.top = '0';
+        measurer.style.width = '210mm';
+        measurer.innerHTML = '<div class="page page-itinerary" style="min-height:auto;height:auto;">' +
+          '<div class="itinerary-two-column"><div class="itinerary-right-col">' +
+          '<div class="day-by-day">' + dayItemsHtml + '</div>' +
+          '</div></div></div>';
+        document.body.appendChild(measurer);
 
-          <!-- Right Column -->
-          <div class="itinerary-right-col">
-            <!-- Hero Image (optional on continuation pages) -->
-            {{#if ../packageImages}}
-            <div class="itinerary-hero-img">
-              <img src="{{../packageImages.[0]}}" alt="Tour destination" />
-            </div>
-            {{/if}}
+        var items = measurer.querySelectorAll('.day-item');
+        var heights = [];
+        for (var i = 0; i < items.length; i++) {
+          // Get full height including margins
+          var style = window.getComputedStyle(items[i]);
+          var h = items[i].offsetHeight + parseInt(style.marginTop || 0) + parseInt(style.marginBottom || 0);
+          heights.push(h);
+        }
+        document.body.removeChild(measurer);
+        return heights;
+      }
 
-            <!-- Day by Day Itinerary -->
-            <div class="day-by-day">
-              {{#each days}}
-              <div class="day-item">
-                <div class="day-title">Day {{day}}: {{title}}</div>
-                {{#if description}}
-                <div class="day-desc">{{stripHtml description}}</div>
-                {{/if}}
-              </div>
-              {{/each}}
-            </div>
-          </div>
-        </div>
+      // Build all day HTML and measure
+      var allDayHtml = [];
+      itinerary.forEach(function(day) {
+        allDayHtml.push(buildDayItemHtml(day));
+      });
+      var dayHeights = measureDayItems(allDayHtml.join(''));
 
-        <!-- Footer -->
-        <div class="itinerary-footer">
-          {{#if ../agencyName}}{{../agencyName}} | {{/if}}{{#if ../agencyEmail}}{{../agencyEmail}}{{else}}holidays@coxandkings.com{{/if}} | {{#if ../agencyPhone}}{{../agencyPhone}}{{else}}+91 855 600 1700{{/if}}
-          <span class="page-number">2</span></div>
-      </div>
-      {{/if}}
-    {{/splitItinerary}}
+      // Now distribute days across pages based on measured heights
+      // First page: has header + hero image, then 2-column grid of days
+      // Continuation pages: has header, then 2-column grid of days (with sidebar)
+      
+      var availableFirstPage = PAGE_HEIGHT - PAGE_PADDING_TOP - PAGE_PADDING_BOTTOM - HEADER_HEIGHT - FOOTER_HEIGHT - SAFETY_MARGIN;
+      if (tplData.packageImage) {
+        availableFirstPage -= HERO_IMG_HEIGHT;
+      }
+
+      var availableContinuationPage = PAGE_HEIGHT - PAGE_PADDING_TOP - PAGE_PADDING_BOTTOM - HEADER_HEIGHT - FOOTER_HEIGHT - SAFETY_MARGIN;
+
+      // The day-by-day grid is 2 columns. We need to simulate 2-col layout.
+      // Each row holds 2 items, row height = max of the two items in that row + gap
+      function distributeToPages(dayHeights, availableHeights) {
+        var pages = [];
+        var currentPage = [];
+        var currentHeight = 0;
+        var colIndex = 0; // 0 = left col, 1 = right col
+        var rowMaxHeight = 0;
+        var pageIndex = 0;
+        var maxH = availableHeights[0]; // first page available
+
+        for (var i = 0; i < dayHeights.length; i++) {
+          var h = dayHeights[i];
+
+          if (colIndex === 0) {
+            // Starting a new row
+            rowMaxHeight = h;
+            colIndex = 1;
+            currentPage.push(i);
+          } else {
+            // Second column of row
+            rowMaxHeight = Math.max(rowMaxHeight, h);
+            var rowTotal = rowMaxHeight + GRID_GAP;
+
+            if (currentHeight + rowTotal > maxH && currentPage.length > 1) {
+              // This row doesn't fit - remove the first item of this row from current page
+              var firstOfRow = currentPage.pop();
+              pages.push(currentPage);
+              pageIndex++;
+              maxH = availableContinuationPage;
+              currentPage = [firstOfRow, i];
+              currentHeight = rowTotal;
+            } else {
+              currentHeight += rowTotal;
+              currentPage.push(i);
+            }
+            colIndex = 0;
+            rowMaxHeight = 0;
+          }
+        }
+
+        // Handle odd last item (single column remaining)
+        if (colIndex === 1) {
+          var lastRowTotal = rowMaxHeight + GRID_GAP;
+          if (currentHeight + lastRowTotal > maxH && currentPage.length > 1) {
+            var lastItem = currentPage.pop();
+            pages.push(currentPage);
+            currentPage = [lastItem];
+          } else {
+            currentHeight += lastRowTotal;
+          }
+        }
+
+        if (currentPage.length > 0) {
+          pages.push(currentPage);
+        }
+
+        return pages;
+      }
+
+      var pageDistribution = distributeToPages(dayHeights, [availableFirstPage]);
+
+      // Build actual page HTML
+      var leftSidebarHtml = buildLeftSidebar();
+
+      pageDistribution.forEach(function(dayIndices, pageIdx) {
+        var isFirst = (pageIdx === 0);
+        var pageClass = isFirst ? 'page page-itinerary' : 'page page-itinerary-continuation';
+        
+        var daysHtml = '';
+        dayIndices.forEach(function(di) {
+          daysHtml += allDayHtml[di];
+        });
+
+        var heroHtml = '';
+        if (tplData.packageImage) {
+          heroHtml = '<div class="itinerary-hero-img"><img src="' + tplData.packageImage + '" alt="Tour destination" /></div>';
+        }
+
+        var rightColContent = (isFirst ? heroHtml : heroHtml) +
+          '<div class="day-by-day">' + daysHtml + '</div>';
+
+        var pageHtml = '<div class="' + pageClass + '">' +
+          buildPageHeader(!isFirst) +
+          '<div class="itinerary-two-column">' +
+            leftSidebarHtml +
+            '<div class="itinerary-right-col">' + rightColContent + '</div>' +
+          '</div>' +
+          buildFooter() +
+          '</div>';
+
+        container.insertAdjacentHTML('beforeend', pageHtml);
+      });
+
+      // Clean up script tags
+      var s1 = document.getElementById('itinerary-data');
+      var s2 = document.getElementById('template-data');
+      if (s1) s1.parentNode.removeChild(s1);
+      if (s2) s2.parentNode.removeChild(s2);
+    })();
+    </script>
     {{else}}
     <!-- Fallback if no itinerary data -->
     <div class="page page-itinerary">
@@ -2125,7 +2260,7 @@
       <!-- Footer -->
       <div class="itinerary-footer">
         {{#if agencyName}}{{agencyName}} | {{/if}}{{#if agencyEmail}}{{agencyEmail}}{{else}}holidays@coxandkings.com{{/if}} | {{#if agencyPhone}}{{agencyPhone}}{{else}}+91 855 600 1700{{/if}}
-        <span class="page-number">2</span></div>
+      </div>
     </div>
     {{/if}}
 
@@ -2198,31 +2333,9 @@
         </div>
       </div>
 
-      <!-- Full Width Tour Inclusions Section -->
-      {{#if tourInclusions}}
-      <div class="inclusions-full-width">
-        <h3 class="inclusion-section-title tour-inclusions-title">
-          <span class="inclusion-icon">★</span>
-          {{#if tourInclusions.label}}{{tourInclusions.label}}{{else}}Special Tour Inclusions{{/if}}
-        </h3>
-        <div class="tour-inclusions-list">
-          {{#if tourInclusions.inclusions}}
-            {{#each tourInclusions.inclusions}}
-            <span class="inclusion-item">{{this.label}}</span>
-            {{/each}}
-          {{else}}
-            {{#each tourInclusions}}
-            <span class="inclusion-item">{{this}}</span>
-            {{/each}}
-          {{/if}}
-        </div>
-      </div>
-      {{/if}}
-
       <!-- Footer -->
       <div class="inclusions-footer">
         {{#if agencyName}}{{agencyName}} | {{/if}}{{#if agencyEmail}}{{agencyEmail}}{{else}}holidays@coxandkings.com{{/if}} | {{#if agencyPhone}}{{agencyPhone}}{{else}}+91 855 600 1700{{/if}}
-        <span class="page-number">3</span>
       </div>
     </div>
 
@@ -2350,7 +2463,6 @@
       <!-- Footer -->
       <div class="logistics-page-footer">
         {{#if agencyName}}{{agencyName}} | {{/if}}{{#if agencyEmail}}{{agencyEmail}}{{else}}holidays@coxandkings.com{{/if}} | {{#if agencyPhone}}{{agencyPhone}}{{else}}+91 855 600 1700{{/if}}
-        <span class="page-number">3</span>
       </div>
     </div>
 
@@ -2445,25 +2557,16 @@
               <div class="traveler-item">
                 <span class="traveler-type"><strong>Adults:</strong></span>
                 <span class="traveler-count">{{paxAdults}}</span>
-                {{#if pricePerAdult}}
-                <span class="traveler-price">{{formatINR pricePerAdult}} each</span>
-                {{/if}}
               </div>
               {{#if (gt paxChildren 0)}}
               <div class="traveler-item">
                 <span class="traveler-type"><strong>Children:</strong></span>
                 <span class="traveler-count">{{paxChildren}}</span>
-                {{#if pricePerChild}}
-                <span class="traveler-price">{{formatINR pricePerChild}} each</span>
-                {{/if}}
               </div>
               {{/if}} {{#if (gt paxInfants 0)}}
               <div class="traveler-item">
                 <span class="traveler-type"><strong>Infants:</strong></span>
                 <span class="traveler-count">{{paxInfants}}</span>
-                {{#if pricePerInfant}}
-                <span class="traveler-price">{{formatINR pricePerInfant}} each</span>
-                {{/if}}
               </div>
               {{/if}}
             </div>
@@ -2560,8 +2663,8 @@
             <div style="text-align: center; margin-top: 16px;">
               <a href="{{quoteLink}}#payment" 
                  style="display: inline-block; 
-                        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); 
-                        color: white; 
+                        background: white; 
+                        color: black; 
                         padding: 12px 40px; 
                         border-radius: 8px; 
                         text-decoration: none; 
@@ -2609,7 +2712,6 @@
             <a href="https://coxandkings.com/info/cookie-policy" style="color: #004080; text-decoration: none;">Cookie Policy</a>
           </span>
         </div>
-        <div class="footer-page">4</div>
       </div>
     </div>
 
