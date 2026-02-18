@@ -578,9 +578,9 @@
       }
 
       .day-by-day {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 5px 8px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
       }
 
       .day-item {
@@ -592,7 +592,7 @@
 
       .day-title {
         font-family: "Inter", sans-serif;
-        font-size: 10pt;
+        font-size: 9pt;
         font-weight: 600;
         color: #0f172a;
         margin-bottom: 2px;
@@ -602,7 +602,7 @@
       .day-desc {
         font-family: "Inter", sans-serif;
         font-size: 9pt;
-        color: #64748b;
+        color: #1e293b;
         line-height: 1.25;
         text-align: left;
         margin-bottom: 3px;
@@ -719,9 +719,9 @@
       }
 
       .continuation-day-by-day {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 6px 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
       }
 
       /* ============================================ */
@@ -1741,11 +1741,11 @@
       var PAGE_HEIGHT = 1122; // A4 height in px at 96dpi (297mm)
       var PAGE_PADDING_TOP = 20;
       var PAGE_PADDING_BOTTOM = 15;
-      var HEADER_HEIGHT = 120; // label + title + divider + info bar
-      var FOOTER_HEIGHT = 30;
+      var HEADER_HEIGHT = 135; // label ~20px + 52px title + divider ~9px + info-bar ~35px + gaps
+      var FOOTER_HEIGHT = 46;  // 10px margin-top + 8px pad-top + ~14px text + 8px pad-bottom + 6px buffer
       var HERO_IMG_HEIGHT = 118; // hero image + margin
-      var GRID_GAP = 5;
-      var SAFETY_MARGIN = 15;
+      var GRID_GAP = 6; // vertical gap between day items
+      var SAFETY_MARGIN = 25; // buffer for sub-pixel / font rounding (larger day-detail items at 7pt)
 
       var itinerary, tplData;
       try {
@@ -1873,8 +1873,14 @@
         measurer.style.left = '-9999px';
         measurer.style.top = '0';
         measurer.style.width = '210mm';
+        // IMPORTANT: include a dummy left-col so that itinerary-right-col is
+        // placed in the SECOND grid track (1.35fr) rather than the first (0.60fr).
+        // Without this, items are measured at ~45% of the actual width, making
+        // them appear ~2x taller than reality and causing 1 day per page.
         measurer.innerHTML = '<div class="page page-itinerary" style="min-height:auto;height:auto;">' +
-          '<div class="itinerary-two-column"><div class="itinerary-right-col">' +
+          '<div class="itinerary-two-column">' +
+          '<div class="itinerary-left-col"></div>' +
+          '<div class="itinerary-right-col">' +
           '<div class="day-by-day">' + dayItemsHtml + '</div>' +
           '</div></div></div>';
         document.body.appendChild(measurer);
@@ -1898,10 +1904,9 @@
       });
       var dayHeights = measureDayItems(allDayHtml.join(''));
 
-      // Now distribute days across pages based on measured heights
-      // First page: has header + hero image, then 2-column grid of days
-      // Continuation pages: has header, then 2-column grid of days (with sidebar)
-      
+      // Now distribute days across pages based on measured heights.
+      // First page: has header + optional hero image, then day list.
+      // Continuation pages: have header + day list (no hero image).
       var availableFirstPage = PAGE_HEIGHT - PAGE_PADDING_TOP - PAGE_PADDING_BOTTOM - HEADER_HEIGHT - FOOTER_HEIGHT - SAFETY_MARGIN;
       if (tplData.packageImage) {
         availableFirstPage -= HERO_IMG_HEIGHT;
@@ -1909,56 +1914,29 @@
 
       var availableContinuationPage = PAGE_HEIGHT - PAGE_PADDING_TOP - PAGE_PADDING_BOTTOM - HEADER_HEIGHT - FOOTER_HEIGHT - SAFETY_MARGIN;
 
-      // The day-by-day grid is 2 columns. We need to simulate 2-col layout.
-      // Each row holds 2 items, row height = max of the two items in that row + gap
-      function distributeToPages(dayHeights, availableHeights) {
+      // The day-by-day list is a single column. We stack items vertically,
+      // accounting for the vertical gap between consecutive items.
+      function distributeToPages(dayHeights, firstPageHeight, continuationPageHeight) {
         var pages = [];
         var currentPage = [];
         var currentHeight = 0;
-        var colIndex = 0; // 0 = left col, 1 = right col
-        var rowMaxHeight = 0;
-        var pageIndex = 0;
-        var maxH = availableHeights[0]; // first page available
+        var maxH = firstPageHeight; // available height for the current page
 
         for (var i = 0; i < dayHeights.length; i++) {
           var h = dayHeights[i];
+          var gap = currentPage.length > 0 ? GRID_GAP : 0;
+          var effectiveHeight = h + gap;
 
-          if (colIndex === 0) {
-            // Starting a new row
-            rowMaxHeight = h;
-            colIndex = 1;
-            currentPage.push(i);
-          } else {
-            // Second column of row
-            rowMaxHeight = Math.max(rowMaxHeight, h);
-            var rowTotal = rowMaxHeight + GRID_GAP;
-
-            if (currentHeight + rowTotal > maxH && currentPage.length > 1) {
-              // This row doesn't fit - remove the first item of this row from current page
-              var firstOfRow = currentPage.pop();
-              pages.push(currentPage);
-              pageIndex++;
-              maxH = availableContinuationPage;
-              currentPage = [firstOfRow, i];
-              currentHeight = rowTotal;
-            } else {
-              currentHeight += rowTotal;
-              currentPage.push(i);
-            }
-            colIndex = 0;
-            rowMaxHeight = 0;
-          }
-        }
-
-        // Handle odd last item (single column remaining)
-        if (colIndex === 1) {
-          var lastRowTotal = rowMaxHeight + GRID_GAP;
-          if (currentHeight + lastRowTotal > maxH && currentPage.length > 1) {
-            var lastItem = currentPage.pop();
+          // If adding this item exceeds the page height and we already
+          // have at least one item on the page, start a new page.
+          if (currentHeight + effectiveHeight > maxH && currentPage.length > 0) {
             pages.push(currentPage);
-            currentPage = [lastItem];
+            currentPage = [i];
+            currentHeight = h;
+            maxH = continuationPageHeight;
           } else {
-            currentHeight += lastRowTotal;
+            currentPage.push(i);
+            currentHeight += effectiveHeight;
           }
         }
 
@@ -1969,7 +1947,7 @@
         return pages;
       }
 
-      var pageDistribution = distributeToPages(dayHeights, [availableFirstPage]);
+      var pageDistribution = distributeToPages(dayHeights, availableFirstPage, availableContinuationPage);
 
       // Build actual page HTML
       var leftSidebarHtml = buildLeftSidebar();
@@ -1988,7 +1966,7 @@
           heroHtml = '<div class="itinerary-hero-img"><img src="' + tplData.packageImage + '" alt="Tour destination" /></div>';
         }
 
-        var rightColContent = (isFirst ? heroHtml : heroHtml) +
+        var rightColContent = (isFirst ? heroHtml : '') +
           '<div class="day-by-day">' + daysHtml + '</div>';
 
         var pageHtml = '<div class="' + pageClass + '">' +
