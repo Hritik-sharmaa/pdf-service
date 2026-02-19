@@ -436,6 +436,8 @@
         display: flex;
         flex-direction: column;
         min-height: 297mm;
+        max-height: 297mm;
+        overflow: hidden;
       }
 
       .itinerary-label {
@@ -489,6 +491,8 @@
         grid-template-columns: 0.60fr 1.35fr;
         gap: 12px;
         margin-bottom: 8px;
+        flex: 1;
+        overflow: hidden;
       }
 
       .itinerary-left-col {
@@ -559,6 +563,9 @@
 
       .itinerary-right-col {
         padding-left: 5px;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
       }
 
       .itinerary-hero-img {
@@ -581,6 +588,7 @@
         display: flex;
         flex-direction: column;
         gap: 6px;
+        overflow: hidden;
       }
 
       .day-item {
@@ -601,7 +609,7 @@
 
       .day-desc {
         font-family: "Inter", sans-serif;
-        font-size: 9pt;
+        font-size: 8pt;
         color: #1e293b;
         line-height: 1.25;
         text-align: left;
@@ -686,6 +694,8 @@
         display: flex;
         flex-direction: column;
         min-height: 297mm;
+        max-height: 297mm;
+        overflow: hidden;
       }
 
       .continuation-header {
