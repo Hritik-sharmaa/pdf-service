@@ -83,7 +83,7 @@
       }
 
       .logo-image {
-        height: 80px;
+        height: 180px;
         width: auto;
         filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.5));
       }
@@ -348,7 +348,7 @@
       }
 
       .intro-logo-img {
-        height: 40px;
+        height: 90px;
         width: auto;
       }
 
@@ -1522,7 +1522,7 @@
       }
 
       .back-logo-img {
-        height: 45px;
+        height: 90px;
         width: auto;
       }
 
@@ -1683,7 +1683,7 @@
           <img
             src="data:image/png;base64,{{COX_KINGS_LOGO_BASE64}}"
             alt="Cox & Kings"
-            style="height: 60px; width: auto;" />
+            style="height: 160px; width: auto;" />
         </div>
       </div>
 
@@ -1701,7 +1701,7 @@
         <div class="cover-price-section">
           <div class="cover-price-amount">INR {{formatINR grandTotal}}/-</div>
            <div style="font-size: 8pt; color: #ffffff; margin-top: 2px;">
-            {{#if includeTcs}}including taxes{{else}}including GST{{/if}}
+            {{#if includeTcs}}including GST and TCS{{else}}including GST{{/if}}
           </div>
         </div>
 
@@ -1890,7 +1890,7 @@
       }
 
       function buildPageHeader(isContinuation) {
-        var taxLabel = tplData.includeTcs ? 'including taxes' : 'including GST';
+        var taxLabel = tplData.includeTcs ? 'including GST and TCS' : 'including GST';
         var countryCount = tplData.countryCount || 1;
         var cityCount = tplData.cityCount || 1;
         var countryLabel = countryCount === 1 ? 'Country' : 'Countries';
@@ -2062,7 +2062,7 @@
         <div class="info-right">
           Quote Price INR {{formatINR grandTotal}}/-
           <div style="font-size: 5pt; color: #666; margin-top: 2px;">
-            {{#if includeTcs}}including taxes{{else}}including GST{{/if}}
+            {{#if includeTcs}}including GST and TCS{{else}}including GST{{/if}}
           </div>
         </div>
       </div>
@@ -2440,7 +2440,7 @@
           <div class="price-box">
             Quote Price INR {{formatINR grandTotal}}/-
             <div style="font-size: 5pt; color: #666; margin-top: 4px;">
-              {{#if includeTcs}}including taxes{{else}}including GST{{/if}}
+              {{#if includeTcs}}including GST and TCS{{else}}including GST{{/if}}
             </div>
           </div>
 
@@ -2505,7 +2505,7 @@
         <div class="header-left">
           <h1 class="quote-details-title">Your Quote Summary</h1>
           <div class="quote-reference">
-            Quote Reference: <strong>#{{quoteNumber}}</strong>
+            Quote Reference: <strong>{{quoteNumber}}</strong>
           </div>
           {{#if quoteLink}}
           <div class="quote-link" style="margin-top: 8px; font-size: 9pt;">
