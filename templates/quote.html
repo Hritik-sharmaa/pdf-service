@@ -484,6 +484,23 @@
 
       .info-right {
         font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .pay-now-btn {
+        display: inline-block;
+        background: #22c55e;
+        color: white;
+        padding: 6px 16px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-family: 'Inter', sans-serif;
+        font-size: 8pt;
+        font-weight: 600;
+        box-shadow: 0 2px 6px rgba(34, 197, 94, 0.3);
+        white-space: nowrap;
       }
 
       .itinerary-two-column {
@@ -874,7 +891,15 @@
 
       .tour-inclusions-list .inclusion-item {
         color: white;
-        display: inline;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .tour-inclusions-list .inclusion-item svg {
+        flex-shrink: 0;
+        width: 16px;
+        height: 16px;
       }
 
       .tour-inclusions-list .inclusion-item::after {
@@ -1676,7 +1701,7 @@
         <div class="cover-price-section">
           <div class="cover-price-amount">INR {{formatINR grandTotal}}/-</div>
            <div style="font-size: 8pt; color: #ffffff; margin-top: 2px;">
-            {{#if includeTcs}}incl. taxes{{else}}incl. GST{{/if}}
+            {{#if includeTcs}}including taxes{{else}}including GST{{/if}}
           </div>
         </div>
 
@@ -1696,18 +1721,24 @@
               <!-- Full Width Tour Inclusions Section -->
       {{#if tourInclusions}}
       <div class="inclusions-full-width">
-        <h3 class="inclusion-section-title tour-inclusions-title">
-          <span class="inclusion-icon"><svg width="20px" height="20px" viewBox="0 -0.5 33 33" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><title>star</title> <desc>Created with Sketch.</desc> <defs> </defs> <g id="Vivid.JS" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Vivid-Icons" transform="translate(-903.000000, -411.000000)" fill="#efefef"> <g id="Icons" transform="translate(37.000000, 169.000000)"> <g id="star" transform="translate(858.000000, 234.000000)"> <g transform="translate(7.000000, 8.000000)" id="Shape"> <polygon points="27.865 31.83 17.615 26.209 7.462 32.009 9.553 20.362 0.99 12.335 12.532 10.758 17.394 0 22.436 10.672 34 12.047 25.574 20.22"> </polygon> </g> </g> </g> </g> </g> </g></svg></span>
-          {{#if tourInclusions.label}}{{tourInclusions.label}}{{else}}Special Tour Inclusions{{/if}}
-        </h3>
         <div class="tour-inclusions-list">
           {{#if tourInclusions.inclusions}}
             {{#each tourInclusions.inclusions}}
-            <span class="inclusion-item">{{this.label}}</span>
+            <span class="inclusion-item">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>{{this.label}}</span>
+            </span>
             {{/each}}
           {{else}}
             {{#each tourInclusions}}
-            <span class="inclusion-item">{{this}}</span>
+            <span class="inclusion-item">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>{{this}}</span>
+            </span>
             {{/each}}
           {{/if}}
         </div>
@@ -1743,7 +1774,8 @@
       "packageImage": {{#if packageImages}}{{{jsonStringify packageImages.[0]}}}{{else}}""{{/if}},
       "nightAllocations": {{{jsonStringify nightAllocations}}},
       "aboutDescription": {{{jsonStringify aboutDescription}}},
-      "highlights": {{{jsonStringify highlights}}}
+      "highlights": {{{jsonStringify highlights}}},
+      "quoteLink": {{#if quoteLink}}{{{jsonStringify quoteLink}}}{{else}}""{{/if}}
     }</script>
 
     <script>
@@ -1766,6 +1798,12 @@
         itinerary = [];
         tplData = {};
       }
+      
+      // Calculate cityCount from nightAllocations if available
+      if (tplData.nightAllocations && Array.isArray(tplData.nightAllocations) && tplData.nightAllocations.length > 0) {
+        tplData.cityCount = tplData.nightAllocations.length;
+      }
+      
       var container = document.getElementById('itinerary-pages-container');
 
       function formatINR(amount) {
@@ -1852,19 +1890,24 @@
       }
 
       function buildPageHeader(isContinuation) {
-        var taxLabel = tplData.includeTcs ? 'incl. taxes' : 'incl. GST';
+        var taxLabel = tplData.includeTcs ? 'including taxes' : 'including GST';
         var countryCount = tplData.countryCount || 1;
         var cityCount = tplData.cityCount || 1;
         var countryLabel = countryCount === 1 ? 'Country' : 'Countries';
         var cityLabel = cityCount === 1 ? 'City' : 'Cities';
         var titleSuffix = isContinuation ? ' (continued)' : '';
 
+        var payNowBtn = '';
+        if (tplData.quoteLink) {
+          payNowBtn = '<a href="' + escapeHtml(tplData.quoteLink) + '#payment" class="pay-now-btn">Pay Now</a>';
+        }
+        
         return '<div class="itinerary-label">' + escapeHtml(tplData.country || '') + ' &bull; GROUP TOUR</div>' +
           '<h1 class="itinerary-main-title">' + escapeHtml(tplData.tourTitle || '') + titleSuffix + '</h1>' +
           '<div class="itinerary-title-divider"></div>' +
           '<div class="itinerary-info-bar">' +
             '<div class="info-left">Duration &bull; ' + escapeHtml(tplData.duration || '') + ' &bull; ' + countryCount + ' ' + countryLabel + ' &bull; ' + cityCount + ' ' + cityLabel + '</div>' +
-            '<div class="info-right">Quote Price INR ' + formatINR(tplData.grandTotal || 0) + '/-<div style="font-size:5pt;color:#666;margin-top:2px;">' + taxLabel + '</div></div>' +
+            '<div class="info-right"><div>Quote Price INR ' + formatINR(tplData.grandTotal || 0) + '/-<div style="font-size:5pt;color:#666;margin-top:2px;">' + taxLabel + '</div></div>' + payNowBtn + '</div>' +
           '</div>';
       }
 
@@ -2014,13 +2057,12 @@
       <div class="itinerary-info-bar">
         <div class="info-left">
           Duration • {{duration}} • {{countryCount}} {{#if (eq countryCount
-          1)}}Country{{else}}Countries{{/if}} • {{cityCount}} {{#if (eq
-          cityCount 1)}}City{{else}}Cities{{/if}}
+          1)}}Country{{else}}Countries{{/if}} • {{#if nightAllocations}}{{nightAllocations.length}}{{else}}{{#if cityCount}}{{cityCount}}{{else}}1{{/if}}{{/if}} Cit{{#if nightAllocations}}{{#if (eq nightAllocations.length 1)}}y{{else}}ies{{/if}}{{else}}{{#if (eq cityCount 1)}}y{{else}}ies{{/if}}{{/if}}
         </div>
         <div class="info-right">
           Quote Price INR {{formatINR grandTotal}}/-
           <div style="font-size: 5pt; color: #666; margin-top: 2px;">
-            {{#if includeTcs}}incl. taxes{{else}}incl. GST{{/if}}
+            {{#if includeTcs}}including taxes{{else}}including GST{{/if}}
           </div>
         </div>
       </div>
@@ -2398,7 +2440,7 @@
           <div class="price-box">
             Quote Price INR {{formatINR grandTotal}}/-
             <div style="font-size: 5pt; color: #666; margin-top: 4px;">
-              {{#if includeTcs}}incl. taxes{{else}}incl. GST{{/if}}
+              {{#if includeTcs}}including taxes{{else}}including GST{{/if}}
             </div>
           </div>
 
