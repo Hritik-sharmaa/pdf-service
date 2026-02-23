@@ -6,7 +6,7 @@
     <title>Quote {{quoteNumber}}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Mrs+Saint+Delafield&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mrs+Saint+Delafield&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
       * {
         margin: 0;
@@ -27,7 +27,7 @@
       }
 
       body {
-        font-family: "Inter", "Segoe UI", -apple-system, sans-serif;
+        font-family: sans-serif;
         font-size: 10pt;
         line-height: 1.6;
         color: #1a1a1a;
@@ -111,7 +111,7 @@
       }
 
       .cover-hero-title {
-        font-family: "Inter", sans-serif;
+        font-family: serif;
         font-size: 48pt;
         font-weight: 600;
         color: #ffffff;
@@ -139,14 +139,14 @@
       }
 
       .cover-price-label {
-        font-family: "Arial", sans-serif;
+        font-family: sans-serif;
         font-size: 10pt;
         color: #ffffff;
         margin-bottom: 3px;
       }
 
       .cover-price-amount {
-        font-family: "Inter", sans-serif;
+        font-family: sans-serif;
         font-size: 46pt;
         font-weight: 700;
         color: #ffffff;
@@ -179,12 +179,11 @@
         font-size: 9pt;
         font-weight: 600;
         color: #ffffff;
-        background: rgba(255, 69, 0, 0.8);
+        background: #bd4011;
         padding: 6px 18px;
         border-radius: 20px;
         display: inline-block;
         margin-bottom: 15px;
-        text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
       }
 
       .cover-rating {
@@ -224,7 +223,7 @@
       /* PAGE 2: INTRODUCTION PAGE STYLES */
       /* ============================================ */
       .page-intro {
-        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        background: #0b5ab1;
         padding: 35px 45px 30px 45px;
         color: white;
         display: flex;
@@ -239,7 +238,7 @@
       }
 
       .intro-from {
-        font-family: "Inter", sans-serif;
+        font-family: sans-serif;
         font-size: 20pt;
         font-weight: 300;
         color: rgba(255, 255, 255, 0.9);
@@ -248,7 +247,7 @@
       }
 
       .intro-brand {
-        font-family: "Inter", sans-serif;
+        font-family: sans-serif;
         font-size: 42pt;
         font-weight: 700;
         color: #ffffff;
@@ -258,7 +257,7 @@
       }
 
       .intro-to-you {
-        font-family: "Inter", sans-serif;
+        font-family: sans-serif;
         font-size: 20pt;
         font-weight: 300;
         color: rgba(255, 255, 255, 0.9);
@@ -288,7 +287,7 @@
       }
 
       .intro-letter p {
-        font-family: "Inter", sans-serif;
+        font-family: sans-serif;
         font-size: 8.5pt;
         line-height: 1.7;
         color: rgba(255, 255, 255, 0.95);
@@ -441,6 +440,7 @@
       }
 
       .itinerary-label {
+        text-align: center;
         font-family: "Arial", sans-serif;
         font-size: 6.5pt;
         font-weight: 700;
@@ -450,14 +450,31 @@
         margin-bottom: 6px;
       }
 
+      .itinerary-header-section {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 8px;
+      }
+
+      .itinerary-logo {
+        flex-shrink: 0;
+      }
+
+      .itinerary-logo img {
+        height: 60px;
+        width: auto;
+      }
+
       .itinerary-main-title {
-        font-family: "Inter", sans-serif;
-        font-size: 52px;
+        font-family: serif;
+        font-size: 45px;
         font-weight: 600;
         color: #64748b;
-        margin-bottom: 8px;
+        margin-bottom: 0;
         line-height: 1;
         letter-spacing: -2px;
+        flex: 1;
       }
 
       .itinerary-title-divider {
@@ -478,7 +495,7 @@
       }
 
       .info-left {
-        font-size: 15px; 
+        font-size: 8pt; 
         font-weight: 400;
       }
 
@@ -491,25 +508,31 @@
 
       .pay-now-btn {
         display: inline-block;
-        background: #22c55e;
+        background: #0b5ab1;
         color: white;
         padding: 6px 16px;
         border-radius: 6px;
         text-decoration: none;
-        font-family: 'Inter', sans-serif;
+        font-family: sans-serif;
         font-size: 8pt;
         font-weight: 600;
-        box-shadow: 0 2px 6px rgba(34, 197, 94, 0.3);
         white-space: nowrap;
       }
 
       .itinerary-two-column {
-        display: grid;
-        grid-template-columns: 0.60fr 1.35fr;
+        display: flex;
+        flex-direction: column;
         gap: 12px;
         margin-bottom: 8px;
         flex: 1;
         overflow: hidden;
+      }
+
+      .itinerary-content {
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        flex: 1;
       }
 
       .itinerary-left-col {
@@ -519,7 +542,7 @@
       .route-box {
         margin-bottom: 10px;
         font-family: "Arial", sans-serif;
-        font-size: 7pt;
+        font-size: 8pt;
         font-weight: 700;
         color: #004080;
         line-height: 1.4;
@@ -533,7 +556,7 @@
       }
 
       .section-heading {
-        font-family: "Inter", sans-serif;
+        font-family: sans-serif;
         font-size: 9pt;
         font-weight: 600;
         color: #0f172a;
@@ -541,12 +564,11 @@
         margin-top: 12px;
         text-transform: uppercase;
         letter-spacing: 0.5px;
-        font-size: 7.5pt;
       }
 
       .tour-overview-text {
         font-family: "Arial", sans-serif;
-        font-size: 7.5pt;
+        font-size: 8pt;
         line-height: 1.3;
         color: #333333;
         text-align: justify;
@@ -561,21 +583,12 @@
 
       .highlights-list li {
         font-family: "Arial", sans-serif;
-        font-size: 7.5pt;
+        font-size: 8pt;
         color: #333333;
         padding: 1.5px 0;
-        padding-left: 10px;
+        padding-left: 0;
         position: relative;
         line-height: 1.2;
-      }
-
-      .highlights-list li::before {
-        content: "•";
-        position: absolute;
-        left: 0;
-        color: #333333;
-        font-weight: 700;
-        font-size: 7pt;
       }
 
       .itinerary-right-col {
@@ -587,9 +600,9 @@
 
       .itinerary-hero-img {
         width: 100%;
-        height: 110px;
+        height: 180px;
         overflow: hidden;
-        margin-bottom: 8px;
+        margin-bottom: 12px;
         border-radius: 12px;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
       }
@@ -604,7 +617,7 @@
       .day-by-day {
         display: flex;
         flex-direction: column;
-        gap: 6px;
+        gap: 15px;
         overflow: hidden;
       }
 
@@ -613,11 +626,12 @@
         break-inside: avoid;
         display: flex;
         flex-direction: column;
+        margin-bottom: 5px;
       }
 
       .day-title {
-        font-family: "Inter", sans-serif;
-        font-size: 9pt;
+        font-family: sans-serif;
+        font-size: 12pt;
         font-weight: 600;
         color: #0f172a;
         margin-bottom: 2px;
@@ -625,8 +639,8 @@
       }
 
       .day-desc {
-        font-family: "Inter", sans-serif;
-        font-size: 8pt;
+        font-family: sans-serif;
+        font-size: 11pt;
         color: #1e293b;
         line-height: 1.25;
         text-align: left;
@@ -644,10 +658,10 @@
 
       .day-detail-row {
         display: flex;
-        align-items: flex-start;
+        align-items: center;
         gap: 3px;
-        font-family: "Inter", sans-serif;
-        font-size: 5.5pt;
+        font-family: sans-serif;
+        font-size: 11pt;
         line-height: 1.25;
       }
 
@@ -655,7 +669,7 @@
         flex-shrink: 0;
         width: 8px;
         height: 8px;
-        margin-top: 1px;
+        margin-top: 0;
       }
 
       .day-detail-label {
@@ -690,8 +704,11 @@
         font-size: 6pt;
       }
 
-      .itinerary-footer {
-        text-align: center;
+      .itinerary-footer,
+      .quote-details-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         font-family: "Arial", sans-serif;
         font-size: 6.5pt;
         color: #000000;
@@ -699,6 +716,19 @@
         margin-top: auto;
         border-radius: 4px;
         font-weight: 500;
+        padding-top: 15px;
+        border-top: 2px solid #e0e0e0;
+      }
+
+      .itinerary-footer .footer-contact,
+      .quote-details-footer .footer-contact {
+        text-align: left;
+        flex: 1;
+      }
+
+      .itinerary-footer .footer-agency,
+      .quote-details-footer .footer-agency {
+        text-align: right;
       }
 
       /* ============================================ */
@@ -717,6 +747,22 @@
 
       .continuation-header {
         margin-bottom: 15px;
+      }
+
+      .continuation-hero-img {
+        width: 100%;
+        height: 180px;
+        overflow: hidden;
+        margin-bottom: 12px;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      }
+
+      .continuation-hero-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
       }
 
       .continuation-label {
@@ -763,6 +809,7 @@
       }
 
       .inclusions-label {
+        text-align: center;
         font-family: "Arial", sans-serif;
         font-size: 6.5pt;
         font-weight: 700;
@@ -773,7 +820,7 @@
       }
 
       .inclusions-main-title {
-        font-family: "Inter", sans-serif;
+        font-family: sans-serif;
         font-size: 40px;
         font-weight: 600;
         color: #64748b;
@@ -791,21 +838,21 @@
 
       .inclusions-content {
         display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 15px;
         margin-bottom: 15px;
       }
 
       .inclusion-section {
         background: #f8fafc;
         border-radius: 12px;
-        padding: 20px;
+        padding: 16px;
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
       }
 
       .inclusion-section-title {
         font-family: "Inter", sans-serif;
-        font-size: 11pt;
+        font-size: 9pt;
         font-weight: 600;
         color: #0f172a;
         margin-bottom: 12px;
@@ -817,7 +864,7 @@
       }
 
       .inclusion-icon {
-        font-size: 14pt;
+        font-size: 11pt;
       }
 
       .inclusion-section-title.inclusions-title {
@@ -840,12 +887,12 @@
 
       .inclusions-list li {
         font-family: "Arial", sans-serif;
-        font-size: 7.5pt;
+        font-size: 8pt;
         color: #333333;
-        padding: 5px 0;
-        padding-left: 20px;
+        padding: 3px 0;
+        padding-left: 0;
         position: relative;
-        line-height: 1.5;
+        line-height: 1.4;
         display: flex;
         align-items: flex-start;
         gap: 6px;
@@ -864,12 +911,12 @@
 
       .exclusions-list li {
         font-family: "Arial", sans-serif;
-        font-size: 7.5pt;
+        font-size: 8pt;
         color: #333333;
-        padding: 5px 0;
+        padding: 3px 0;
         padding-left: 0;
         position: relative;
-        line-height: 1.5;
+        line-height: 1.4;
         display: flex;
         align-items: flex-start;
         gap: 6px;
@@ -882,10 +929,15 @@
 
       .tour-inclusions-list {
         font-family: "Arial", sans-serif;
-        font-size: 9pt;
-        color: #333333;
-        line-height: 1.8;
+        font-size: 11pt;
+        color: #ffffff;
+        line-height: 1.6;
         margin: 0;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
         padding: 0;
       }
 
@@ -893,32 +945,20 @@
         color: white;
         display: inline-flex;
         align-items: center;
-        gap: 6px;
+        gap: 8px;
+        font-weight: 500;
       }
 
       .tour-inclusions-list .inclusion-item svg {
         flex-shrink: 0;
-        width: 16px;
-        height: 16px;
-      }
-
-      .tour-inclusions-list .inclusion-item::after {
-        content: " • ";
-        color: #2563eb;
-        font-weight: 700;
-        margin: 0 4px;
-      }
-
-      .tour-inclusions-list .inclusion-item:last-child::after {
-        content: "";
+        width: 20px;
+        height: 20px;
       }
 
       .inclusions-full-width {
         color: white;
-        background: #f8fafc21;
-        border-radius: 12px;
-        padding: 20px;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        padding: 20px 40px;
+        margin-top: 15px;
       }
 
       .inclusions-footer {
@@ -973,7 +1013,7 @@
       }
 
       .logistics-main-heading {
-        font-family: "Inter", sans-serif;
+        font-family: sans-serif;
         font-size: 16pt;
         font-weight: 600;
         color: #0f172a;
@@ -986,7 +1026,7 @@
       }
 
       .logistics-subheading {
-        font-family: "Arial", sans-serif;
+        font-family: sans-serif;
         font-size: 9pt;
         font-weight: 700;
         color: #333333;
@@ -1029,7 +1069,7 @@
         color: white;
         padding: 16px 20px;
         text-align: center;
-        font-family: "Inter", sans-serif;
+        font-family: sans-serif;
         font-size: 15pt;
         font-weight: 600;
         border-radius: 12px;
@@ -1051,14 +1091,14 @@
       }
 
       .includes-title {
-        font-family: "Inter", sans-serif;
+        font-family: sans-serif;
         font-size: 9pt;
         font-weight: 600;
         color: #0f172a;
       }
 
       .includes-list {
-        font-family: "Arial", sans-serif;
+        font-family: sans-serif;
         font-size: 7pt;
         color: #333333;
         line-height: 1.5;
@@ -1066,6 +1106,7 @@
 
       .dates-section,
       .payment-section {
+        margin-top: 20px;
         background: #f8fafc;
         padding: 16px 18px;
         border-radius: 12px;
@@ -1073,7 +1114,7 @@
       }
 
       .section-title {
-        font-family: "Inter", sans-serif;
+        font-family: sans-serif;
         font-size: 9pt;
         font-weight: 600;
         color: #0f172a;
@@ -1160,29 +1201,49 @@
         padding-bottom: 18px;
         border-bottom: 2px solid #e2e8f0;
         margin-bottom: 24px;
+        gap: 20px;
+      }
+
+      .header-left {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        flex: 1;
+      }
+
+      .quote-logo {
+        flex-shrink: 0;
+      }
+
+      .quote-logo img {
+        height: 80px;
+        width: auto;
+      }
+
+      .header-text {
+        flex: 1;
       }
 
       .quote-details-title {
-        font-family: "Inter", sans-serif;
-        font-size: 22pt;
+        font-family: serif;
+        font-size: 20pt;
         font-weight: 600;
-        color: #0f172a;
-        margin-bottom: 5px;
+        color: #64748b;
         letter-spacing: -0.5px;
+        margin-bottom: 8px;
+        line-height: 1.3;
+        word-wrap: break-word;
+        hyphens: none;
       }
 
-      .quote-reference {
-        font-family: "Arial", sans-serif;
-        font-size: 9pt;
-        color: #666666;
-      }
-
+      .quote-reference,
+      .quote-link,
       .quote-date,
       .quote-valid {
-        font-family: "Arial", sans-serif;
+        font-family: sans-serif;
         font-size: 8pt;
         color: #666666;
-        text-align: right;
+        margin-bottom: 4px;
       }
 
       .quote-details-content {
@@ -1200,7 +1261,7 @@
       }
 
       .section-heading-blue {
-        font-family: "Inter", sans-serif;
+        font-family: sans-serif;
         font-size: 10pt;
         font-weight: 600;
         color: #0f172a;
@@ -1292,7 +1353,7 @@
       }
 
       .pricing-box {
-        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        background: #0b5ab1;
         padding: 24px;
         border-radius: 16px;
         color: white;
@@ -1301,7 +1362,7 @@
       }
 
       .pricing-heading {
-        font-family: "Inter", sans-serif;
+        font-family: sans-serif;
         font-size: 14pt;
         font-weight: 600;
         color: white;
@@ -1483,6 +1544,14 @@
         font-family: "Arial", sans-serif;
         font-size: 7.5pt;
         color: #666666;
+        flex: 1;
+      }
+
+      .footer-agency {
+        font-family: "Arial", sans-serif;
+        font-size: 7.5pt;
+        color: #666666;
+        text-align: right;
       }
 
       .footer-page {
@@ -1508,7 +1577,7 @@
 
       .back-cover-left {
         width: 40%;
-        background: linear-gradient(135deg, #004080 0%, #003366 100%);
+        background: #0b5ab1;
         padding: 25px 20px;
         display: flex;
         flex-direction: column;
@@ -1561,11 +1630,13 @@
         gap: 12px;
         margin-bottom: 20px;
         width: 100%;
+        align-items: center;
       }
 
       .contact-item {
         display: flex;
         align-items: center;
+        justify-content: center;
         gap: 10px;
         font-family: "Arial", sans-serif;
         font-size: 8pt;
@@ -1598,7 +1669,7 @@
 
       .back-cover-right {
         width: 60%;
-        background: #004080;
+        background: #0b5ab1;
         display: flex;
         flex-direction: column;
         height: 297mm;
@@ -1683,7 +1754,7 @@
           <img
             src="data:image/png;base64,{{COX_KINGS_LOGO_BASE64}}"
             alt="Cox & Kings"
-            style="height: 160px; width: auto;" />
+            style="height: 160px; width: auto; margin-top: 100px;" />
         </div>
       </div>
 
@@ -1726,7 +1797,7 @@
             {{#each tourInclusions.inclusions}}
             <span class="inclusion-item">
               <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M5 13L9 17L19 7" stroke="#337d64" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
               <span>{{this.label}}</span>
             </span>
@@ -1735,7 +1806,7 @@
             {{#each tourInclusions}}
             <span class="inclusion-item">
               <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M5 13L9 17L19 7" stroke="#337d64" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
               <span>{{this}}</span>
             </span>
@@ -1747,12 +1818,12 @@
       </div>
 
       <div class="cover-footer-text">
-        Cox & Kings 260+ Years of Travel, 1M+ Travelers.
+        <span style="font-family: 'Playfair Display', serif; font-weight: 600;">Cox & Kings</span> 260+ Years of Travel, 1M+ Travelers.
       </div>
     </div>
 
     <!-- ============================================ -->
-    <!-- PAGE 3+: THE ITINERARY & HIGHLIGHTS (DYNAMIC PAGINATION) -->
+    <!-- PAGE 2: THE ITINERARY & HIGHLIGHTS (DYNAMIC PAGINATION) -->
     <!-- ============================================ -->
     {{#if itinerary}}
     <!-- Itinerary pages container - will be dynamically paginated -->
@@ -1769,13 +1840,17 @@
       "grandTotal": {{#if grandTotal}}{{{jsonStringify grandTotal}}}{{else}}0{{/if}},
       "includeTcs": {{#if includeTcs}}true{{else}}false{{/if}},
       "agencyName": {{{jsonStringify agencyName}}},
-      "agencyEmail": {{#if agencyEmail}}{{{jsonStringify agencyEmail}}}{{else}}"holidays@coxandkings.com"{{/if}},
+      "agencyEmail": {{#if agencyEmail}}{{{jsonStringify agencyEmail}}}{{else}}"bookings@coxandkings.com"{{/if}},
       "agencyPhone": {{#if agencyPhone}}{{{jsonStringify agencyPhone}}}{{else}}"+91 855 600 1700"{{/if}},
       "packageImage": {{#if packageImages}}{{{jsonStringify packageImages.[0]}}}{{else}}""{{/if}},
+      "packageImages": {{{jsonStringify packageImages}}},
       "nightAllocations": {{{jsonStringify nightAllocations}}},
       "aboutDescription": {{{jsonStringify aboutDescription}}},
       "highlights": {{{jsonStringify highlights}}},
-      "quoteLink": {{#if quoteLink}}{{{jsonStringify quoteLink}}}{{else}}""{{/if}}
+      "quoteLink": {{#if quoteLink}}{{{jsonStringify quoteLink}}}{{else}}""{{/if}},
+      "COX_KINGS_LOGO_BASE64": {{{jsonStringify COX_KINGS_LOGO_BASE64}}},
+      "packageType": {{#if packageType}}{{{jsonStringify packageType}}}{{else}}null{{/if}},
+      "totalPax": {{#if totalPax}}{{totalPax}}{{else}}0{{/if}}
     }</script>
 
     <script>
@@ -1784,10 +1859,10 @@
       var PAGE_PADDING_TOP = 20;
       var PAGE_PADDING_BOTTOM = 15;
       var HEADER_HEIGHT = 135; // label ~20px + 52px title + divider ~9px + info-bar ~35px + gaps
-      var FOOTER_HEIGHT = 46;  // 10px margin-top + 8px pad-top + ~14px text + 8px pad-bottom + 6px buffer
-      var HERO_IMG_HEIGHT = 118; // hero image + margin
-      var GRID_GAP = 6; // vertical gap between day items
-      var SAFETY_MARGIN = 25; // buffer for sub-pixel / font rounding (larger day-detail items at 7pt)
+      var FOOTER_HEIGHT = 80;  // Updated for new two-column footer with links (15px pad-top + ~40px content + 15px pad-bottom + 10px buffer)
+      var HERO_IMG_HEIGHT = 192; // hero image 180px + 12px margin
+      var GRID_GAP = 15; // vertical gap between day items (updated to match CSS)
+      var SAFETY_MARGIN = 30; // buffer for sub-pixel / font rounding (increased for better fit)
 
       var itinerary, tplData;
       try {
@@ -1817,6 +1892,27 @@
         return div.innerHTML;
       }
 
+      function decodeHtmlEntities(text) {
+        if (!text) return '';
+        var textarea = document.createElement('textarea');
+        textarea.innerHTML = text;
+        var decoded = textarea.value;
+        
+        // Additional manual replacements for common entities
+        decoded = decoded
+          .replace(/&middot;/g, '•')
+          .replace(/&rsquo;/g, "'")
+          .replace(/&lsquo;/g, "'")
+          .replace(/&rdquo;/g, '"')
+          .replace(/&ldquo;/g, '"')
+          .replace(/&mdash;/g, '—')
+          .replace(/&ndash;/g, '–')
+          .replace(/&bull;/g, '•')
+          .replace(/&hellip;/g, '…');
+        
+        return decoded;
+      }
+
       function stripHtml(text) {
         if (!text) return '';
         var tmp = document.createElement('div');
@@ -1841,7 +1937,8 @@
         var highlightsHtml = '';
         if (tplData.highlights && tplData.highlights.length > 0) {
           tplData.highlights.forEach(function(h) {
-            highlightsHtml += '<li>' + escapeHtml(h) + '</li>';
+            var decodedHighlight = decodeHtmlEntities(h);
+            highlightsHtml += '<li>' + escapeHtml(decodedHighlight) + '</li>';
           });
         } else {
           highlightsHtml = '<li>Curated experiences by Cox & Kings</li>';
@@ -1895,28 +1992,55 @@
         var cityCount = tplData.cityCount || 1;
         var countryLabel = countryCount === 1 ? 'Country' : 'Countries';
         var cityLabel = cityCount === 1 ? 'City' : 'Cities';
-        var titleSuffix = isContinuation ? ' (continued)' : '';
+        var titleSuffix = isContinuation ? '' : '';
 
         var payNowBtn = '';
         if (tplData.quoteLink) {
           payNowBtn = '<a href="' + escapeHtml(tplData.quoteLink) + '#payment" class="pay-now-btn">Pay Now</a>';
         }
         
-        return '<div class="itinerary-label">' + escapeHtml(tplData.country || '') + ' &bull; GROUP TOUR</div>' +
-          '<h1 class="itinerary-main-title">' + escapeHtml(tplData.tourTitle || '') + titleSuffix + '</h1>' +
+        var tourTypeLabel = '';
+        if (tplData.packageType === 'GIT') {
+          tourTypeLabel = ' &bull; GROUP TOUR';
+        }
+        
+        return '<div class="itinerary-label">' + escapeHtml(tplData.country || '') + tourTypeLabel + '</div>' +
+          '<div class="itinerary-header-section">' +
+            '<div class="itinerary-logo">' +
+              '<img src="data:image/png;base64,' + (tplData.COX_KINGS_LOGO_BASE64 || '') + '" alt="Cox & Kings Logo" />' +
+            '</div>' +
+            '<h1 class="itinerary-main-title">' + escapeHtml(tplData.tourTitle || '') + titleSuffix + '</h1>' +
+          '</div>' +
           '<div class="itinerary-title-divider"></div>' +
           '<div class="itinerary-info-bar">' +
-            '<div class="info-left">Duration &bull; ' + escapeHtml(tplData.duration || '') + ' &bull; ' + countryCount + ' ' + countryLabel + ' &bull; ' + cityCount + ' ' + cityLabel + '</div>' +
-            '<div class="info-right"><div>Quote Price INR ' + formatINR(tplData.grandTotal || 0) + '/-<div style="font-size:5pt;color:#666;margin-top:2px;">' + taxLabel + '</div></div>' + payNowBtn + '</div>' +
+            '<div class="info-left">' + escapeHtml(tplData.duration || '') + ' &bull; ' + countryCount + ' ' + countryLabel + ' &bull; ' + cityCount + ' ' + cityLabel + '</div>' +
+            '<div class="info-right"><div>Price INR ' + formatINR(tplData.grandTotal || 0) + '/-<div style="font-size:5pt;color:#666;margin-top:2px;">' + taxLabel + '</div></div>' + payNowBtn + '</div>' +
           '</div>';
       }
 
       function buildFooter() {
-        var parts = [];
-        if (tplData.agencyName) parts.push(tplData.agencyName);
-        parts.push(tplData.agencyEmail || 'holidays@coxandkings.com');
-        parts.push(tplData.agencyPhone || '+91 855 600 1700');
-        return '<div class="itinerary-footer">' + parts.join(' | ') + '</div>';
+        var agencyHtml = '';
+        if (tplData.agencyName) {
+          agencyHtml += '<strong>' + escapeHtml(tplData.agencyName) + '</strong><br />';
+        }
+        if (tplData.agencyEmail) {
+          agencyHtml += escapeHtml(tplData.agencyEmail) + '<br />';
+        }
+        if (tplData.agencyPhone) {
+          agencyHtml += escapeHtml(tplData.agencyPhone);
+        }
+        
+        return '<div class="quote-details-footer">' +
+          '<div class="footer-contact">' +
+            '<strong>Questions?</strong> Contact us at bookings@coxandkings.com<br />' +
+            '<span style="font-size: 7pt; margin-top: 5px; display: inline-block;">' +
+              '<a href="https://coxandkings.com/info/terms-condition" style="color: #004080; text-decoration: none;">Terms & Conditions</a> | ' +
+              '<a href="https://coxandkings.com/info/privacy-policy" style="color: #004080; text-decoration: none;">Privacy Policy</a> | ' +
+              '<a href="https://coxandkings.com/info/cookie-policy" style="color: #004080; text-decoration: none;">Cookie Policy</a>' +
+            '</span>' +
+          '</div>' +
+          '<div class="footer-agency">' + agencyHtml + '</div>' +
+        '</div>';
       }
 
       // Measure function: create a temporary off-screen page to measure day items
@@ -1926,16 +2050,11 @@
         measurer.style.left = '-9999px';
         measurer.style.top = '0';
         measurer.style.width = '210mm';
-        // IMPORTANT: include a dummy left-col so that itinerary-right-col is
-        // placed in the SECOND grid track (1.35fr) rather than the first (0.60fr).
-        // Without this, items are measured at ~45% of the actual width, making
-        // them appear ~2x taller than reality and causing 1 day per page.
+        // Measure day items in a single column layout
         measurer.innerHTML = '<div class="page page-itinerary" style="min-height:auto;height:auto;">' +
-          '<div class="itinerary-two-column">' +
-          '<div class="itinerary-left-col"></div>' +
-          '<div class="itinerary-right-col">' +
+          '<div class="itinerary-content">' +
           '<div class="day-by-day">' + dayItemsHtml + '</div>' +
-          '</div></div></div>';
+          '</div></div>';
         document.body.appendChild(measurer);
 
         var items = measurer.querySelectorAll('.day-item');
@@ -1959,13 +2078,17 @@
 
       // Now distribute days across pages based on measured heights.
       // First page: has header + optional hero image, then day list.
-      // Continuation pages: have header + day list (no hero image).
+      // Continuation pages: have header + hero image (if packageImages available) + day list.
       var availableFirstPage = PAGE_HEIGHT - PAGE_PADDING_TOP - PAGE_PADDING_BOTTOM - HEADER_HEIGHT - FOOTER_HEIGHT - SAFETY_MARGIN;
       if (tplData.packageImage) {
         availableFirstPage -= HERO_IMG_HEIGHT;
       }
 
       var availableContinuationPage = PAGE_HEIGHT - PAGE_PADDING_TOP - PAGE_PADDING_BOTTOM - HEADER_HEIGHT - FOOTER_HEIGHT - SAFETY_MARGIN;
+      // Subtract hero image height for continuation pages if images are available
+      if (tplData.packageImages && tplData.packageImages.length > 0) {
+        availableContinuationPage -= HERO_IMG_HEIGHT;
+      }
 
       // The day-by-day list is a single column. We stack items vertically,
       // accounting for the vertical gap between consecutive items.
@@ -2003,8 +2126,6 @@
       var pageDistribution = distributeToPages(dayHeights, availableFirstPage, availableContinuationPage);
 
       // Build actual page HTML
-      var leftSidebarHtml = buildLeftSidebar();
-
       pageDistribution.forEach(function(dayIndices, pageIdx) {
         var isFirst = (pageIdx === 0);
         var pageClass = isFirst ? 'page page-itinerary' : 'page page-itinerary-continuation';
@@ -2015,19 +2136,19 @@
         });
 
         var heroHtml = '';
-        if (tplData.packageImage) {
+        if (isFirst && tplData.packageImage) {
           heroHtml = '<div class="itinerary-hero-img"><img src="' + tplData.packageImage + '" alt="Tour destination" /></div>';
+        } else if (!isFirst && tplData.packageImages && tplData.packageImages.length > 0) {
+          // Use different images for continuation pages (cycle through available images)
+          var imageIndex = pageIdx % tplData.packageImages.length;
+          heroHtml = '<div class="continuation-hero-img"><img src="' + tplData.packageImages[imageIndex] + '" alt="Tour destination" /></div>';
         }
 
-        var rightColContent = (isFirst ? heroHtml : '') +
-          '<div class="day-by-day">' + daysHtml + '</div>';
+        var contentHtml = heroHtml + '<div class="day-by-day">' + daysHtml + '</div>';
 
         var pageHtml = '<div class="' + pageClass + '">' +
           buildPageHeader(!isFirst) +
-          '<div class="itinerary-two-column">' +
-            leftSidebarHtml +
-            '<div class="itinerary-right-col">' + rightColContent + '</div>' +
-          '</div>' +
+          '<div class="itinerary-content">' + contentHtml + '</div>' +
           buildFooter() +
           '</div>';
 
@@ -2041,280 +2162,64 @@
       if (s2) s2.parentNode.removeChild(s2);
     })();
     </script>
-    {{else}}
-    <!-- Fallback if no itinerary data -->
-    <div class="page page-itinerary">
-      <!-- Top Label -->
-      <div class="itinerary-label">{{country}} • GROUP TOUR</div>
-
-      <!-- Main Title -->
-      <h1 class="itinerary-main-title">{{tourTitle}}</h1>
-
-      <!-- Divider Line -->
-      <div class="itinerary-title-divider"></div>
-
-      <!-- Info Bar -->
-      <div class="itinerary-info-bar">
-        <div class="info-left">
-          Duration • {{duration}} • {{countryCount}} {{#if (eq countryCount
-          1)}}Country{{else}}Countries{{/if}} • {{#if nightAllocations}}{{nightAllocations.length}}{{else}}{{#if cityCount}}{{cityCount}}{{else}}1{{/if}}{{/if}} Cit{{#if nightAllocations}}{{#if (eq nightAllocations.length 1)}}y{{else}}ies{{/if}}{{else}}{{#if (eq cityCount 1)}}y{{else}}ies{{/if}}{{/if}}
-        </div>
-        <div class="info-right">
-          Quote Price INR {{formatINR grandTotal}}/-
-          <div style="font-size: 5pt; color: #666; margin-top: 2px;">
-            {{#if includeTcs}}including GST and TCS{{else}}including GST{{/if}}
-          </div>
-        </div>
-      </div>
-
-      <!-- Two Column Layout -->
-      <div class="itinerary-two-column">
-        <!-- Left Column -->
-        <div class="itinerary-left-col">
-          <!-- Route Box -->
-           <div class="left-side">
-          {{#if nightAllocations}}
-          <div class="route-box">
-            {{#each nightAllocations}} {{#if @index}} > {{/if}}{{city}}{{#if nights}} ({{nights}}N){{/if}} {{/each}}
-          </div>
-          {{/if}}
-
-          <!-- Tour Overview -->
-          <h3 class="section-heading">Tour overview</h3>
-          <p class="tour-overview-text">
-            {{#if aboutDescription}} {{stripHtml aboutDescription}} {{else}} A great
-            journey is measured by the moments that leave you standing still in
-            awe, and somehow, Europe has a way of giving you a whole lot of
-            those. Paris draws you in with its cafés, corners, and sweeping
-            views from the Eiffel Tower, leaving you wondering how so much
-            beauty can exist in one place. Switzerland lifts your gaze even
-            higher: glaciers, snow-brushed peaks, and waterfalls that feel
-            carved out of the sky. Italy brings it all back down to earth:
-            gondolas slipping through Venice, a scoop of gelato in San
-            Gimignano, and history laid out in the streets of Rome. Over this
-            carefully designed 14-day journey, every detail is taken care of so
-            you can wander, taste, watch, and feel without a worry in the world.
-            From handpicked hotels to curated meals to easy transfers,
-            everything falls into place around you, leaving you free to collect
-            the sights, sounds, and the small surprises waiting for you here.
-            {{/if}}
-          </p>
-
-          <!-- C&K Highlights -->
-          <h3 class="section-heading">C&K highlights</h3>
-          <ul class="highlights-list">
-            {{#if highlights}} {{#each highlights}}
-            <li>{{this}}</li>
-            {{/each}} {{else}}
-            <li>Amsterdam Canal Cruise</li>
-            <li>Visit to Cheese Farm Catharina-Hoeve</li>
-            <li>Visit to De Zaanse Schans Clog Workshop</li>
-            <li>Second Visit to Keukenhof Gardens in Muidendam</li>
-            <li>Guided exploration of the Palace of Versailles</li>
-            <li>
-              Guided Paris city tour with Eiffel Tower 3rd level access
-            </li>
-            <li>
-              Experience Paris by night with Seine River Cruise and dinner
-              onboard
-            </li>
-            <li>Orientation tour of Dijon, the heart of Burgundy</li>
-            <li>
-              Journey through Switzerland's alpine heart on the GoldenPass Line
-            </li>
-            <li>
-              Scenic Titlis excursion with Rotair cable car, Ice Flyer, and
-              alpine lunch
-            </li>
-            <li>Rhine Falls visit and Grand Orientation Tour</li>
-            <li>Lindt Chocolate Factory experience</li>
-            <li>Guided discovery of Venice city</li>
-            <li>
-              Gondola ride experience through the romantic canals of Venice
-            </li>
-            <li>
-              Half-day plane excursion by boat covering San Marco, Burano, and
-              Murano
-            </li>
-            <li>
-              Iconic sights of Pisa: San Gimignano, and Siena with wine tasting
-            </li>
-            <li>
-              Guided exploration of Rome's iconic landmarks: Colosseum, Trevi
-              Fountain, and Vatican City
-            </li>
-            {{/if}}
-          </ul>
-        </div>
-        </div>
-
-        <!-- Right Column -->
-        <div class="itinerary-right-col">
-          <!-- Hero Image -->
-          {{#if packageImages}}
-          <div class="itinerary-hero-img">
-            <img src="{{packageImages.[0]}}" alt="Tour destination" />
-          </div>
-          {{/if}}
-
-          <!-- Day by Day Itinerary -->
-          <div class="day-by-day">
-            <div class="day-item">
-              <div class="day-title">Day 1: Welcome to Amsterdam</div>
-              <div class="day-desc">
-                Arrive in Amsterdam, settle into your hotel, and relax before
-                tomorrow's scenic evening cruise before sharing a welcome dinner
-                with your fellow travellers.
-              </div>
-            </div>
-            <div class="day-item">
-              <div class="day-title">Day 2: Tulips & Timeless Crafts</div>
-              <div class="day-desc">
-                Spend the day at Keukenhof's blooming gardens, explore the
-                heritage of Zaanse Schans, and enjoy a relaxed afternoon.
-              </div>
-            </div>
-            <div class="day-item">
-              <div class="day-title">Day 3: Capitals in Transit</div>
-              <div class="day-desc">
-                Make the journey from Paris via Brussels, strolling through
-                Brussels' Grand Place before arriving in the City of Light.
-              </div>
-            </div>
-            <div class="day-item">
-              <div class="day-title">
-                Day 4: Versailles, Paris Icons and a Seine Cruise
-              </div>
-              <div class="day-desc">
-                Step into the splendour of Versailles, discover Paris' most
-                iconic spots, ascend the Eiffel Tower, and conclude the day with
-                a Seine River dinner cruise.
-              </div>
-            </div>
-            <div class="day-item">
-              <div class="day-title">
-                Day 5: A Free Day in Paris or Disneyland
-              </div>
-              <div class="day-desc">
-                Shape the day to your interests; wander through Paris,
-                boutiques, and neighbourhoods, or have an optional magical
-                experience at Disneyland Paris.
-              </div>
-            </div>
-            <div class="day-item">
-              <div class="day-title">
-                Day 6: Burgundy Countryside and Arrival in Switzerland
-              </div>
-              <div class="day-desc">
-                Pause in Dijon and continue across scenic routes to reach the
-                natural beauty of Switzerland.
-              </div>
-            </div>
-            <div class="day-item">
-              <div class="day-title">
-                Day 7: GoldenPass Scenic Rail, Interlaken & Optional Jungfraujoch
-                Experience
-              </div>
-              <div class="day-desc">
-                Journey through Switzerland's alpine heart on the GoldenPass
-                Line, with an optional chance to choose between a relaxed
-                lakeside afternoon or a breathtaking ascent to Jungfraujoch –
-                Top of Europe!
-              </div>
-            </div>
-            <div class="day-item">
-              <div class="day-title">Day 8: Mt. Titlis and Lucerne</div>
-              <div class="day-desc">
-                Rise to the snowy heights of Mt. Titlis, enjoy an alpine lunch,
-                explore Lucerne's Chapel Bridge, Lion's treat, and unwind amid
-                the beauty of Lucerne on a cruise with appetisers.
-              </div>
-            </div>
-            <div class="day-item">
-              <div class="day-title">
-                Day 9: Rhine Falls, Zurich and Lindt Chocolate Factory
-              </div>
-              <div class="day-desc">
-                Feel the rush of the Rhine Falls on a boat ride, tour the
-                cultural centre of Zurich, and savour sweet moments inside the
-                Lindt Chocolate Factory.
-              </div>
-            </div>
-            <div class="day-item">
-              <div class="day-title">
-                Day 10: Switzerland to Italy: Lakeside Scenery & Milan Highlights
-              </div>
-              <div class="day-desc">
-                Cross into Italy, passing through the scenic Lugano lake region
-                and past Lake Como, arriving in Milan for an orientation tour of
-                this iconic landmarks, before continuing to Padova for dinner and
-                an overnight stay.
-              </div>
-            </div>
-            <div class="day-item">
-              <div class="day-title">
-                Day 11: Canals, Colours & Venetian Craft
-              </div>
-              <div class="day-desc">
-                Experience Venice by boat and gondola, then explore the shining
-                glass workshops of Murano and the pastel tones of Burano before
-                continuing through Tuscany.
-              </div>
-            </div>
-            <div class="day-item">
-              <div class="day-title">Day 12: Pisa, Tuscany & Medieval Dreams</div>
-              <div class="day-desc">
-                Capture the Leaning Tower of Pisa, stroll the medieval streets of
-                San Gimignano, savour a gelato, and arrive in Rome by evening.
-              </div>
-            </div>
-            <div class="day-item">
-              <div class="day-title">Day 13: Witness the Eternal City</div>
-              <div class="day-desc">
-                Trace the capital's ancient heart and the Vatican's treasures,
-                from the Colosseum and Sistine Chapel to the Fountain to St.
-                Peter's Basilica.
-              </div>
-            </div>
-            <div class="day-item">
-              <div class="day-title">Day 14: Farewell to Europe from Rome</div>
-              <div class="day-desc">
-                Depart the Eternal City carrying home the memories, moments, and
-                stories gathered along the way.
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Footer -->
-      <div class="itinerary-footer">
-        {{#if agencyName}}{{agencyName}} | {{/if}}{{#if agencyEmail}}{{agencyEmail}}{{else}}holidays@coxandkings.com{{/if}} | {{#if agencyPhone}}{{agencyPhone}}{{else}}+91 855 600 1700{{/if}}
-      </div>
-    </div>
     {{/if}}
 
     <!-- ============================================ -->
-    <!-- PAGE 3.5: INCLUSIONS & EXCLUSIONS -->
+    <!-- PAGE 3: INCLUSIONS & EXCLUSIONS -->
     <!-- ============================================ -->
     <div class="page page-inclusions-exclusions">
       <!-- Top Label -->
-      <div class="inclusions-label">{{country}} • GROUP TOUR</div>
+      <div class="inclusions-label">{{country}}{{#if (eq packageType "GIT")}} • GROUP TOUR{{/if}}</div>
 
-        <!-- Main Title -->
-      <h1 class="itinerary-main-title">{{tourTitle}}</h1>
+      <!-- Header with Logo and Title -->
+      <div class="itinerary-header-section">
+        <div class="itinerary-logo">
+          <img src="data:image/png;base64,{{COX_KINGS_LOGO_BASE64}}" alt="Cox & Kings Logo" />
+        </div>
+        <h1 class="itinerary-main-title">{{tourTitle}}</h1>
+      </div>
 
       <!-- Divider Line -->
       <div class="itinerary-title-divider"></div>
 
       <!-- Two Column Layout for Inclusions and Exclusions -->
       <div class="inclusions-content">
+        <!-- Tour Overview & Highlights Column -->
+        <div class="inclusion-section">
+          <h3 class="inclusion-section-title" style="color: #0b5ab1;">
+            Tour Overview & Highlights
+          </h3>
+          
+          <!-- Route Box -->
+          {{#if nightAllocations}}
+          <div class="route-box" style="margin-bottom: 12px;">
+            {{#each nightAllocations}} {{#if @index}} > {{/if}}{{city}}{{#if nights}} ({{nights}}N){{/if}} {{/each}}
+          </div>
+          {{/if}}
+          
+          <!-- Tour Overview -->
+          <h4 class="section-heading">Tour overview</h4>
+          <p class="tour-overview-text">
+            {{#if aboutDescription}} {{stripHtml aboutDescription}} {{else}} A great
+            journey is measured by the moments that leave you standing still in
+            awe. Every detail is taken care of so you can wander, taste, watch, and feel without a worry in the world.
+            {{/if}}
+          </p>
+
+          <!-- C&K Highlights -->
+          <h4 class="section-heading">C&K highlights</h4>
+          <ul class="highlights-list">
+            {{#if highlights}} {{#each highlights}}
+            <li>{{decodeHtmlEntities this}}</li>
+            {{/each}} {{else}}
+            <li>Curated experiences by Cox & Kings</li>
+            {{/if}}
+          </ul>
+        </div>
+
         <!-- Inclusions Column -->
         <div class="inclusion-section">
           <h3 class="inclusion-section-title inclusions-title">
-            <span><svg xmlns="http://www.w3.org/2000/svg" width="10px" height="10px" viewBox="0 -20 130 130" fill="#059669">
-<path d="M34.7162 81.5027C36.3213 79.9761 37.2031 79.2039 38.0103 78.3599C63.8892 51.3046 92.2309 26.9469 120.74 2.77407C121.817 1.86111 122.921 0.696462 124.196 0.3701C125.733 -0.0238104 128.241 -0.282655 128.928 0.552804C129.852 1.67765 130.015 4.12286 129.452 5.60109C128.782 7.35947 127.15 8.86542 125.669 10.1822C116.833 18.0391 107.749 25.6258 99.0678 33.6462C80.9213 50.4165 62.8904 67.3116 44.9751 84.3312C37.125 91.7736 34.1038 92.075 26.8803 84.1228C22.1253 78.8861 7.77509 61.237 3.38035 55.6767C2.75974 54.8123 2.20692 53.9011 1.72689 52.9513C0.732118 51.1915 0.0876263 49.254 2.05727 47.8895C4.25215 46.3708 5.81043 47.9557 7.11073 49.606C8.42738 51.2769 9.55004 53.1127 10.9598 54.6962C15.336 59.6122 29.9896 76.32 34.7162 81.5027Z" fill="#059669"/>
-</svg></span>
             Tour Inclusions
           </h3>
           <ul class="inclusions-list">
@@ -2339,9 +2244,6 @@
         <!-- Exclusions Column -->
         <div class="inclusion-section">
           <h3 class="inclusion-section-title exclusions-title">
-            <span class="inclusion-icon"><svg xmlns="http://www.w3.org/2000/svg" width="15px" height="15px" viewBox="0 0 24 24" fill="#dc2626">
-<path d="M6.99486 7.00636C6.60433 7.39689 6.60433 8.03005 6.99486 8.42058L10.58 12.0057L6.99486 15.5909C6.60433 15.9814 6.60433 16.6146 6.99486 17.0051C7.38538 17.3956 8.01855 17.3956 8.40907 17.0051L11.9942 13.4199L15.5794 17.0051C15.9699 17.3956 16.6031 17.3956 16.9936 17.0051C17.3841 16.6146 17.3841 15.9814 16.9936 15.5909L13.4084 12.0057L16.9936 8.42059C17.3841 8.03007 17.3841 7.3969 16.9936 7.00638C16.603 6.61585 15.9699 6.61585 15.5794 7.00638L11.9942 10.5915L8.40907 7.00636C8.01855 6.61584 7.38538 6.61584 6.99486 7.00636Z" fill="#dc2626"/>
-</svg></span>
             Tour Exclusions
           </h3>
           <ul class="exclusions-list">
@@ -2364,135 +2266,21 @@
       </div>
 
       <!-- Footer -->
-      <div class="inclusions-footer">
-        {{#if agencyName}}{{agencyName}} | {{/if}}{{#if agencyEmail}}{{agencyEmail}}{{else}}holidays@coxandkings.com{{/if}} | {{#if agencyPhone}}{{agencyPhone}}{{else}}+91 855 600 1700{{/if}}
-      </div>
-    </div>
-
-    <!-- ============================================ -->
-    <!-- PAGE 4: LOGISTICS, INCLUSIONS & DATES -->
-    <!-- ============================================ -->
-    <div class="page page-logistics">
-      <!-- Top: Full Width Hero Image -->
-      <div class="logistics-hero-full">
-        {{#if packageImages}}
-        <img src="{{packageImages.[1]}}" alt="Destination" />
-        {{else}}
-        <div class="hero-placeholder"></div>
-        {{/if}}
-      </div>
-
-      <!-- Bottom Content Section -->
-      <div class="logistics-content">
-        <!-- Left Column -->
-        <div class="logistics-left">
-          <h2 class="logistics-main-heading">What Makes This Journey Special</h2>
-
-          <!-- All-Inclusive Convenience -->
-          <div class="logistics-section">
-            <h3 class="logistics-subheading">All-Inclusive Convenience</h3>
-            <ul class="logistics-list">
-              <li>
-                Expertly crafted and consistently loved, with an impressive
-                5-star reviews
-              </li>
-              <li>Flights Included</li>
-              <li>Hotel Stays</li>
-              <li>All Meals</li>
-              <li>Fully immersive and packed</li>
-              <li>Airport Transfers</li>
-              <li>Complimentary Travel Insurance</li>
-              <li>Expert Tour Manager</li>
-              <li>Visa Included</li>
-            </ul>
-          </div>
-
-          <!-- Our Signature Touch -->
-          <div class="logistics-section">
-            <h3 class="logistics-subheading">Our Signature Touch</h3>
-            <ul class="logistics-list">
-              <li>Handpicked hotels for comfort and convenience</li>
-              <li>
-                Specially curated, selected for authentic Indian flavours and
-                vegetarian options
-              </li>
-              <li>
-                Assistance of experienced guides throughout your journey
-              </li>
-            </ul>
-          </div>
-
-          <!-- Our Brand -->
-          <div class="logistics-section">
-            <h3 class="logistics-subheading">Our Brand</h3>
-            <ul class="logistics-list">
-              <li>Artfully curated journeys with care and expertise</li>
-              <li>A legacy of over 260 years in travel</li>
-              <li>Cox and Kings one of the most awarded travel brands</li>
-              <li>Trusted by over a million travellers worldwide</li>
-            </ul>
-          </div>
+      <div class="quote-details-footer">
+        <div class="footer-contact">
+          <strong>Questions?</strong> Contact us at bookings@coxandkings.com
+          <br />
+          <span style="font-size: 7pt; margin-top: 5px; display: inline-block;">
+            <a href="https://coxandkings.com/info/terms-condition" style="color: #004080; text-decoration: none;">Terms & Conditions</a> | 
+            <a href="https://coxandkings.com/info/privacy-policy" style="color: #004080; text-decoration: none;">Privacy Policy</a> | 
+            <a href="https://coxandkings.com/info/cookie-policy" style="color: #004080; text-decoration: none;">Cookie Policy</a>
+          </span>
         </div>
-
-        <!-- Right Column -->
-        <div class="logistics-right">
-          <!-- Starting Price Box -->
-          <div class="price-box">
-            Quote Price INR {{formatINR grandTotal}}/-
-            <div style="font-size: 5pt; color: #666; margin-top: 4px;">
-              {{#if includeTcs}}including GST and TCS{{else}}including GST{{/if}}
-            </div>
-          </div>
-
-          <!-- Group Tours Include Box -->
-          <div class="includes-box">
-            <div class="includes-header">
-              <span class="includes-title">Group tours include:</span>
-            </div>
-            <div class="includes-list">
-              International Flights • 4-Star Hotels • Meals • Expert Guided
-              Tours • Visa Fees & Assistance • Free Local SIMs • Free Travel
-              Insurance • Parking & Currency Guide • Bucket List Experiences
-            </div>
-          </div>
-
-          <!-- Departure Dates -->
-          <div class="dates-section">
-            <h3 class="section-title">Departure dates for {{currentYear}}</h3>
-            <div class="dates-text">
-              {{#if departureStartDate}}
-              Selected Departure Date: {{departureStartDate}}
-              {{else}}
-              Please contact us for available departure dates
-              {{/if}}
-            </div>
-          </div>
-
-          <!-- Payment Schedule -->
-          <div class="payment-section">
-            <h3 class="section-title">Payment Schedule</h3>
-            <ul class="payment-list">
-              <li>100% of flight cost at the time of booking to secure seats</li>
-              <li>30% of the total package amount upon booking</li>
-              <li>35% due 60 days before departure</li>
-              <li>35% due 45 days before departure</li>
-            </ul>
-          </div>
-
-          <!-- Bottom Landscape Image -->
-          <div class="logistics-bottom-img">
-            {{#if packageImages}}
-            <img src="{{packageImages.[2]}}" alt="Scenic view" />
-            {{else}}
-            <div class="img-placeholder"></div>
-            {{/if}}
-          </div>
+        <div class="footer-agency">
+          {{#if agencyName}}<strong>{{agencyName}}</strong><br />{{/if}}
+          {{#if agencyEmail}}{{agencyEmail}}<br />{{/if}}
+          {{#if agencyPhone}}{{agencyPhone}}{{/if}}
         </div>
-      </div>
-
-      <!-- Footer -->
-      <div class="logistics-page-footer">
-        {{#if agencyName}}{{agencyName}} | {{/if}}{{#if agencyEmail}}{{agencyEmail}}{{else}}holidays@coxandkings.com{{/if}} | {{#if agencyPhone}}{{agencyPhone}}{{else}}+91 855 600 1700{{/if}}
       </div>
     </div>
 
@@ -2503,22 +2291,25 @@
       <!-- Header -->
       <div class="quote-details-header">
         <div class="header-left">
-          <h1 class="quote-details-title">Your Quote Summary</h1>
-          <div class="quote-reference">
-            Quote Reference: <strong>{{quoteNumber}}</strong>
+          <div class="quote-logo">
+            <img src="data:image/png;base64,{{COX_KINGS_LOGO_BASE64}}" alt="Cox & Kings Logo" />
           </div>
-          {{#if quoteLink}}
-          <div class="quote-link" style="margin-top: 8px; font-size: 9pt;">
-            <span style="color: #666;">View Online: </span>
-            <a href="{{quoteLink}}#payment" style="color: #004080; text-decoration: none; font-weight: 500;">{{quoteLink}}</a>
+          <div class="header-text">
+            <h1 class="quote-details-title">{{tourTitle}}</h1>
+            <div class="quote-reference">
+              Quote Reference: <strong>{{quoteNumber}}</strong>
+            </div>
+            {{#if quoteLink}}
+            <div class="quote-link">
+              <span style="color: #666;">View Online: </span>
+              <a href="{{quoteLink}}#payment" style="color: #004080; text-decoration: none; font-weight: 500;">{{quoteLink}}</a>
+            </div>
+            {{/if}}
+            <div class="quote-date">Date: {{formatDate quoteDate}}</div>
+            {{#if validUntil}}
+            <div class="quote-valid">Valid Until: {{formatDate validUntil}}</div>
+            {{/if}}
           </div>
-          {{/if}}
-        </div>
-        <div class="header-right">
-          <div class="quote-date">Date: {{formatDate quoteDate}}</div>
-          {{#if validUntil}}
-          <div class="quote-valid">Valid Until: {{formatDate validUntil}}</div>
-          {{/if}}
         </div>
       </div>
 
@@ -2698,7 +2489,7 @@
                         padding: 12px 40px; 
                         border-radius: 8px; 
                         text-decoration: none; 
-                        font-family: 'Inter', sans-serif; 
+                        font-family: sans-serif; 
                         font-size: 10pt; 
                         font-weight: 600; 
                         box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15); 
@@ -2717,15 +2508,20 @@
               <li>All prices are in Indian Rupees (INR)</li>
               <li>Prices are subject to availability at the time of booking</li>
               <li>
-                This quote is valid for {{#if validUntil}}{{validUntil}}{{else}}30
+                This quote is valid for {{#if validUntil}}{{formatDate validUntil}}{{else}}30
                 days{{/if}}
               </li>
               <li>Payment schedule may vary based on departure date</li>
-              {{#if flightIncluded}}
-              <li>International flights are included in the package</li>
-              {{else}}
-              <li>International flights can be arranged separately</li>
-              {{/if}}
+            </ul>
+          </div>
+          <!-- Payment Schedule -->
+          <div class="payment-section">
+            <h3 class="section-title">Payment Schedule</h3>
+            <ul class="payment-list">
+              <li>100% of flight cost at the time of booking to secure seats</li>
+              <li>30% of the total package amount upon booking</li>
+              <li>35% due 60 days before departure</li>
+              <li>35% due 45 days before departure</li>
             </ul>
           </div>
         </div>
@@ -2734,7 +2530,7 @@
       <!-- Footer -->
       <div class="quote-details-footer">
         <div class="footer-contact">
-          <strong>Questions?</strong> Contact us at holidays@coxandkings.com
+          <strong>Questions?</strong> Contact us at bookings@coxandkings.com
           <br />
           <span style="font-size: 7pt; margin-top: 5px; display: inline-block;">
             <a href="https://coxandkings.com/info/terms-condition" style="color: #004080; text-decoration: none;">Terms & Conditions</a> | 
@@ -2742,17 +2538,22 @@
             <a href="https://coxandkings.com/info/cookie-policy" style="color: #004080; text-decoration: none;">Cookie Policy</a>
           </span>
         </div>
+        <div class="footer-agency">
+          {{#if agencyName}}<strong>{{agencyName}}</strong><br />{{/if}}
+          {{#if agencyEmail}}{{agencyEmail}}<br />{{/if}}
+          {{#if agencyPhone}}{{agencyPhone}}{{/if}}
+        </div>
       </div>
     </div>
 
     <!-- ============================================ -->
-    <!-- PAGE 4: INTRODUCTION & BRAND PROMISE -->
+    <!-- PAGE 5: INTRODUCTION & BRAND PROMISE -->
     <!-- ============================================ -->
     <div class="page page-intro">
       <!-- Top Header -->
       <div class="intro-header">
         <div class="intro-from">From</div>
-        <div class="intro-brand">Cox & Kings</div>
+        <div class="intro-brand"><span style="font-family: 'Playfair Display', serif; font-weight: 600;">Cox & Kings</span></div>
         <div class="intro-to-you">to you</div>
         <div class="intro-divider"></div>
       </div>
@@ -2808,13 +2609,13 @@
           </div>
 
           <div class="intro-contact">
-            <div class="contact-company">Cox and Kings</div>
+            <div class="contact-company"><span style="font-family: 'Playfair Display', serif; font-weight: 600;">Cox & Kings</span></div>
             <div class="contact-address">
               Plot no. 32-B, 1st floor, 100 ft road<br />Ghitorni, New
               Delhi-110030
             </div>
             <div class="contact-phone">+91 855 600 1700</div>
-            <div class="contact-email">holidays@coxandkings.com</div>
+            <div class="contact-email">bookings@coxandkings.com</div>
             <div class="contact-website">www.coxandkings.com</div>
           </div>
         </div>
@@ -2822,7 +2623,7 @@
         <!-- Bottom Right: What We Offer & Why Trust -->
         <div class="intro-right-column">
           <div class="intro-offerings">
-            <h4>What We Offer Across Europe</h4>
+            <h4>What We Offer Across World</h4>
             <ul>
               <li>Private tailored travel</li>
               <li>Guaranteed Group Departures</li>
@@ -2870,7 +2671,7 @@
 
         <!-- Company Info -->
         <div class="back-company-info">
-          <div class="company-name">Cox and Kings</div>
+          <div class="company-name"><span style="font-family: 'Playfair Display', serif; font-weight: 600;">Cox & Kings</span></div>
           <div class="company-address">
             Plot no. 35-B, 1st floor<br />100 ft road, Ghitorni,<br />New
             Delhi-110030
@@ -2921,7 +2722,7 @@
               </svg>
             </span>
             <span class="contact-text"
-              >holidays@coxandkings.com</span
+              >bookings@coxandkings.com</span
             >
           </div>
 

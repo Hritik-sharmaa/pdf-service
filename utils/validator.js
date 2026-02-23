@@ -55,6 +55,7 @@ const QuoteDataSchema = z.object({
   paxAdults: z.number(),
   paxChildren: z.number(),
   paxInfants: z.number(),
+  totalPax: z.number().optional(),
   pricePerAdult: z.number().nullable().optional(),
   pricePerChild: z.number().nullable().optional(),
   pricePerInfant: z.number().nullable().optional(),
@@ -91,6 +92,7 @@ const QuoteDataSchema = z.object({
   flightDetails: z.any().nullable().optional(),
   packageImages: z.array(z.string()).nullable().optional(),
   quoteLink: z.string().nullable().optional(),
+  packageType: z.enum(["GIT", "FIT"]).nullable().optional(),
 });
 
 const InvoiceDataSchema = z.object({

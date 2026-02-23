@@ -78,12 +78,46 @@ Handlebars.registerHelper("stripHtml", function (text) {
     .replace(/&gt;/g, ">")
     .replace(/&quot;/g, '"')
     .replace(/&#39;/g, "'")
-    .replace(/&apos;/g, "'");
+    .replace(/&apos;/g, "'")
+    .replace(/&middot;/g, "•")
+    .replace(/&rsquo;/g, "'")
+    .replace(/&lsquo;/g, "'")
+    .replace(/&rdquo;/g, '"')
+    .replace(/&ldquo;/g, '"')
+    .replace(/&mdash;/g, "—")
+    .replace(/&ndash;/g, "–")
+    .replace(/&bull;/g, "•")
+    .replace(/&hellip;/g, "…");
 
   // Clean up extra whitespace
   cleaned = cleaned.replace(/\s+/g, " ").trim();
 
   return cleaned;
+});
+
+Handlebars.registerHelper("decodeHtmlEntities", function (text) {
+  if (!text) return "";
+
+  // Decode HTML entities
+  let decoded = text
+    .replace(/&nbsp;/g, " ")
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&apos;/g, "'")
+    .replace(/&middot;/g, "•")
+    .replace(/&rsquo;/g, "'")
+    .replace(/&lsquo;/g, "'")
+    .replace(/&rdquo;/g, '"')
+    .replace(/&ldquo;/g, '"')
+    .replace(/&mdash;/g, "—")
+    .replace(/&ndash;/g, "–")
+    .replace(/&bull;/g, "•")
+    .replace(/&hellip;/g, "…");
+
+  return decoded;
 });
 
 Handlebars.registerHelper("isArray", function (value) {
