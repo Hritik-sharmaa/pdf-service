@@ -138,12 +138,13 @@
         width: 100%;
         border-collapse: collapse;
         margin-bottom: 10px;
-        border: 1px solid #000;
+        border: 0.5px solid #b8c9e0;
       }
 
       .invoice-table th {
-        background-color: #d9e1f2;
-        border: 1px solid #000;
+        background-color: #0b5ab1;
+        color: white;
+        border: 0.5px solid #b8c9e0;
         padding: 4px 3px;
         font-size: 8px;
         font-weight: bold;
@@ -151,7 +152,7 @@
       }
 
       .invoice-table td {
-        border: 1px solid #000;
+        border: 0.5px solid #b8c9e0;
         padding: 4px 3px;
         font-size: 9px;
       }
@@ -231,9 +232,8 @@
         display: flex;
         justify-content: space-between;
         align-items: flex-end;
-        margin-top: 10px;
+        margin-top: 50px;
         padding-top: 8px;
-        border-top: 1px solid #ddd;
       }
 
       .signature-section {
@@ -249,7 +249,7 @@
       .thank-you {
         flex: 1;
         text-align: right;
-        color: #4472c4;
+        color: #0b5ab1;
         font-weight: bold;
         font-size: 10px;
         padding: 5px 0;
@@ -273,21 +273,23 @@
         font-weight: bold;
         font-size: 10px;
         margin-bottom: 5px;
-        background-color: #d9e1f2;
+        background-color: #0b5ab1;
+        color: white;
         padding: 4px 8px;
-        border: 1px solid #000;
+        border: 0.5px solid #b8c9e0;
       }
 
       .payment-table {
         width: 100%;
         border-collapse: collapse;
-        border: 1px solid #000;
+        border: 0.5px solid #b8c9e0;
         margin-bottom: 10px;
       }
 
       .payment-table th {
-        background-color: #d9e1f2;
-        border: 1px solid #000;
+        background-color: #0b5ab1;
+        color: white;
+        border: 0.5px solid #b8c9e0;
         padding: 4px;
         font-size: 8px;
         font-weight: bold;
@@ -295,7 +297,7 @@
       }
 
       .payment-table td {
-        border: 1px solid #000;
+        border: 0.5px solid #b8c9e0;
         padding: 4px;
         font-size: 8px;
         text-align: center;
@@ -303,7 +305,7 @@
 
       /* Agency info box */
       .agency-box {
-        border: 1px solid #000;
+        border: 0.5px solid #000;
         padding: 6px 8px;
         margin-bottom: 10px;
         font-size: 8px;
@@ -331,13 +333,16 @@
       <!-- Header with Company Info -->
       <div class="header-section">
         <div class="logo-section">
-          <img src="data:image/png;base64,{{COX_KINGS_LOGO_BASE64}}" alt="Cox & Kings" class="logo" />
+          <img
+            src="data:image/png;base64,{{COX_KINGS_LOGO_BASE64}}"
+            alt="Cox & Kings"
+            class="logo" />
         </div>
         <div class="company-info">
-          <div class="company-name">Cox & Kings Ltd.</div>
+          <div class="company-name">Wilson & Hughes India Private Limited</div>
           <div class="company-details">
             <div>
-              D-2 Southern Park, Unit 10 & 108, Saket, New Delhi, 110017
+              Plot no. 32-B, 1st floor, 100 ft road Ghitorni, New Delhi-110030
             </div>
             <div>Website - www.coxandkings.com</div>
             <div>Phone - +91 9056750579</div>
@@ -358,14 +363,6 @@
             <span class="info-item-value">{{customerName}}</span>
           </div>
           <div class="info-item">
-            <span class="info-item-label">Customer Address</span>
-            <span class="info-item-value">{{destination}}, {{country}}</span>
-          </div>
-        </div>
-
-        <!-- Right Column - Invoice Details -->
-        <div class="info-column">
-          <div class="info-item">
             <span class="info-item-label">Invoice Number</span>
             <span class="info-item-value">{{invoiceNumber}}</span>
           </div>
@@ -373,6 +370,14 @@
             <span class="info-item-label">Invoice Date</span>
             <span class="info-item-value">{{invoiceDate}}</span>
           </div>
+          <!-- <div class="info-item">
+            <span class="info-item-label">Customer Address</span>
+            <span class="info-item-value">{{destination}}, {{country}}</span>
+          </div> -->
+        </div>
+
+        <!-- Right Column - Invoice Details -->
+        <div class="info-column">
           <div class="info-item">
             <span class="info-item-label">Place of Supply</span>
             <span class="info-item-value">DELHI</span>
@@ -600,11 +605,6 @@
           <div class="signature-label">Authorized Signatory</div>
         </div>
         <div class="thank-you">THANK YOU FOR YOUR BUSINESS!</div>
-      </div>
-
-      <!-- Company Footer -->
-      <div class="company-footer">
-        <strong>For Cox & Kings Ltd.</strong>
       </div>
     </div>
   </body>
