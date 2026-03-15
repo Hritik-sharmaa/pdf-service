@@ -77,6 +77,7 @@ const QuoteDataSchema = z.object({
   brandTag: z.string().nullable().optional(),
   includeTcs: z.boolean().optional(),
   flightIncluded: z.boolean().nullable().optional(),
+  visaIncluded: z.boolean().nullable().optional(),
   country: z.string().nullable().optional(),
   countryCount: z.number().nullable().optional(),
   cityCount: z.number().nullable().optional(),

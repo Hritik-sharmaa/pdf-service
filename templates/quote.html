@@ -132,6 +132,20 @@
         max-width: 800px;
       }
 
+      .service-exclusion-banner {
+        display: inline-block;
+        margin: 8px 0 10px 0;
+        padding: 6px 14px;
+        border-radius: 999px;
+        background: #7f1d1d;
+        color: #ffffff;
+        font-family: sans-serif;
+        font-size: 8pt;
+        font-weight: 700;
+        letter-spacing: 0.2px;
+        text-transform: uppercase;
+      }
+
       .cover-price-section {
         border-radius: 16px;
         margin-bottom: 15px;
@@ -1765,6 +1779,18 @@
 
         <h1 class="cover-hero-title">{{tourTitle}}</h1>
 
+        {{#if (eq flightIncluded false)}}
+        {{#if (eq visaIncluded false)}}
+        <div class="service-exclusion-banner">Without Flights • Without Visa</div>
+        {{else}}
+        <div class="service-exclusion-banner">Without Flights</div>
+        {{/if}}
+        {{else}}
+        {{#if (eq visaIncluded false)}}
+        <div class="service-exclusion-banner">Without Visa</div>
+        {{/if}}
+        {{/if}}
+
         {{#if destination}}
         <div class="cover-destinations">{{destination}}</div>
         {{/if}}
@@ -1847,6 +1873,8 @@
       "nightAllocations": {{{jsonStringify nightAllocations}}},
       "aboutDescription": {{{jsonStringify aboutDescription}}},
       "highlights": {{{jsonStringify highlights}}},
+      "flightIncluded": {{{jsonStringify flightIncluded}}},
+      "visaIncluded": {{{jsonStringify visaIncluded}}},
       "quoteLink": {{#if quoteLink}}{{{jsonStringify quoteLink}}}{{else}}""{{/if}},
       "COX_KINGS_LOGO_BASE64": {{{jsonStringify COX_KINGS_LOGO_BASE64}}},
       "packageType": {{#if packageType}}{{{jsonStringify packageType}}}{{else}}null{{/if}},
@@ -1918,6 +1946,14 @@
         var tmp = document.createElement('div');
         tmp.innerHTML = text;
         return tmp.textContent || tmp.innerText || '';
+      }
+
+      function buildServiceExclusionNotice() {
+        var parts = [];
+        if (tplData.flightIncluded === false) parts.push('Without Flights');
+        if (tplData.visaIncluded === false) parts.push('Without Visa');
+        if (parts.length === 0) return '';
+        return '<div class="service-exclusion-banner">' + escapeHtml(parts.join(' • ')) + '</div>';
       }
 
       function buildLeftSidebar() {
@@ -1998,6 +2034,7 @@
         if (tplData.quoteLink) {
           payNowBtn = '<a href="' + escapeHtml(tplData.quoteLink) + '#payment" class="pay-now-btn">Pay Now</a>';
         }
+        var serviceNotice = buildServiceExclusionNotice();
         
         var tourTypeLabel = '';
         if (tplData.packageType === 'GIT') {
@@ -2011,6 +2048,7 @@
             '</div>' +
             '<h1 class="itinerary-main-title">' + escapeHtml(tplData.tourTitle || '') + titleSuffix + '</h1>' +
           '</div>' +
+          serviceNotice +
           '<div class="itinerary-title-divider"></div>' +
           '<div class="itinerary-info-bar">' +
             '<div class="info-left">' + escapeHtml(tplData.duration || '') + ' &bull; ' + countryCount + ' ' + countryLabel + ' &bull; ' + cityCount + ' ' + cityLabel + '</div>' +
@@ -2178,6 +2216,18 @@
         </div>
         <h1 class="itinerary-main-title">{{tourTitle}}</h1>
       </div>
+
+      {{#if (eq flightIncluded false)}}
+      {{#if (eq visaIncluded false)}}
+      <div class="service-exclusion-banner">Without Flights • Without Visa</div>
+      {{else}}
+      <div class="service-exclusion-banner">Without Flights</div>
+      {{/if}}
+      {{else}}
+      {{#if (eq visaIncluded false)}}
+      <div class="service-exclusion-banner">Without Visa</div>
+      {{/if}}
+      {{/if}}
 
       <!-- Divider Line -->
       <div class="itinerary-title-divider"></div>
