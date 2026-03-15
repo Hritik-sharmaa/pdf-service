@@ -1779,18 +1779,6 @@
 
         <h1 class="cover-hero-title">{{tourTitle}}</h1>
 
-        {{#if (eq flightIncluded false)}}
-        {{#if (eq visaIncluded false)}}
-        <div class="service-exclusion-banner">Without Flights • Without Visa</div>
-        {{else}}
-        <div class="service-exclusion-banner">Without Flights</div>
-        {{/if}}
-        {{else}}
-        {{#if (eq visaIncluded false)}}
-        <div class="service-exclusion-banner">Without Visa</div>
-        {{/if}}
-        {{/if}}
-
         {{#if destination}}
         <div class="cover-destinations">{{destination}}</div>
         {{/if}}
@@ -1873,8 +1861,6 @@
       "nightAllocations": {{{jsonStringify nightAllocations}}},
       "aboutDescription": {{{jsonStringify aboutDescription}}},
       "highlights": {{{jsonStringify highlights}}},
-      "flightIncluded": {{{jsonStringify flightIncluded}}},
-      "visaIncluded": {{{jsonStringify visaIncluded}}},
       "quoteLink": {{#if quoteLink}}{{{jsonStringify quoteLink}}}{{else}}""{{/if}},
       "COX_KINGS_LOGO_BASE64": {{{jsonStringify COX_KINGS_LOGO_BASE64}}},
       "packageType": {{#if packageType}}{{{jsonStringify packageType}}}{{else}}null{{/if}},
@@ -2496,7 +2482,42 @@
                   >INR {{formatINR (multiply paxInfants pricePerInfant)}}</span
                 >
               </div>
-              {{/if}} {{/if}} {{#if discountAmount}} {{#if (gt discountAmount
+              {{/if}} {{/if}}
+              
+              {{#if visaIncluded}}
+              {{#if visaPriceAdult}} {{#if (gt paxAdults 0)}}
+              <div class="price-item">
+                <span class="price-desc"
+                  >Visa - Adults ({{paxAdults}} × INR {{formatINR visaPriceAdult}})</span
+                >
+                <span class="price-amount"
+                  >INR {{formatINR (multiply paxAdults visaPriceAdult)}}</span
+                >
+              </div>
+              {{/if}} {{/if}}
+              {{#if visaPriceChild}} {{#if (gt paxChildren 0)}}
+              <div class="price-item">
+                <span class="price-desc"
+                  >Visa - Children ({{paxChildren}} × INR {{formatINR visaPriceChild}})</span
+                >
+                <span class="price-amount"
+                  >INR {{formatINR (multiply paxChildren visaPriceChild)}}</span
+                >
+              </div>
+              {{/if}} {{/if}}
+              {{#if visaPriceInfant}} {{#if (gt paxInfants 0)}}
+              <div class="price-item">
+                <span class="price-desc"
+                  >Visa - Infants ({{paxInfants}} × INR {{formatINR visaPriceInfant}})</span
+                >
+                <span class="price-amount"
+                  >INR {{formatINR (multiply paxInfants visaPriceInfant)}}</span
+                >
+              </div>
+              {{/if}} {{/if}}
+              {{/if}}
+              
+              {{#if discountAmount}} {{#if (gt discountAmount
               0)}}
               <div class="price-item discount">
                 <span class="price-desc"
