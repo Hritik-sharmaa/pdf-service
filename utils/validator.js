@@ -34,6 +34,7 @@ const BookingDataSchema = z.object({
   brandTag: z.string().nullable().optional(),
   includeTcs: z.boolean().optional(),
   flightIncluded: z.boolean().nullable().optional(),
+  isFlightRefundable: z.boolean().nullable().optional(),
   departureAirport: z.string().nullable().optional(),
   flightDetails: z.any().nullable().optional(),
 });
@@ -77,6 +78,7 @@ const QuoteDataSchema = z.object({
   brandTag: z.string().nullable().optional(),
   includeTcs: z.boolean().optional(),
   flightIncluded: z.boolean().nullable().optional(),
+  isFlightRefundable: z.boolean().nullable().optional(),
   flightPriceAdult: z.number().nullable().optional(),
   flightPriceChild: z.number().nullable().optional(),
   flightPriceInfant: z.number().nullable().optional(),

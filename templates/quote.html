@@ -2583,13 +2583,24 @@
                 days{{/if}}
               </li>
               <li>Payment schedule may vary based on departure date</li>
+              {{#if flightIncluded}}
+              {{#if isFlightRefundable}}
+              <li>Flight bookings are refundable as per airline policy</li>
+              {{else}}
+              {{#if (eq isFlightRefundable false)}}
+              <li>Flight bookings are non-refundable once confirmed</li>
+              {{/if}}
+              {{/if}}
+              {{/if}}
             </ul>
           </div>
           <!-- Payment Schedule -->
           <div class="payment-section">
             <h3 class="section-title">Payment Schedule</h3>
             <ul class="payment-list">
-              <li>100% of flight cost at the time of booking to secure seats</li>
+              {{#if flightIncluded}}
+              <li>100% of flight cost at the time of booking to secure seats{{#if isFlightRefundable}} (Refundable as per airline policy){{else}}{{#if (eq isFlightRefundable false)}} (Non-refundable){{/if}}{{/if}}</li>
+              {{/if}}
               <li>30% of the total package amount upon booking</li>
               <li>35% due 60 days before departure</li>
               <li>35% due 45 days before departure</li>
