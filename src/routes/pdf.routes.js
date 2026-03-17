@@ -1,5 +1,4 @@
 import express from "express";
-import { renderTemplate } from "../../utils/template-render.js";
 import { validatePDFRequest } from "../../utils/validator.js";
 import {
   prepareTemplateData,
@@ -47,12 +46,21 @@ router.post("/generate-pdf", async (req, res) => {
     // 3. Generate PDF
     const pdfBuffer = await generatePDFDocument(type, templateData);
 
-    // 4. Create filename with customer name
+    // 4. Create filename with format: ClientName_Date_PackageName.pdf
     const customerName = (data.customerName || "Customer")
       .replace(/[^a-zA-Z0-9\s-]/g, "") // Remove special characters
-      .replace(/\s+/g, "-") // Replace spaces with hyphens
-      .toLowerCase();
-    const filename = `${customerName}-${documentId}.pdf`;
+      .replace(/\s+/g, "_") // Replace spaces with underscores
+      .replace(/-/g, "_"); // Replace hyphens with underscores
+
+    const packageName = (data.tourTitle || "Package")
+      .replace(/[^a-zA-Z0-9\s-]/g, "") // Remove special characters
+      .replace(/\s+/g, "_") // Replace spaces with underscores
+      .replace(/-/g, "_"); // Replace hyphens with underscores
+
+    // Get date from quoteDate, fallback to current date if not available
+    const dateToUse = data.quoteDate || new Date().toISOString().split("T")[0];
+
+    const filename = `${customerName}_${dateToUse}_${packageName}.pdf`;
 
     // 5. Convert PDF to base64
     const pdfBase64 = pdfBuffer.toString("base64");
@@ -181,12 +189,22 @@ router.post("/generate-invoice", async (req, res) => {
     // 4. Generate PDF
     const pdfBuffer = await generatePDFDocument("invoice", invoiceData);
 
-    // 5. Create filename
+    // 5. Create filename with format: ClientName_Date_PackageName.pdf
     const customerName = (data.customerName || "Customer")
-      .replace(/[^a-zA-Z0-9\s-]/g, "")
-      .replace(/\s+/g, "-")
-      .toLowerCase();
-    const filename = `invoice-${data.invoiceNumber.replace(/\//g, "-")}-${customerName}.pdf`;
+      .replace(/[^a-zA-Z0-9\s-]/g, "") // Remove special characters
+      .replace(/\s+/g, "_") // Replace spaces with underscores
+      .replace(/-/g, "_"); // Replace hyphens with underscores
+
+    const packageName = (data.tourTitle || "Invoice")
+      .replace(/[^a-zA-Z0-9\s-]/g, "") // Remove special characters
+      .replace(/\s+/g, "_") // Replace spaces with underscores
+      .replace(/-/g, "_"); // Replace hyphens with underscores
+
+    // Get date from invoiceDate, fallback to current date if not available
+    const dateToUse =
+      data.invoiceDate || new Date().toISOString().split("T")[0];
+
+    const filename = `${customerName}_${dateToUse}_${packageName}.pdf`;
 
     // 6. Convert to base64
     const pdfBase64 = pdfBuffer.toString("base64");
