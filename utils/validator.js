@@ -102,6 +102,19 @@ const QuoteDataSchema = z.object({
   packageImages: z.array(z.string()).nullable().optional(),
   quoteLink: z.string().nullable().optional(),
   packageType: z.enum(["GIT", "FIT"]).nullable().optional(),
+  activities: z
+    .array(z.object({ name: z.string(), price: z.number() }))
+    .nullable()
+    .optional(),
+  customActivities: z
+    .array(z.object({ name: z.string(), price: z.number() }))
+    .nullable()
+    .optional(),
+  activitiesAmount: z.number().nullable().optional(),
+  discountType: z.string().nullable().optional(),
+  discountValue: z.union([z.string(), z.number()]).nullable().optional(),
+  discountAmount: z.number().nullable().optional(),
+  markupAmount: z.number().nullable().optional(),
 });
 
 const InvoiceDataSchema = z.object({

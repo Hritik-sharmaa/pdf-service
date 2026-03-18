@@ -48,11 +48,20 @@ export function prepareTemplateData(data) {
     console.log(`[PDF] Converted highlightsHtml to highlights array: ${templateData.highlights.length} items`);
   }
 
+  // Normalize agency fields — ensure phone/email always have a fallback
+  // (mirrors the fallback already hardcoded in the dynamic itinerary JSON)
+  if (!templateData.agencyPhone) {
+    templateData.agencyPhone = "+91 855 600 1700";
+  }
+  if (!templateData.agencyEmail) {
+    templateData.agencyEmail = "bookings@coxandkings.com";
+  }
+
   // Log agency information
   console.log("[PDF] Agency Information:", {
     agencyName: templateData.agencyName || "NOT PROVIDED",
-    agencyEmail: templateData.agencyEmail || "NOT PROVIDED",
-    agencyPhone: templateData.agencyPhone || "NOT PROVIDED",
+    agencyEmail: templateData.agencyEmail,
+    agencyPhone: templateData.agencyPhone,
   });
 
   // Log inclusions/exclusions data

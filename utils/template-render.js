@@ -124,6 +124,11 @@ Handlebars.registerHelper("isArray", function (value) {
   return Array.isArray(value);
 });
 
+Handlebars.registerHelper("or", function (...args) {
+  const values = args.slice(0, -1); // last arg is Handlebars options
+  return values.some(Boolean);
+});
+
 // Helper to JSON-serialize data for client-side dynamic pagination
 // Handles strings, arrays, objects, null/undefined safely
 // Also escapes </script to prevent premature script tag termination

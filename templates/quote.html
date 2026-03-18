@@ -78,8 +78,37 @@
         position: relative;
         z-index: 2;
         display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: 20px 40px 10px 40px;
+      }
+
+      .cover-agency-info {
+        display: flex;
+        flex-direction: column;
         justify-content: center;
-        padding: 20px 0 10px 0;
+        height: 160px;
+        margin-top: 100px;
+        text-align: right;
+      }
+
+      .cover-agency-name {
+        font-family: "Arial", sans-serif;
+        font-size: 11pt;
+        font-weight: 600;
+        color: #ffffff;
+        letter-spacing: 1px;
+        line-height: 1.6;
+        margin-bottom: 2px;
+      }
+
+      .cover-agency-contact {
+        font-family: "Arial", sans-serif;
+        font-size: 11pt;
+        font-weight: 600;
+        color: #ffffff;
+        letter-spacing: 1px;
+        line-height: 1.6;
       }
 
       .logo-image {
@@ -603,6 +632,44 @@
         padding-left: 0;
         position: relative;
         line-height: 1.2;
+      }
+
+      .optional-addons-list {
+        list-style: none;
+        padding: 0;
+        margin: 8px 0 0 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+      }
+
+      .addon-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 3px;
+        font-family: "Arial", sans-serif;
+        font-size: 7pt;
+        font-weight: 600;
+        padding: 3px 8px;
+        border-radius: 4px;
+      }
+
+      .addon-tag.flight-tag {
+        background: #dbeafe;
+        color: #1e40af;
+        border: 1px solid #93c5fd;
+      }
+
+      .addon-tag.visa-tag {
+        background: #dcfce7;
+        color: #166534;
+        border: 1px solid #86efac;
+      }
+
+      .addon-tag.activity-tag {
+        background: #fef3c7;
+        color: #92400e;
+        border: 1px solid #fcd34d;
       }
 
       .itinerary-right-col {
@@ -1394,18 +1461,58 @@
       .price-item {
         display: flex;
         justify-content: space-between;
+        align-items: baseline;
         font-family: "Arial", sans-serif;
         font-size: 8pt;
         padding: 6px 0;
+      }
+
+      .price-item .price-desc {
+        flex: 1;
+        min-width: 0;
+        padding-right: 8px;
+      }
+
+      .price-item .price-amount {
+        white-space: nowrap;
+        flex-shrink: 0;
       }
 
       .price-item.discount {
         color: #ffd700;
       }
 
+      .price-item.markup {
+        color: #86efac;
+      }
+
       .price-item.tax {
         font-size: 7.5pt;
         color: rgba(255, 255, 255, 0.9);
+      }
+
+      .price-item.activity {
+        font-size: 7.5pt;
+        color: rgba(255, 255, 255, 0.75);
+        padding: 3px 0 3px 12px;
+      }
+
+      .price-incl-tag {
+        font-size: 7pt;
+        color: #60a5fa;
+        margin-left: 4px;
+      }
+
+      .price-markup-tag {
+        font-size: 7pt;
+        color: #86efac;
+        margin-left: 4px;
+      }
+
+      .price-discount-tag {
+        font-size: 7pt;
+        color: #fcd34d;
+        margin-left: 4px;
       }
 
       .price-subtotal {
@@ -1770,6 +1877,15 @@
             alt="Cox & Kings"
             style="height: 160px; width: auto; margin-top: 100px;" />
         </div>
+        {{#if agencyName}}
+        <div class="cover-agency-info">
+          <div class="cover-agency-name">Consultant: {{agencyName}}</div>
+          <div class="cover-agency-contact">
+            {{#if agencyEmail}}Email: {{agencyEmail}}<br />{{/if}}
+            {{#if agencyPhone}}Phone: {{agencyPhone}}{{/if}}
+          </div>
+        </div>
+        {{/if}}
       </div>
 
       <div class="cover-main-content">
@@ -2045,13 +2161,13 @@
       function buildFooter() {
         var agencyHtml = '';
         if (tplData.agencyName) {
-          agencyHtml += '<strong>' + escapeHtml(tplData.agencyName) + '</strong><br />';
+          agencyHtml += '<strong>Consultant Company: ' + escapeHtml(tplData.agencyName) + '</strong><br />';
         }
         if (tplData.agencyEmail) {
-          agencyHtml += escapeHtml(tplData.agencyEmail) + '<br />';
+          agencyHtml += 'Consultant Email: ' + escapeHtml(tplData.agencyEmail) + '<br />';
         }
         if (tplData.agencyPhone) {
-          agencyHtml += escapeHtml(tplData.agencyPhone);
+          agencyHtml += 'Consultant Phone: ' + escapeHtml(tplData.agencyPhone);
         }
         
         return '<div class="quote-details-footer">' +
@@ -2251,6 +2367,24 @@
             <li>Curated experiences by Cox & Kings</li>
             {{/if}}
           </ul>
+
+          {{#if (or flightIncluded visaIncluded activities customActivities)}}
+          <h4 class="section-heading" style="margin-top: 12px; margin-bottom: 4px;">Optional Inclusions</h4>
+          <ul class="optional-addons-list">
+            {{#if flightIncluded}}
+            <li><span class="addon-tag flight-tag">✈ Flights{{#if departureAirport}} from {{departureAirport}}{{/if}}</span></li>
+            {{/if}}
+            {{#if visaIncluded}}
+            <li><span class="addon-tag visa-tag">🛂 Visa</span></li>
+            {{/if}}
+            {{#each activities}}
+            <li><span class="addon-tag activity-tag">⭐ {{name}}</span></li>
+            {{/each}}
+            {{#each customActivities}}
+            <li><span class="addon-tag activity-tag">⭐ {{name}}</span></li>
+            {{/each}}
+          </ul>
+          {{/if}}
         </div>
 
         <!-- Inclusions Column -->
@@ -2313,9 +2447,9 @@
           </span>
         </div>
         <div class="footer-agency">
-          {{#if agencyName}}<strong>{{agencyName}}</strong><br />{{/if}}
-          {{#if agencyEmail}}{{agencyEmail}}<br />{{/if}}
-          {{#if agencyPhone}}{{agencyPhone}}{{/if}}
+          {{#if agencyName}}<strong>Consultant Company: {{agencyName}}</strong><br />{{/if}}
+          {{#if agencyEmail}}Consultant Email: {{agencyEmail}}<br />{{/if}}
+          {{#if agencyPhone}}Consultant Phone: {{agencyPhone}}{{/if}}
         </div>
       </div>
     </div>
@@ -2439,6 +2573,19 @@
             {{/if}}
           </div>
 
+        <!-- Payment Schedule -->
+          <div class="payment-section">
+            <h3 class="section-title">Payment Schedule</h3>
+            <ul class="payment-list">
+              {{#if flightIncluded}}
+              <li>100% of flight cost at the time of booking to secure seats{{#if isFlightRefundable}} (Refundable as per airline policy){{else}}{{#if (eq isFlightRefundable false)}} (Non-refundable){{/if}}{{/if}}</li>
+              {{/if}}
+              <li>30% of the total package amount upon booking</li>
+              <li>35% due 60 days before departure</li>
+              <li>35% due 45 days before departure</li>
+            </ul>
+          </div>
+
           {{#if specialRequests}}
           <!-- Special Requests -->
           <div class="details-section">
@@ -2457,75 +2604,60 @@
             <div class="price-line-items">
               {{#if pricePerAdult}} {{#if (gt paxAdults 0)}}
               <div class="price-item">
-                <span class="price-desc"
-                  >Adults ({{paxAdults}} × INR {{formatINR pricePerAdult}})</span
-                >
-                <span class="price-amount"
-                  >INR {{formatINR (multiply paxAdults pricePerAdult)}}</span
-                >
+                <span class="price-desc">Adults ({{paxAdults}} × INR {{formatINR pricePerAdult}}){{#if flightIncluded}}{{#if flightPriceAdult}} <span class="price-incl-tag">Incl. INR {{formatINR (multiply paxAdults flightPriceAdult)}} flight</span>{{/if}}{{/if}}{{#if markupAmount}} <span class="price-markup-tag">+ INR {{formatINR markupAmount}} markup</span>{{/if}}{{#if discountAmount}} <span class="price-discount-tag">- INR {{formatINR discountAmount}} discount</span>{{/if}}</span>
+                <span class="price-amount">INR {{formatINR (multiply paxAdults pricePerAdult)}}</span>
               </div>
-              {{/if}} {{/if}} {{#if pricePerChild}} {{#if (gt paxChildren 0)}}
-              <div class="price-item">
-                <span class="price-desc"
-                  >Children ({{paxChildren}} × INR {{formatINR pricePerChild}})</span
-                >
-                <span class="price-amount"
-                  >INR {{formatINR (multiply paxChildren pricePerChild)}}</span
-                >
+              {{#if visaIncluded}}{{#if visaPriceAdult}}
+              <div class="price-item activity">
+                <span class="price-desc">+ Visa ({{paxAdults}} × INR {{formatINR visaPriceAdult}})</span>
+                <span class="price-amount">INR {{formatINR (multiply paxAdults visaPriceAdult)}}</span>
               </div>
-              {{/if}} {{/if}} {{#if pricePerInfant}} {{#if (gt paxInfants 0)}}
-              <div class="price-item">
-                <span class="price-desc"
-                  >Infants ({{paxInfants}} × INR {{formatINR pricePerInfant}})</span
-                >
-                <span class="price-amount"
-                  >INR {{formatINR (multiply paxInfants pricePerInfant)}}</span
-                >
-              </div>
+              {{/if}}{{/if}}
               {{/if}} {{/if}}
-              
-              {{#if visaIncluded}}
-              {{#if visaPriceAdult}} {{#if (gt paxAdults 0)}}
+
+              {{#if pricePerChild}} {{#if (gt paxChildren 0)}}
               <div class="price-item">
-                <span class="price-desc"
-                  >Visa - Adults ({{paxAdults}} × INR {{formatINR visaPriceAdult}})</span
-                >
-                <span class="price-amount"
-                  >INR {{formatINR (multiply paxAdults visaPriceAdult)}}</span
-                >
+                <span class="price-desc">Children ({{paxChildren}} × INR {{formatINR pricePerChild}}){{#if flightIncluded}}{{#if flightPriceChild}} <span class="price-incl-tag">Incl. INR {{formatINR (multiply paxChildren flightPriceChild)}} flight</span>{{/if}}{{/if}}</span>
+                <span class="price-amount">INR {{formatINR (multiply paxChildren pricePerChild)}}</span>
               </div>
+              {{#if visaIncluded}}{{#if visaPriceChild}}
+              <div class="price-item activity">
+                <span class="price-desc">+ Visa ({{paxChildren}} × INR {{formatINR visaPriceChild}})</span>
+                <span class="price-amount">INR {{formatINR (multiply paxChildren visaPriceChild)}}</span>
+              </div>
+              {{/if}}{{/if}}
               {{/if}} {{/if}}
-              {{#if visaPriceChild}} {{#if (gt paxChildren 0)}}
+
+              {{#if pricePerInfant}} {{#if (gt paxInfants 0)}}
               <div class="price-item">
-                <span class="price-desc"
-                  >Visa - Children ({{paxChildren}} × INR {{formatINR visaPriceChild}})</span
-                >
-                <span class="price-amount"
-                  >INR {{formatINR (multiply paxChildren visaPriceChild)}}</span
-                >
+                <span class="price-desc">Infants ({{paxInfants}} × INR {{formatINR pricePerInfant}}){{#if flightIncluded}}{{#if flightPriceInfant}} <span class="price-incl-tag">Incl. INR {{formatINR (multiply paxInfants flightPriceInfant)}} flight</span>{{/if}}{{/if}}</span>
+                <span class="price-amount">INR {{formatINR (multiply paxInfants pricePerInfant)}}</span>
               </div>
-              {{/if}} {{/if}}
-              {{#if visaPriceInfant}} {{#if (gt paxInfants 0)}}
-              <div class="price-item">
-                <span class="price-desc"
-                  >Visa - Infants ({{paxInfants}} × INR {{formatINR visaPriceInfant}})</span
-                >
-                <span class="price-amount"
-                  >INR {{formatINR (multiply paxInfants visaPriceInfant)}}</span
-                >
+              {{#if visaIncluded}}{{#if visaPriceInfant}}
+              <div class="price-item activity">
+                <span class="price-desc">+ Visa ({{paxInfants}} × INR {{formatINR visaPriceInfant}})</span>
+                <span class="price-amount">INR {{formatINR (multiply paxInfants visaPriceInfant)}}</span>
               </div>
+              {{/if}}{{/if}}
               {{/if}} {{/if}}
+
+              {{#if activities}}
+              {{#each activities}}
+              <div class="price-item activity">
+                <span class="price-desc">+ {{name}} ({{../paxAdults}} × INR {{formatINR price}})</span>
+                <span class="price-amount">INR {{formatINR (multiply ../paxAdults price)}}</span>
+              </div>
+              {{/each}}
               {{/if}}
-              
-              {{#if discountAmount}} {{#if (gt discountAmount
-              0)}}
-              <div class="price-item discount">
-                <span class="price-desc"
-                  >Discount {{#if discountType}}({{discountType}}){{/if}}</span
-                >
-                <span class="price-amount">-{{formatINR discountAmount}}</span>
+
+              {{#if customActivities}}
+              {{#each customActivities}}
+              <div class="price-item activity">
+                <span class="price-desc">+ {{name}} ({{../paxAdults}} × INR {{formatINR price}})</span>
+                <span class="price-amount">INR {{formatINR (multiply ../paxAdults price)}}</span>
               </div>
-              {{/if}} {{/if}}
+              {{/each}}
+              {{/if}}
 
               <div class="price-subtotal">
                 <span class="price-desc">Package Subtotal</span>
@@ -2575,7 +2707,7 @@
           <div class="notes-box">
             <h3 class="notes-heading">Important Notes</h3>
             <ul class="notes-list">
-              <li>TCS amount is recoverable as per prevailing tax laws</li>
+              <li>TCS is not a cost or extra tax and can be claimed in your IT return.</li>
               <li>All prices are in Indian Rupees (INR)</li>
               <li>Prices are subject to availability at the time of booking</li>
               <li>
@@ -2594,18 +2726,6 @@
               {{/if}}
             </ul>
           </div>
-          <!-- Payment Schedule -->
-          <div class="payment-section">
-            <h3 class="section-title">Payment Schedule</h3>
-            <ul class="payment-list">
-              {{#if flightIncluded}}
-              <li>100% of flight cost at the time of booking to secure seats{{#if isFlightRefundable}} (Refundable as per airline policy){{else}}{{#if (eq isFlightRefundable false)}} (Non-refundable){{/if}}{{/if}}</li>
-              {{/if}}
-              <li>30% of the total package amount upon booking</li>
-              <li>35% due 60 days before departure</li>
-              <li>35% due 45 days before departure</li>
-            </ul>
-          </div>
         </div>
       </div>
 
@@ -2621,9 +2741,9 @@
           </span>
         </div>
         <div class="footer-agency">
-          {{#if agencyName}}<strong>{{agencyName}}</strong><br />{{/if}}
-          {{#if agencyEmail}}{{agencyEmail}}<br />{{/if}}
-          {{#if agencyPhone}}{{agencyPhone}}{{/if}}
+          {{#if agencyName}}<strong>Consultant Company: {{agencyName}}</strong><br />{{/if}}
+          {{#if agencyEmail}}Consultant Email: {{agencyEmail}}<br />{{/if}}
+          {{#if agencyPhone}}Consultant Phone: {{agencyPhone}}{{/if}}
         </div>
       </div>
     </div>
