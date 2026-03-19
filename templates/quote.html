@@ -78,24 +78,24 @@
         position: relative;
         z-index: 2;
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         align-items: flex-start;
         padding: 20px 40px 10px 40px;
       }
 
       .cover-agency-info {
+        position: absolute;
+        top: 20px;
+        right: 40px;
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        height: 160px;
-        margin-top: 100px;
+        justify-content: flex-start;
         text-align: right;
       }
 
       .cover-agency-name {
         font-family: "Arial", sans-serif;
         font-size: 11pt;
-        font-weight: 600;
         color: #ffffff;
         letter-spacing: 1px;
         line-height: 1.6;
@@ -104,8 +104,7 @@
 
       .cover-agency-contact {
         font-family: "Arial", sans-serif;
-        font-size: 11pt;
-        font-weight: 600;
+        font-size: 10pt;
         color: #ffffff;
         letter-spacing: 1px;
         line-height: 1.6;
@@ -1875,11 +1874,10 @@
           <img
             src="data:image/png;base64,{{COX_KINGS_LOGO_BASE64}}"
             alt="Cox & Kings"
-            style="height: 160px; width: auto; margin-top: 100px;" />
+            style="height: 160px; width: auto; margin-top: 130px;" />
         </div>
         {{#if agencyName}}
         <div class="cover-agency-info">
-          <div class="cover-agency-name">Consultant: {{agencyName}}</div>
           <div class="cover-agency-contact">
             {{#if agencyEmail}}Email: {{agencyEmail}}<br />{{/if}}
             {{#if agencyPhone}}Phone: {{agencyPhone}}{{/if}}
@@ -1929,7 +1927,7 @@
               <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M5 13L9 17L19 7" stroke="#337d64" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
-              <span>{{this.label}}</span>
+              <span>{{{this.label}}}</span>
             </span>
             {{/each}}
           {{else}}
@@ -1938,7 +1936,7 @@
               <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M5 13L9 17L19 7" stroke="#337d64" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
-              <span>{{this}}</span>
+              <span>{{{this}}}</span>
             </span>
             {{/each}}
           {{/if}}
@@ -2160,14 +2158,11 @@
 
       function buildFooter() {
         var agencyHtml = '';
-        if (tplData.agencyName) {
-          agencyHtml += '<strong>Consultant Company: ' + escapeHtml(tplData.agencyName) + '</strong><br />';
-        }
         if (tplData.agencyEmail) {
-          agencyHtml += 'Consultant Email: ' + escapeHtml(tplData.agencyEmail) + '<br />';
+          agencyHtml += escapeHtml(tplData.agencyEmail) + '<br />';
         }
         if (tplData.agencyPhone) {
-          agencyHtml += 'Consultant Phone: ' + escapeHtml(tplData.agencyPhone);
+          agencyHtml += escapeHtml(tplData.agencyPhone);
         }
         
         return '<div class="quote-details-footer">' +
@@ -2395,7 +2390,7 @@
           <ul class="inclusions-list">
             {{#if inclusions}}
               {{#each inclusions}}
-              <li><svg xmlns="http://www.w3.org/2000/svg" width="10px" height="10px" viewBox="0 -20 130 130" fill="#059669"><path d="M34.7162 81.5027C36.3213 79.9761 37.2031 79.2039 38.0103 78.3599C63.8892 51.3046 92.2309 26.9469 120.74 2.77407C121.817 1.86111 122.921 0.696462 124.196 0.3701C125.733 -0.0238104 128.241 -0.282655 128.928 0.552804C129.852 1.67765 130.015 4.12286 129.452 5.60109C128.782 7.35947 127.15 8.86542 125.669 10.1822C116.833 18.0391 107.749 25.6258 99.0678 33.6462C80.9213 50.4165 62.8904 67.3116 44.9751 84.3312C37.125 91.7736 34.1038 92.075 26.8803 84.1228C22.1253 78.8861 7.77509 61.237 3.38035 55.6767C2.75974 54.8123 2.20692 53.9011 1.72689 52.9513C0.732118 51.1915 0.0876263 49.254 2.05727 47.8895C4.25215 46.3708 5.81043 47.9557 7.11073 49.606C8.42738 51.2769 9.55004 53.1127 10.9598 54.6962C15.336 59.6122 29.9896 76.32 34.7162 81.5027Z" fill="#059669"/></svg><span>{{this}}</span></li>
+              <li><svg xmlns="http://www.w3.org/2000/svg" width="10px" height="10px" viewBox="0 -20 130 130" fill="#059669"><path d="M34.7162 81.5027C36.3213 79.9761 37.2031 79.2039 38.0103 78.3599C63.8892 51.3046 92.2309 26.9469 120.74 2.77407C121.817 1.86111 122.921 0.696462 124.196 0.3701C125.733 -0.0238104 128.241 -0.282655 128.928 0.552804C129.852 1.67765 130.015 4.12286 129.452 5.60109C128.782 7.35947 127.15 8.86542 125.669 10.1822C116.833 18.0391 107.749 25.6258 99.0678 33.6462C80.9213 50.4165 62.8904 67.3116 44.9751 84.3312C37.125 91.7736 34.1038 92.075 26.8803 84.1228C22.1253 78.8861 7.77509 61.237 3.38035 55.6767C2.75974 54.8123 2.20692 53.9011 1.72689 52.9513C0.732118 51.1915 0.0876263 49.254 2.05727 47.8895C4.25215 46.3708 5.81043 47.9557 7.11073 49.606C8.42738 51.2769 9.55004 53.1127 10.9598 54.6962C15.336 59.6122 29.9896 76.32 34.7162 81.5027Z" fill="#059669"/></svg><span>{{{this}}}</span></li>
               {{/each}}
             {{else}}
               <li><svg xmlns="http://www.w3.org/2000/svg" width="10px" height="10px" viewBox="0 -20 130 130" fill="#059669"><path d="M34.7162 81.5027C36.3213 79.9761 37.2031 79.2039 38.0103 78.3599C63.8892 51.3046 92.2309 26.9469 120.74 2.77407C121.817 1.86111 122.921 0.696462 124.196 0.3701C125.733 -0.0238104 128.241 -0.282655 128.928 0.552804C129.852 1.67765 130.015 4.12286 129.452 5.60109C128.782 7.35947 127.15 8.86542 125.669 10.1822C116.833 18.0391 107.749 25.6258 99.0678 33.6462C80.9213 50.4165 62.8904 67.3116 44.9751 84.3312C37.125 91.7736 34.1038 92.075 26.8803 84.1228C22.1253 78.8861 7.77509 61.237 3.38035 55.6767C2.75974 54.8123 2.20692 53.9011 1.72689 52.9513C0.732118 51.1915 0.0876263 49.254 2.05727 47.8895C4.25215 46.3708 5.81043 47.9557 7.11073 49.606C8.42738 51.2769 9.55004 53.1127 10.9598 54.6962C15.336 59.6122 29.9896 76.32 34.7162 81.5027Z" fill="#059669"/></svg><span>Return economy class airfare</span></li>
@@ -2419,7 +2414,7 @@
           <ul class="exclusions-list">
             {{#if exclusions}}
               {{#each exclusions}}
-              <li><svg xmlns="http://www.w3.org/2000/svg" width="12px" height="12px" viewBox="0 0 24 24" fill="#dc2626"><path d="M6.99486 7.00636C6.60433 7.39689 6.60433 8.03005 6.99486 8.42058L10.58 12.0057L6.99486 15.5909C6.60433 15.9814 6.60433 16.6146 6.99486 17.0051C7.38538 17.3956 8.01855 17.3956 8.40907 17.0051L11.9942 13.4199L15.5794 17.0051C15.9699 17.3956 16.6031 17.3956 16.9936 17.0051C17.3841 16.6146 17.3841 15.9814 16.9936 15.5909L13.4084 12.0057L16.9936 8.42059C17.3841 8.03007 17.3841 7.3969 16.9936 7.00638C16.603 6.61585 15.9699 6.61585 15.5794 7.00638L11.9942 10.5915L8.40907 7.00636C8.01855 6.61584 7.38538 6.61584 6.99486 7.00636Z" fill="#dc2626"/></svg><span>{{this}}</span></li>
+              <li><svg xmlns="http://www.w3.org/2000/svg" width="12px" height="12px" viewBox="0 0 24 24" fill="#dc2626"><path d="M6.99486 7.00636C6.60433 7.39689 6.60433 8.03005 6.99486 8.42058L10.58 12.0057L6.99486 15.5909C6.60433 15.9814 6.60433 16.6146 6.99486 17.0051C7.38538 17.3956 8.01855 17.3956 8.40907 17.0051L11.9942 13.4199L15.5794 17.0051C15.9699 17.3956 16.6031 17.3956 16.9936 17.0051C17.3841 16.6146 17.3841 15.9814 16.9936 15.5909L13.4084 12.0057L16.9936 8.42059C17.3841 8.03007 17.3841 7.3969 16.9936 7.00638C16.603 6.61585 15.9699 6.61585 15.5794 7.00638L11.9942 10.5915L8.40907 7.00636C8.01855 6.61584 7.38538 6.61584 6.99486 7.00636Z" fill="#dc2626"/></svg><span>{{{this}}}</span></li>
               {{/each}}
             {{else}}
               <li><svg xmlns="http://www.w3.org/2000/svg" width="12px" height="12px" viewBox="0 0 24 24" fill="#dc2626"><path d="M6.99486 7.00636C6.60433 7.39689 6.60433 8.03005 6.99486 8.42058L10.58 12.0057L6.99486 15.5909C6.60433 15.9814 6.60433 16.6146 6.99486 17.0051C7.38538 17.3956 8.01855 17.3956 8.40907 17.0051L11.9942 13.4199L15.5794 17.0051C15.9699 17.3956 16.6031 17.3956 16.9936 17.0051C17.3841 16.6146 17.3841 15.9814 16.9936 15.5909L13.4084 12.0057L16.9936 8.42059C17.3841 8.03007 17.3841 7.3969 16.9936 7.00638C16.603 6.61585 15.9699 6.61585 15.5794 7.00638L11.9942 10.5915L8.40907 7.00636C8.01855 6.61584 7.38538 6.61584 6.99486 7.00636Z" fill="#dc2626"/></svg><span>Porterage, tips, laundry, telephone calls and all items of personal nature</span></li>
@@ -2447,9 +2442,8 @@
           </span>
         </div>
         <div class="footer-agency">
-          {{#if agencyName}}<strong>Consultant Company: {{agencyName}}</strong><br />{{/if}}
-          {{#if agencyEmail}}Consultant Email: {{agencyEmail}}<br />{{/if}}
-          {{#if agencyPhone}}Consultant Phone: {{agencyPhone}}{{/if}}
+          {{#if agencyEmail}}{{agencyEmail}}<br />{{/if}}
+          {{#if agencyPhone}}{{agencyPhone}}{{/if}}
         </div>
       </div>
     </div>
@@ -2604,9 +2598,15 @@
             <div class="price-line-items">
               {{#if pricePerAdult}} {{#if (gt paxAdults 0)}}
               <div class="price-item">
-                <span class="price-desc">Adults ({{paxAdults}} × INR {{formatINR pricePerAdult}}){{#if flightIncluded}}{{#if flightPriceAdult}} <span class="price-incl-tag">Incl. INR {{formatINR (multiply paxAdults flightPriceAdult)}} flight</span>{{/if}}{{/if}}{{#if markupAmount}} <span class="price-markup-tag">+ INR {{formatINR markupAmount}} markup</span>{{/if}}{{#if discountAmount}} <span class="price-discount-tag">- INR {{formatINR discountAmount}} discount</span>{{/if}}</span>
+                <span class="price-desc">Adults ({{paxAdults}} × INR {{formatINR pricePerAdult}}){{#if discountAmount}} <span class="price-discount-tag">- INR {{formatINR discountAmount}} discount</span>{{/if}}</span>
                 <span class="price-amount">INR {{formatINR (multiply paxAdults pricePerAdult)}}</span>
               </div>
+              {{#if flightIncluded}}{{#if flightPriceAdult}}
+              <div class="price-item activity">
+                <span class="price-desc">+ Flight ({{paxAdults}} × INR {{formatINR flightPriceAdult}})</span>
+                <span class="price-amount">INR {{formatINR (multiply paxAdults flightPriceAdult)}}</span>
+              </div>
+              {{/if}}{{/if}}
               {{#if visaIncluded}}{{#if visaPriceAdult}}
               <div class="price-item activity">
                 <span class="price-desc">+ Visa ({{paxAdults}} × INR {{formatINR visaPriceAdult}})</span>
@@ -2617,9 +2617,15 @@
 
               {{#if pricePerChild}} {{#if (gt paxChildren 0)}}
               <div class="price-item">
-                <span class="price-desc">Children ({{paxChildren}} × INR {{formatINR pricePerChild}}){{#if flightIncluded}}{{#if flightPriceChild}} <span class="price-incl-tag">Incl. INR {{formatINR (multiply paxChildren flightPriceChild)}} flight</span>{{/if}}{{/if}}</span>
+                <span class="price-desc">Children ({{paxChildren}} × INR {{formatINR pricePerChild}})</span>
                 <span class="price-amount">INR {{formatINR (multiply paxChildren pricePerChild)}}</span>
               </div>
+              {{#if flightIncluded}}{{#if flightPriceChild}}
+              <div class="price-item activity">
+                <span class="price-desc">+ Flight ({{paxChildren}} × INR {{formatINR flightPriceChild}})</span>
+                <span class="price-amount">INR {{formatINR (multiply paxChildren flightPriceChild)}}</span>
+              </div>
+              {{/if}}{{/if}}
               {{#if visaIncluded}}{{#if visaPriceChild}}
               <div class="price-item activity">
                 <span class="price-desc">+ Visa ({{paxChildren}} × INR {{formatINR visaPriceChild}})</span>
@@ -2630,9 +2636,15 @@
 
               {{#if pricePerInfant}} {{#if (gt paxInfants 0)}}
               <div class="price-item">
-                <span class="price-desc">Infants ({{paxInfants}} × INR {{formatINR pricePerInfant}}){{#if flightIncluded}}{{#if flightPriceInfant}} <span class="price-incl-tag">Incl. INR {{formatINR (multiply paxInfants flightPriceInfant)}} flight</span>{{/if}}{{/if}}</span>
+                <span class="price-desc">Infants ({{paxInfants}} × INR {{formatINR pricePerInfant}})</span>
                 <span class="price-amount">INR {{formatINR (multiply paxInfants pricePerInfant)}}</span>
               </div>
+              {{#if flightIncluded}}{{#if flightPriceInfant}}
+              <div class="price-item activity">
+                <span class="price-desc">+ Flight ({{paxInfants}} × INR {{formatINR flightPriceInfant}})</span>
+                <span class="price-amount">INR {{formatINR (multiply paxInfants flightPriceInfant)}}</span>
+              </div>
+              {{/if}}{{/if}}
               {{#if visaIncluded}}{{#if visaPriceInfant}}
               <div class="price-item activity">
                 <span class="price-desc">+ Visa ({{paxInfants}} × INR {{formatINR visaPriceInfant}})</span>
@@ -2741,9 +2753,8 @@
           </span>
         </div>
         <div class="footer-agency">
-          {{#if agencyName}}<strong>Consultant Company: {{agencyName}}</strong><br />{{/if}}
-          {{#if agencyEmail}}Consultant Email: {{agencyEmail}}<br />{{/if}}
-          {{#if agencyPhone}}Consultant Phone: {{agencyPhone}}{{/if}}
+          {{#if agencyEmail}}{{agencyEmail}}<br />{{/if}}
+          {{#if agencyPhone}}{{agencyPhone}}{{/if}}
         </div>
       </div>
     </div>
