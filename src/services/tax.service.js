@@ -29,7 +29,7 @@ export function calculateTaxes(totalAmount, includeTcs = true) {
       tcsAboveThreshold =
         (tcsBaseAmount - TAX_CONFIG.TCS_THRESHOLD) *
         TAX_CONFIG.TCS_RATE_ABOVE_THRESHOLD;
-      tcsRate = "5% up to ₹10L, 20% above";
+      tcsRate = "5% up to INR 10L, 20% above";
     }
   }
 

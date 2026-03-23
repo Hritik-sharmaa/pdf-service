@@ -1643,14 +1643,6 @@
         line-height: 1.4;
       }
 
-      .notes-list li::before {
-        content: "⚠";
-        position: absolute;
-        left: 0;
-        color: #ffd700;
-        font-size: 8pt;
-      }
-
       .quote-details-footer {
         display: flex;
         justify-content: space-between;
@@ -2598,7 +2590,7 @@
             <div class="price-line-items">
               {{#if pricePerAdult}} {{#if (gt paxAdults 0)}}
               <div class="price-item">
-                <span class="price-desc">Adults ({{paxAdults}} × INR {{formatINR pricePerAdult}}){{#if discountAmount}} <span class="price-discount-tag">- INR {{formatINR discountAmount}} discount</span>{{/if}}</span>
+                <span class="price-desc">Adults ({{paxAdults}} × INR {{formatINR pricePerAdult}})</span>
                 <span class="price-amount">INR {{formatINR (multiply paxAdults pricePerAdult)}}</span>
               </div>
               {{#if flightIncluded}}{{#if flightPriceAdult}}
@@ -2719,20 +2711,20 @@
           <div class="notes-box">
             <h3 class="notes-heading">Important Notes</h3>
             <ul class="notes-list">
-              <li>TCS is not a cost or extra tax and can be claimed in your IT return.</li>
-              <li>All prices are in Indian Rupees (INR)</li>
-              <li>Prices are subject to availability at the time of booking</li>
+              <li>• TCS is not a cost or extra tax and can be claimed in your IT return.</li>
+              <li>• All prices are in Indian Rupees (INR)</li>
+              <li>• Prices are subject to availability at the time of booking</li>
               <li>
-                This quote is valid for {{#if validUntil}}{{formatDate validUntil}}{{else}}30
+                • This quote is valid for {{#if validUntil}}{{formatDate validUntil}}{{else}}30
                 days{{/if}}
               </li>
-              <li>Payment schedule may vary based on departure date</li>
+              <li>• Payment schedule may vary based on departure date</li>
               {{#if flightIncluded}}
               {{#if isFlightRefundable}}
-              <li>Flight bookings are refundable as per airline policy</li>
+              <li>• Flight bookings are refundable as per airline policy</li>
               {{else}}
               {{#if (eq isFlightRefundable false)}}
-              <li>Flight bookings are non-refundable once confirmed</li>
+              <li>• Flight bookings are non-refundable once confirmed</li>
               {{/if}}
               {{/if}}
               {{/if}}
