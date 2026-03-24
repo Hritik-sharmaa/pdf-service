@@ -2592,8 +2592,8 @@
               <div class="price-item">
                 <span class="price-desc">Adults ({{paxAdults}} × INR {{formatINR pricePerAdult}})</span>
                 <span class="price-amount">
-                  INR {{formatINR (multiply paxAdults pricePerAdult)}}
-                  {{#if discountAmount}}<span class="price-discount-tag">-INR {{formatINR discountAmount}} Discount</span>{{/if}}
+                  {{#if discountAmount}}<span class="price-discount-tag">(Including discount INR {{formatINR discountAmount}})</span>{{/if}} INR {{formatINR (multiply paxAdults pricePerAdult)}}
+                  
                 </span>
               </div>
               {{#if flightIncluded}}{{#if flightPriceAdult}}
