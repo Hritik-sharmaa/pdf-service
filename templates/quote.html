@@ -2591,7 +2591,10 @@
               {{#if pricePerAdult}} {{#if (gt paxAdults 0)}}
               <div class="price-item">
                 <span class="price-desc">Adults ({{paxAdults}} × INR {{formatINR pricePerAdult}})</span>
-                <span class="price-amount">INR {{formatINR (multiply paxAdults pricePerAdult)}}</span>
+                <span class="price-amount">
+                  INR {{formatINR (multiply paxAdults pricePerAdult)}}
+                  {{#if discountAmount}}<span class="price-discount-tag">-INR {{formatINR discountAmount}} Discount</span>{{/if}}
+                </span>
               </div>
               {{#if flightIncluded}}{{#if flightPriceAdult}}
               <div class="price-item activity">
